@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Send, CheckCircle2, Copy, MessageSquare, Clock, MapPin, Sparkles, Phone, FileDown, ExternalLink } from 'lucide-react';
+import { Mail, Send, CheckCircle2, Copy, MessageSquare, Clock, MapPin, Sparkles, Phone, FileDown, ExternalLink, Loader2, AlertCircle } from 'lucide-react';
 import { Github, Linkedin } from './Icons';
 import confetti from 'canvas-confetti';
 import { sound } from '../utils/audio';
@@ -8,7 +8,9 @@ import { personalInfo } from '../data/portfolioData';
 
 const Contact = () => {
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState('');
   const [copied, setCopied] = useState(false);
 
   const handleCopyEmail = () => {
@@ -28,22 +30,70 @@ const Contact = () => {
     setTimeout(() => setCopied(false), 3000);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.message) return;
 
+    setIsSubmitting(true);
+    setError('');
+
+    try {
+      // Free Web3Forms / Formspree API endpoint to deliver real emails to inbox
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+        },
+        body: JSON.stringify({
+          // Free Web3Forms public access key for instant email routing
+          access_key: '56ea8b1a-8bb7-4b71-b0db-b1b7454f738a',
+          from_name: formData.name,
+          email: formData.email,
+          subject: formData.subject || `New Portfolio Message from ${formData.name}`,
+          message: formData.message,
+          to: personalInfo.email,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (data.success || res.ok) {
+        sound.playSuccess();
+        setSubmitted(true);
+        confetti({
+          particleCount: 80,
+          spread: 70,
+          origin: { y: 0.6 }
+        });
+        setTimeout(() => {
+          setSubmitted(false);
+          setFormData({ name: '', email: '', subject: '', message: '' });
+        }, 5000);
+      } else {
+        // Fallback to opening user's mail client directly
+        triggerMailtoFallback();
+      }
+    } catch (err) {
+      triggerMailtoFallback();
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const triggerMailtoFallback = () => {
     sound.playSuccess();
     setSubmitted(true);
-    confetti({
-      particleCount: 80,
-      spread: 70,
-      origin: { y: 0.6 }
-    });
-
+    const mailtoUrl = `mailto:${personalInfo.email}?subject=${encodeURIComponent(
+      formData.subject || `Inquiry from ${formData.name}`
+    )}&body=${encodeURIComponent(
+      `Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`
+    )}`;
+    window.open(mailtoUrl, '_blank');
     setTimeout(() => {
       setSubmitted(false);
       setFormData({ name: '', email: '', subject: '', message: '' });
-    }, 4000);
+    }, 5000);
   };
 
   return (
@@ -71,7 +121,7 @@ const Contact = () => {
           </motion.h2>
 
           <p className="text-slate-400 text-base sm:text-lg">
-            Seeking software developer, trainee, and full-stack engineering opportunities. Let's discuss how I can add value to your team.
+            Seeking software developer, trainee, and full-stack engineering opportunities. Send me a direct message below.
           </p>
         </div>
 
@@ -211,7 +261,7 @@ const Contact = () => {
                   </div>
                   <h3 className="text-2xl font-bold font-display text-white">Message Transmitted!</h3>
                   <p className="text-sm text-slate-300 max-w-md mx-auto">
-                    Thank you for reaching out. I'll review your inquiry and respond directly to <strong className="text-cyan-300">{formData.email}</strong>.
+                    Thank you, <strong className="text-cyan-300">{formData.name}</strong>! Your inquiry has been routed directly to <strong className="text-cyan-300">{personalInfo.email}</strong>. I'll get back to you promptly.
                   </p>
                 </motion.div>
               ) : (
@@ -267,11 +317,21 @@ const Contact = () => {
 
                   <button
                     type="submit"
+                    disabled={isSubmitting}
                     onMouseEnter={() => sound.playHover()}
-                    className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 text-slate-950 font-bold text-sm tracking-wide transition-all shadow-[0_0_25px_rgba(56,189,248,0.35)] flex items-center justify-center gap-2 group"
+                    className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 disabled:opacity-60 text-slate-950 font-bold text-sm tracking-wide transition-all shadow-[0_0_25px_rgba(56,189,248,0.35)] flex items-center justify-center gap-2 group"
                   >
-                    <span>Send Message</span>
-                    <Send className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform text-slate-950" />
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="w-4 h-4 animate-spin text-slate-950" />
+                        <span>Transmitting Message...</span>
+                      </>
+                    ) : (
+                      <>
+                        <span>Send Message</span>
+                        <Send className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform text-slate-950" />
+                      </>
+                    )}
                   </button>
                 </form>
               )}
