@@ -88,11 +88,11 @@ export const projectsData = [
     architecture: "MERN Stack + Three.js / WebXR Layer + Stripe API + Cloudinary CDN"
   },
   {
-    id: "anime-site",
-    title: "Anime Site / Onisaga Media Hub",
+    id: "animeverse",
+    title: "AnimeVerse — Interactive Discovery Platform",
     category: "Full Stack",
-    tagline: "Dynamic Content Discovery & Streaming Platform",
-    summary: "A responsive web application for exploring and discovering anime media titles, featuring dynamic catalog listings, real-time search functionality, interactive carousel sliders, and bookmarking.",
+    tagline: "Dynamic Content Exploration Platform with REST APIs & Dark Mode",
+    summary: "An interactive anime exploration platform enabling users to search, discover, and filter thousands of titles dynamically with client-side caching, REST APIs, and responsive dark-mode styling.",
     image: "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=1200&q=80",
     repoUrl: "https://github.com/C-KAVISHKA/onisaga-clone",
     demoUrl: "https://github.com/C-KAVISHKA/onisaga-clone",
