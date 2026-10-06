@@ -2,8 +2,8 @@ export const personalInfo = {
   name: "Channa Kavishka Sadaruwan",
   handle: "C-KAVISHKA",
   role: "Full-Stack & 3D WebXR Software Developer",
-  tagline: "Final-year BSc (Hons) Software Engineering Student at Cardiff Metropolitan University | Full-Stack MERN & Java Spring Boot Developer",
-  location: "Kandy, Sri Lanka",
+  tagline: "Final-year BSc (Hons) Software Engineering Student at Cardiff Metropolitan University | Full-Stack MERN, Three.js 3D & Java Spring Boot Developer",
+  location: "No. 483, Matale Road, Alawatugoda, Sri Lanka",
   phone: "+94 70 457 3602",
   email: "channasadhruvan@gmail.com",
   github: "https://github.com/C-KAVISHKA",
@@ -16,7 +16,7 @@ export const personalInfo = {
     { label: "Graduation Year", value: "2026" },
     { label: "University", value: "Cardiff Met" }
   ],
-  bio: "Final-year BSc (Hons) Software Engineering student at Cardiff Metropolitan University (Expected 2026). Skilled in Java, JavaScript, TypeScript, and Python, with hands-on experience building full-stack web applications using the MERN stack (MongoDB, Express, React, Node.js), Java Spring Boot, and Three.js 3D WebXR rendering. Seeking a trainee or software developer role to apply and grow technical skills in a high-impact engineering environment."
+  bio: "Final-year BSc (Hons) Software Engineering student at Cardiff Metropolitan University (Expected 2026). Skilled in Java, JavaScript, TypeScript, and Python, with hands-on experience building full-stack web applications using the MERN stack (MongoDB, Express, React, Node.js), Java Spring Boot, and Three.js / WebGL 3D graphics. Passionate about writing clean, high-performance code and crafting interactive user experiences. Seeking a trainee or software developer role to contribute to high-impact engineering teams."
 };
 
 export const skillsData = [
@@ -28,19 +28,20 @@ export const skillsData = [
       { name: "React.js & Next.js", level: 95, desc: "Component hierarchies, hooks, SSR, dynamic routing, Vite" },
       { name: "Node.js & Express.js", level: 92, desc: "RESTful API development, JWT authentication, middleware" },
       { name: "Tailwind CSS & Modern CSS3", level: 95, desc: "Responsive design systems, glassmorphism, fluid UI" },
-      { name: "JavaScript (ES6+) & TypeScript", level: 90, desc: "Async/await, DOM APIs, strict typing, modular code" },
+      { name: "JavaScript (ES6+) & TypeScript", level: 92, desc: "Async/await, DOM APIs, strict typing, modular code" },
       { name: "Framer Motion & Swiper.js", level: 90, desc: "Micro-interactions, gestures, and carousel sliders" }
     ]
   },
   {
     category: "3D & Immersive WebXR",
-    description: "Real-time 3D WebGL rendering and spatial AR experiences",
+    description: "Real-time 3D WebGL rendering, GSAP animations, and spatial AR",
     icon: "Boxes",
     skills: [
-      { name: "Three.js", level: 90, desc: "WebGL scene rendering, lighting, materials, and 3D geometries" },
+      { name: "Three.js & WebGL", level: 92, desc: "WebGL scene rendering, lighting, materials, and 3D geometries" },
+      { name: "GSAP & ScrollTrigger", level: 90, desc: "High-performance timeline animations and scroll-driven effects" },
+      { name: "Lenis Smooth Scroll", level: 88, desc: "Buttery-smooth 60 FPS viewport scrolling and interactions" },
       { name: "@react-three/fiber & Drei", level: 90, desc: "Declarative 3D canvas integration in React applications" },
-      { name: "WebXR (AR / VR)", level: 85, desc: "Augmented Reality product placement directly in browsers" },
-      { name: "@tweenjs/tween.js", level: 88, desc: "Smooth camera interpolations and interactive rotations" }
+      { name: "WebXR (AR / VR)", level: 85, desc: "Augmented Reality product placement directly in browsers" }
     ]
   },
   {
@@ -69,6 +70,25 @@ export const skillsData = [
 
 export const projectsData = [
   {
+    id: "cafe-nuwara",
+    title: "Café Nuwara — 3D Interactive Restaurant Platform",
+    category: "3D Web & GSAP",
+    tagline: "Immersive 3D Experience with Three.js & GSAP Scroll Animations",
+    summary: "A cutting-edge 3D web experience for a premium burger café featuring WebGL entrance sequences, layer-by-layer GSAP scroll animations, smooth Lenis scrolling, and modern responsive design.",
+    image: "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=1200&q=80",
+    repoUrl: "https://github.com/C-KAVISHKA/cafe-nuwara",
+    demoUrl: "https://cafe-nuwara.vercel.app",
+    featured: true,
+    tags: ["JavaScript (ES6+)", "Three.js", "WebGL", "GSAP", "ScrollTrigger", "Lenis", "Modern CSS3", "Vercel"],
+    highlights: [
+      "Interactive 3D WebGL hero section with custom entrance camera sequences.",
+      "Scroll-triggered GSAP layer-by-layer 'Monster Burger' anatomy breakdown animation.",
+      "Buttery-smooth 60 FPS scrolling powered by Lenis and native CSS positioning.",
+      "Meticulously optimized responsive UI designed for mobile, tablet, and desktop."
+    ],
+    architecture: "Vanilla JS + Three.js WebGL Scene + GSAP ScrollTrigger + Lenis Smooth Scroll"
+  },
+  {
     id: "ifurnish-shop",
     title: "iFurnish Shop — 3D WebXR Furniture Platform",
     category: "3D WebXR",
@@ -76,7 +96,7 @@ export const projectsData = [
     summary: "A production-grade e-commerce platform that allows customers to browse furniture catalogs, customize materials in real-time 3D, preview models in their rooms via WebXR Augmented Reality, and checkout securely with Stripe.",
     image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?auto=format&fit=crop&w=1200&q=80",
     repoUrl: "https://github.com/C-KAVISHKA/iFurnish_Shop",
-    demoUrl: "https://github.com/C-KAVISHKA/iFurnish_Shop",
+    demoUrl: "https://i-furnish-shop.vercel.app/",
     featured: true,
     tags: ["React 18", "Three.js", "WebXR", "Node.js", "Express", "MongoDB", "Stripe", "Framer Motion", "TailwindCSS"],
     highlights: [
@@ -94,8 +114,8 @@ export const projectsData = [
     tagline: "Dynamic Content Exploration Platform with REST APIs & Dark Mode",
     summary: "An interactive anime exploration platform enabling users to search, discover, and filter thousands of titles dynamically with client-side caching, REST APIs, and responsive dark-mode styling.",
     image: "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=1200&q=80",
-    repoUrl: "https://github.com/C-KAVISHKA/onisaga-clone",
-    demoUrl: "https://github.com/C-KAVISHKA/onisaga-clone",
+    repoUrl: "https://github.com/C-KAVISHKA/anime-site",
+    demoUrl: "https://animeverse.up.railway.app/",
     featured: true,
     tags: ["MERN Stack", "Next.js / React", "Node.js", "Express", "MongoDB", "TailwindCSS", "Swiper.js"],
     highlights: [
@@ -113,8 +133,8 @@ export const projectsData = [
     tagline: "Hotel & Resort Booking Platform with Spring Boot & MySQL",
     summary: "An enterprise-grade hotel reservation management system built with Java Spring Boot and MySQL, enabling automated room booking, real-time availability management, and backend data persistence.",
     image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80",
-    repoUrl: "https://github.com/C-KAVISHKA",
-    demoUrl: "https://github.com/C-KAVISHKA",
+    repoUrl: "https://github.com/C-KAVISHKA/oceanview-reservation-system",
+    demoUrl: "https://github.com/C-KAVISHKA/oceanview-reservation-system",
     featured: true,
     tags: ["Java", "Spring Boot", "MySQL", "Hibernate / JPA", "REST API", "MVC Architecture"],
     highlights: [
@@ -132,8 +152,8 @@ export const projectsData = [
     tagline: "Health Data Management & Analytics Application",
     summary: "A health-focused application integrating backend Spring Boot services with a MySQL database to securely store, manage, and analyze patient health records and vital metrics.",
     image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80",
-    repoUrl: "https://github.com/C-KAVISHKA",
-    demoUrl: "https://github.com/C-KAVISHKA",
+    repoUrl: "https://github.com/C-KAVISHKA/healthshield_ai",
+    demoUrl: "https://github.com/C-KAVISHKA/healthshield_ai",
     featured: false,
     tags: ["Java", "Spring Boot", "MySQL", "REST API", "Data Analytics"],
     highlights: [
