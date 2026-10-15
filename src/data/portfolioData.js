@@ -8,7 +8,7 @@ export const personalInfo = {
   email: "channasadhruvan@gmail.com",
   github: "https://github.com/C-KAVISHKA",
   linkedin: "https://linkedin.com/in/channa-sandaruwan",
-  cvDownloadUrl: "/Channa_Kavishka_CV.pdf",
+  cvDownloadUrl: "/Channa_Kavishka_Sadaruwan_CV.pdf",
   availability: "Actively Seeking Software Engineering Internship / Trainee Roles",
   stats: [
     { label: "Featured Projects", value: "8+" },
