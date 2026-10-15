@@ -16,7 +16,7 @@ export const personalInfo = {
     { label: "Graduation Year", value: "2026" },
     { label: "University", value: "Cardiff Met" }
   ],
-  bio: "Final-year BSc (Hons) Software Engineering student at Cardiff Metropolitan University (Expected 2026) with hands-on experience building full-stack web applications and backend systems through academic and personal projects. Experienced with Java, JavaScript, React, Node.js, Express, Spring Boot, MySQL, MongoDB, and REST APIs. Seeking a Software Engineering Internship / Trainee role to apply my skills, learn from experienced engineers, and contribute to real-world software projects."
+  bio: "Final-year BSc (Hons) Software Engineering student who builds and deploys full-stack web applications with React, Node.js, Express and Spring Boot, backed by MySQL and MongoDB. Delivered three live web apps and two Java backend systems through academic and personal projects. Seeking a Software Engineering Internship / Trainee role to contribute to real-world projects and grow under experienced engineers."
 };
 
 export const skillsData = [
