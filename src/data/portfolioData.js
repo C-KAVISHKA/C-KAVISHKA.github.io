@@ -76,7 +76,7 @@ export const projectsData = [
     summary: "Built an interactive 3D web platform for a gourmet burger café featuring WebGL entrance sequences, GSAP scroll-driven layer-by-layer burger anatomy animations, smooth Lenis scrolling, and responsive mobile UI.",
     image: "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=1200&q=80",
     repoUrl: "https://github.com/C-KAVISHKA/cafe-nuwara",
-    demoUrl: "https://cafe-nuwara.vercel.app",
+    demoUrl: "https://cafe-nuwara.vercel.app/",
     featured: true,
     tags: ["JavaScript (ES6+)", "Three.js (WebGL)", "GSAP", "ScrollTrigger", "Lenis", "TailwindCSS", "Vercel"],
     highlights: [
@@ -133,7 +133,7 @@ export const projectsData = [
     summary: "Built an anime discovery platform with dynamic search and filtering, external REST API integration, client-side caching, and responsive dark-mode UI.",
     image: "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=1200&q=80",
     repoUrl: "https://github.com/C-KAVISHKA/anime-site",
-    demoUrl: "https://animeverse.up.railway.app/",
+    demoUrl: "https://animeverse.lol/",
     featured: true,
     tags: ["React.js", "Node.js", "Express.js", "REST APIs", "MongoDB", "TailwindCSS"],
     highlights: [
