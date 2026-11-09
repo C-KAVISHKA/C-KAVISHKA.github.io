@@ -107,6 +107,25 @@ export const projectsData = [
     architecture: "MERN Stack (MongoDB, Express.js, React.js, Node.js) + Three.js / WebXR"
   },
   {
+    id: "apparelflow-erp",
+    title: "ApparelFlow ERP — Garment Production Batch Execution",
+    category: "Full Stack",
+    tagline: "Apparel Manufacturing ERP & Cutting Operations Terminal",
+    summary: "Full-stack apparel manufacturing execution system with production batch verification, sewing queue gate, multi-role RBAC access management, and live status dashboards.",
+    image: "https://images.unsplash.com/photo-1558769132-cb1aea458c5e?auto=format&fit=crop&w=1200&q=80",
+    repoUrl: "https://github.com/C-KAVISHKA/apparelflow-erp",
+    demoUrl: "https://apparelflow-erp-one.vercel.app",
+    featured: true,
+    tags: ["React.js", "Next.js", "Node.js", "Express.js", "RBAC", "TailwindCSS", "Vercel"],
+    highlights: [
+      "Production Batch verification workflow with strict sewing queue gate integrity.",
+      "Multi-role RBAC access management for cutting masters and line supervisors.",
+      "Interactive cutting operations terminal with real-time audit logs and status metrics.",
+      "Production-ready deployment hosted live on Vercel."
+    ],
+    architecture: "Next.js / React + Node.js Express API + Modular RBAC Workflow Engine"
+  },
+  {
     id: "animeverse",
     title: "AnimeVerse — Interactive Discovery Platform",
     category: "Full Stack",
@@ -133,8 +152,8 @@ export const projectsData = [
     summary: "Developed a hotel and resort reservation system with room availability, booking workflows, guest check-in/out, and MySQL persistence using Spring Boot and Hibernate.",
     image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80",
     repoUrl: "https://github.com/C-KAVISHKA/oceanview-reservation-system",
-    demoUrl: "https://github.com/C-KAVISHKA/oceanview-reservation-system",
-    featured: true,
+    demoUrl: null,
+    featured: false,
     tags: ["Java", "Spring Boot", "MySQL", "Hibernate", "MVC Architecture", "REST API"],
     highlights: [
       "Backend reservation services with Spring Boot and Spring Data JPA.",
@@ -152,7 +171,7 @@ export const projectsData = [
     summary: "Developed a healthcare management backend supporting EHR, patient data tracking, role-based access control, and transactional MySQL persistence.",
     image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80",
     repoUrl: "https://github.com/C-KAVISHKA/healthshield_ai",
-    demoUrl: "https://github.com/C-KAVISHKA/healthshield_ai",
+    demoUrl: null,
     featured: false,
     tags: ["Java", "Spring Boot", "MySQL", "REST API", "Role-Based Access"],
     highlights: [
@@ -170,7 +189,7 @@ export const projectsData = [
     summary: "Applied research and neural network models utilizing Computer Vision for plant disease diagnosis and intelligent site safety monitoring.",
     image: "https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=1200&q=80",
     repoUrl: "https://github.com/C-KAVISHKA",
-    demoUrl: "https://github.com/C-KAVISHKA",
+    demoUrl: null,
     featured: false,
     tags: ["Python", "Computer Vision", "Deep Learning", "TensorFlow/PyTorch"],
     highlights: [

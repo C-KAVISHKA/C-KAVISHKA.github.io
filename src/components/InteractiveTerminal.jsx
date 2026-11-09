@@ -87,7 +87,11 @@ BIO: ${personalInfo.bio}`
 
       case 'projects':
         const projectsOutput = projectsData
-          .map((p, idx) => `[${idx + 1}] ${p.title}\n    • Category: ${p.category}\n    • Stack: ${p.tags.join(', ')}\n    • Repo: ${p.repoUrl}`)
+          .map((p, idx) => {
+            const hasLive = p.demoUrl && !p.demoUrl.includes('github.com');
+            const demoLine = hasLive ? `\n    • Live Hosted App: ${p.demoUrl}` : '';
+            return `[${idx + 1}] ${p.title}\n    • Category: ${p.category}\n    • Stack: ${p.tags.join(', ')}\n    • Repo: ${p.repoUrl}${demoLine}`;
+          })
           .join('\n\n');
         newHistory.push({ type: 'output', text: projectsOutput });
         break;
