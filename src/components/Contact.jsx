@@ -179,7 +179,7 @@ const Contact = () => {
             {/* Download Official CV Card */}
             <a
               href={personalInfo.cvDownloadUrl}
-              download="Channa_Kavishka_CV.pdf"
+              download="Channa_Kavishka_Sadaruwan_CV.pdf"
               onMouseEnter={() => sound.playHover()}
               onClick={() => sound.playSuccess()}
               className="p-5 rounded-2xl glass-card border border-purple-500/30 hover:border-purple-400 bg-purple-500/10 flex items-center justify-between group transition-all block"

@@ -101,11 +101,11 @@ BIO: ${personalInfo.bio}`
         sound.playSuccess();
         const link = document.createElement('a');
         link.href = personalInfo.cvDownloadUrl;
-        link.download = 'Channa_Kavishka_CV.pdf';
+        link.download = 'Channa_Kavishka_Sadaruwan_CV.pdf';
         link.click();
         newHistory.push({
           type: 'success',
-          text: `>>> INITIATING CV DOWNLOAD: Channa_Kavishka_CV.pdf ... <<<
+          text: `>>> INITIATING CV DOWNLOAD: Channa_Kavishka_Sadaruwan_CV.pdf ... <<<
 PDF Document downloaded successfully! Also available at: ${personalInfo.cvDownloadUrl}`
         });
         break;

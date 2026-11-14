@@ -123,7 +123,7 @@ const Navbar = ({ soundEnabled, setSoundEnabled }) => {
           {/* Download CV Button */}
           <a
             href={personalInfo.cvDownloadUrl}
-            download="Channa_Kavishka_CV.pdf"
+            download="Channa_Kavishka_Sadaruwan_CV.pdf"
             onMouseEnter={() => sound.playHover()}
             onClick={() => sound.playSuccess()}
             className="hidden sm:flex items-center gap-1.5 px-3 py-2 rounded-xl bg-purple-500/10 hover:bg-purple-500/20 border border-purple-400/40 text-xs font-mono text-purple-300 hover:text-purple-200 transition-all shadow-[0_0_15px_rgba(168,85,247,0.15)]"
@@ -198,7 +198,7 @@ const Navbar = ({ soundEnabled, setSoundEnabled }) => {
             <div className="pt-3 border-t border-white/[0.08] flex flex-col gap-2.5">
               <a
                 href={personalInfo.cvDownloadUrl}
-                download="Channa_Kavishka_CV.pdf"
+                download="Channa_Kavishka_Sadaruwan_CV.pdf"
                 className="flex items-center gap-2 px-3 py-2 rounded-lg bg-purple-500/15 border border-purple-400/40 text-xs font-mono text-purple-300"
               >
                 <FileDown className="w-4 h-4 text-purple-400" />

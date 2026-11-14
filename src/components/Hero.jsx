@@ -102,7 +102,7 @@ const Hero = ({ onOpenTerminal }) => {
               {/* Download CV CTA */}
               <a
                 href={personalInfo.cvDownloadUrl}
-                download="Channa_Kavishka_CV.pdf"
+                download="Channa_Kavishka_Sadaruwan_CV.pdf"
                 onClick={handleDownloadCV}
                 onMouseEnter={() => sound.playHover()}
                 className="px-5 py-3 rounded-xl bg-gradient-to-r from-purple-600 via-indigo-600 to-cyan-500 hover:from-purple-500 hover:to-cyan-400 text-white font-bold text-xs font-mono tracking-wide transition-all shadow-[0_0_25px_rgba(168,85,247,0.35)] flex items-center gap-2 group"

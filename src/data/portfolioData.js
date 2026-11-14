@@ -16,7 +16,7 @@ export const personalInfo = {
     { label: "Graduation Year", value: "2026" },
     { label: "University", value: "Cardiff Met" }
   ],
-  bio: "Final-year BSc (Hons) Software Engineering student with practical experience building full-stack web applications, interactive 3D interfaces, and Java backend services. Delivered 3 production web apps and 2 enterprise backend systems with React, Node.js, Spring Boot, MySQL, and MongoDB. Seeking a Software Engineering Internship / Trainee role to engineer robust features and contribute to production-grade software."
+  bio: "Final-year BSc (Hons) Software Engineering student with practical experience building full-stack web applications, interactive 3D interfaces, enterprise Java backends, and explainable AI systems. Delivered 3 live web apps and multi-tier systems with React, Node.js, Spring Boot, Python, MySQL, and MongoDB. Seeking a Software Engineering Internship / Trainee role to engineer robust features and contribute to production-grade software."
 };
 
 export const skillsData = [
@@ -127,22 +127,22 @@ export const projectsData = [
   },
   {
     id: "animeverse",
-    title: "AnimeVerse — Interactive Discovery Platform",
-    category: "Full Stack",
-    tagline: "Dynamic Content Exploration Platform with REST APIs & Dark Mode",
-    summary: "Built an anime discovery platform with dynamic search and filtering, external REST API integration, client-side caching, and responsive dark-mode UI.",
+    title: "AnimeVerse — Streaming & Discovery Platform",
+    category: "Full Stack & Streaming",
+    tagline: "Dynamic Media Streaming Platform with HLS.js, Custom Proxy & Dark Mode",
+    summary: "Built an anime streaming platform with dynamic search and filtering, custom Express.js video stream proxy, HLS adaptive streaming, client-side caching, and responsive dark-mode UI.",
     image: "https://images.unsplash.com/photo-1578632767115-351597cf2477?auto=format&fit=crop&w=1200&q=80",
     repoUrl: "https://github.com/C-KAVISHKA/anime-site",
     demoUrl: "https://animeverse.lol/",
     featured: true,
-    tags: ["React.js", "Node.js", "Express.js", "REST APIs", "MongoDB", "TailwindCSS"],
+    tags: ["JavaScript (ES6+)", "Node.js", "Express.js", "HLS.js", "ArtPlayer", "TailwindCSS"],
     highlights: [
-      "Dynamic catalog browsing and search with real-time query filtering.",
-      "Modern dark UI with interactive hero sliders and catalog cards.",
-      "RESTful API backend for metadata retrieval and user watchlists.",
-      "Mobile-first responsive styling optimized for speed and readability."
+      "Dynamic catalog browsing and search with real-time debounced query filtering.",
+      "Custom Express.js stream proxy resolving video sources and bypassing CORS restrictions.",
+      "Integrated ArtPlayer with HLS.js for seamless adaptive bitrate media playback.",
+      "Mobile-first responsive dark styling and custom domain deployment (animeverse.lol)."
     ],
-    architecture: "React.js + Node.js Express API + MongoDB Database"
+    architecture: "JavaScript (ES6+) + Express Stream Proxy + HLS.js / ArtPlayer + MongoDB"
   },
   {
     id: "oceanview-reservation",
@@ -165,21 +165,22 @@ export const projectsData = [
   },
   {
     id: "healthshield-ai",
-    title: "HealthShield AI",
-    category: "Enterprise Java",
-    tagline: "Healthcare Management & Electronic Health Records Backend",
-    summary: "Developed a healthcare management backend supporting EHR, patient data tracking, role-based access control, and transactional MySQL persistence.",
+    title: "HealthShield AI — Explainable Health Risk Prediction",
+    category: "Machine Learning & AI",
+    tagline: "Explainable Machine Learning Health Diagnostics with Streamlit & SHAP",
+    summary: "Developed an end-to-end computational intelligence system in Python and Streamlit to predict multi-factorial health risks using an ensemble of XGBoost, LightGBM, and CatBoost, with SHAP explainability.",
     image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1200&q=80",
     repoUrl: "https://github.com/C-KAVISHKA/healthshield_ai",
     demoUrl: null,
     featured: false,
-    tags: ["Java", "Spring Boot", "MySQL", "REST API", "Role-Based Access"],
+    tags: ["Python", "Streamlit", "XGBoost", "LightGBM", "CatBoost", "Scikit-learn", "SHAP", "Pandas"],
     highlights: [
-      "Electronic health records (EHR) and patient record management.",
-      "RESTful API endpoints for patient tracking and appointment workflows.",
-      "Transactional data persistence with MySQL and Spring Data JPA."
+      "Interactive Streamlit web application providing real-time multi-factorial health risk assessment.",
+      "Soft-voting ensemble model combining XGBoost (35%), LightGBM (35%), and CatBoost (30%) with engineered interaction features.",
+      "Integrated SHAP (SHapley Additive exPlanations) for transparent feature attribution and clinician interpretability.",
+      "Automated exploratory data analysis with PCA dimensionality reduction and 5-Fold Stratified Cross-Validation."
     ],
-    architecture: "Java Spring Boot + MySQL + RESTful Backend Services"
+    architecture: "Python 3 + Streamlit UI + XGBoost / LightGBM / CatBoost Ensemble + SHAP XAI"
   },
   {
     id: "siteguard-plant-ai",
