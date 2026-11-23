@@ -571,8 +571,7 @@ export default function App() {
             {filteredProjects.map((project, index) => (
               <button
                 key={project.id}
-                className="card rv"
-                style={{ '--i': (index % 4) + 2 }}
+                className="card"
                 onClick={() => openProjectDrawer(project)}
                 title={`View case study: ${project.title}`}
               >
@@ -614,8 +613,7 @@ export default function App() {
 
             {/* Row 1: Full-Stack */}
             <div
-              className={`row rv ${activeRow === 0 ? 'open' : ''}`}
-              style={{ '--i': 1 }}
+              className={`row ${activeRow === 0 ? 'open' : ''}`}
             >
               <button
                 aria-expanded={activeRow === 0}
@@ -651,8 +649,7 @@ export default function App() {
 
             {/* Row 2: 3D & WebGL */}
             <div
-              className={`row rv ${activeRow === 1 ? 'open' : ''}`}
-              style={{ '--i': 2 }}
+              className={`row ${activeRow === 1 ? 'open' : ''}`}
             >
               <button
                 aria-expanded={activeRow === 1}
@@ -688,8 +685,7 @@ export default function App() {
 
             {/* Row 3: Enterprise Java */}
             <div
-              className={`row rv ${activeRow === 2 ? 'open' : ''}`}
-              style={{ '--i': 3 }}
+              className={`row ${activeRow === 2 ? 'open' : ''}`}
             >
               <button
                 aria-expanded={activeRow === 2}
@@ -725,8 +721,7 @@ export default function App() {
 
             {/* Row 4: AI & ML */}
             <div
-              className={`row rv ${activeRow === 3 ? 'open' : ''}`}
-              style={{ '--i': 4 }}
+              className={`row ${activeRow === 3 ? 'open' : ''}`}
             >
               <button
                 aria-expanded={activeRow === 3}
@@ -778,8 +773,8 @@ export default function App() {
             {educationAndExperience.map((item, idx) => (
               <div
                 key={idx}
-                className="job rv"
-                style={{ '--i': idx + 1, cursor: 'pointer' }}
+                className="job"
+                style={{ cursor: 'pointer' }}
                 onMouseEnter={(e) => handleJobMouseEnter(e, item)}
                 onMouseMove={handleJobMouseMove}
                 onMouseLeave={handleJobMouseLeave}
@@ -797,8 +792,8 @@ export default function App() {
 
             {/* Additional Production Experience Row */}
             <div
-              className="job rv"
-              style={{ '--i': 5, cursor: 'pointer' }}
+              className="job"
+              style={{ cursor: 'pointer' }}
               onMouseEnter={(e) => handleJobMouseEnter(e, {
                 title: 'Full-Stack Developer (Live Web Apps)',
                 organization: 'Independent Software Engineering',
