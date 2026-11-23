@@ -184,7 +184,7 @@ nav sup { color: var(--cyan-dark); font-size: 10px; margin-left: 3px; font-weigh
   position: relative;
 }
 
-/* Display Typography: CHANNA KAVISHKA */
+/* Display Typography: CHANNA KAVISHKA - Dymas Alfin Kinetic Slit Animation */
 .name {
   position: absolute;
   top: clamp(80px, 12vh, 120px);
@@ -200,34 +200,38 @@ nav sup { color: var(--cyan-dark); font-size: 10px; margin-left: 3px; font-weigh
   user-select: none;
   z-index: 5;
   pointer-events: none;
-  opacity: 1 !important;
-  visibility: visible !important;
 }
 
 .name span {
   display: inline-block;
+  overflow: hidden;
   vertical-align: top;
-  padding: 0 .02em;
+  padding: 0 .04em;
+  line-height: 1.1;
 }
 
 .name b {
   display: inline-block;
   font-weight: 800;
-  animation: up 1.2s cubic-bezier(.22, 1, .36, 1) both;
+  transform: translateY(105%);
+  animation: up 1.2s cubic-bezier(.22, 1, .36, 1) forwards;
+  will-change: transform;
 }
 
 .name .o b {
   color: transparent !important;
   -webkit-text-stroke: 2.5px #161616;
+  text-stroke: 2.5px #161616;
   animation-delay: .15s;
 }
 
 :root[data-theme="dark"] .name .o b, html.dark .name .o b {
   -webkit-text-stroke: 2.5px #60c1e5 !important;
+  text-stroke: 2.5px #60c1e5 !important;
 }
 
 .name .s b {
-  animation-delay: .3s;
+  animation-delay: .35s;
   color: #161616 !important;
 }
 
@@ -236,38 +240,31 @@ nav sup { color: var(--cyan-dark); font-size: 10px; margin-left: 3px; font-weigh
 }
 
 @keyframes up {
-  from {
-    opacity: 0;
-    transform: translateY(60px);
-  }
   to {
-    opacity: 1;
     transform: translateY(0);
   }
 }
 
-/* Centerpiece Dual-Photo Overlay (B&W Base + Color Hover) */
+/* Centerpiece Dual-Photo Overlay (B&W Base + Color Hover) - Dymas Alfin Rise + Unblur */
 .portrait {
   position: absolute;
   left: 50%;
   bottom: 0;
   width: min(44%, 400px);
   aspect-ratio: 3/4;
-  transform: translate(-50%, 0);
+  transform: translate(-50%, 40%);
+  opacity: 0;
   z-index: 2;
   cursor: pointer;
   overflow: visible;
-  animation: rise 1.4s .35s cubic-bezier(.22, 1, .36, 1) both;
+  animation: rise 1.4s .55s cubic-bezier(.22, 1, .36, 1) forwards;
+  will-change: transform, opacity;
 }
 
 @keyframes rise {
-  from {
-    opacity: 0;
-    transform: translate(-50%, 50px);
-  }
   to {
-    opacity: 1;
     transform: translate(-50%, 0);
+    opacity: 1;
   }
 }
 
@@ -282,8 +279,20 @@ nav sup { color: var(--cyan-dark); font-size: 10px; margin-left: 3px; font-weigh
   border-radius: 14px 14px 0 0;
   mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
   -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+  animation: unblur 1.8s .5s cubic-bezier(.22, 1, .36, 1) backwards;
   transition: opacity .8s cubic-bezier(.22, 1, .36, 1), transform .6s cubic-bezier(.22, 1, .36, 1);
-  will-change: opacity, transform;
+  will-change: filter, transform, opacity;
+}
+
+@keyframes unblur {
+  from {
+    filter: blur(20px);
+    transform: scale(1.15);
+  }
+  to {
+    filter: blur(0px);
+    transform: scale(1);
+  }
 }
 
 .portrait .p-bw {
@@ -298,16 +307,32 @@ nav sup { color: var(--cyan-dark); font-size: 10px; margin-left: 3px; font-weigh
 
 .portrait:hover .p-color,
 .portrait.active .p-color {
-  opacity: 1;
+  opacity: 1 !important;
 }
 
 .portrait:hover .p-bw,
 .portrait.active .p-bw {
-  opacity: 0;
+  opacity: 0 !important;
 }
 
 .portrait:hover img {
   transform: scale(1.02);
+}
+
+/* Photographic Wash Curtain */
+.wash {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background: var(--page);
+  pointer-events: none;
+  animation: wash 1.8s .15s cubic-bezier(.22, 1, .36, 1) forwards;
+}
+@keyframes wash {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
 }
 
 .hero-l {
@@ -799,6 +824,7 @@ nav sup { color: var(--cyan-dark); font-size: 10px; margin-left: 3px; font-weigh
 
   <!-- HERO -->
   <section class="sec hero" id="top">
+    <div class="wash"></div>
     <nav>
       <span class="avail fade"><i class="dot"></i>Available for 2026 Roles</span>
       <a class="fade" href="#work">Work<sup>[7]</sup></a>
