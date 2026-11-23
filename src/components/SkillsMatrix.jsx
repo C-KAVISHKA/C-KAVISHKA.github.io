@@ -246,8 +246,8 @@ const SkillsMatrix = ({ isDark }) => {
               transition={{ duration: 0.4 }}
               className="p-8 rounded-3xl bg-white dark:bg-slate-900 border-2 border-[#60C1E5] shadow-[0_20px_50px_rgba(96,193,229,0.28)] space-y-6 relative overflow-hidden group hover:rotate-0 transition-transform duration-500"
             >
-              {/* Corner Watermark */}
-              <div className="absolute top-2 right-4 text-7xl font-display font-black text-slate-100 dark:text-slate-800 pointer-events-none select-none">
+              {/* Subtle Bottom-Right Corner Watermark */}
+              <div className="absolute -bottom-4 -right-2 text-8xl font-display font-black text-slate-100/60 dark:text-slate-800/40 pointer-events-none select-none z-0">
                 0{activeIndex + 1}
               </div>
 
