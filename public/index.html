@@ -2,14 +2,29 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Channa Kavishka | Software Engineer & 3D WebXR Developer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<script>
+  (function() {
+    try {
+      var saved = localStorage.getItem('portfolio-theme');
+      var prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      var theme = saved ? saved : (prefersDark ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+      document.documentElement.className = theme;
+    } catch(e) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      document.documentElement.className = 'dark';
+    }
+  })();
+</script>
 <style>
+/* 1. Theme Variables */
 :root {
   --bg: #0b0f17;
   --page: #f5f5f5;
@@ -29,36 +44,34 @@
   padding-bottom: env(safe-area-inset-bottom, 0px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #0b0f17;
-    --page: #0b0f17;
-    --ink: #f8fafc;
-    --mute: #94a3b8;
-    --line: #1e293b;
-    --card: #131b28;
-    --dark: #080c14;
-    --dark-ink: #f8fafc;
-    --dark-mute: #64748b;
-    --dark-line: #1e293b;
-    --cyan: #60c1e5;
-    --cyan-dark: #38bdf8;
-  }
+:root[data-theme="dark"], html.dark, body.dark {
+  --bg: #0b0f17 !important;
+  --page: #0b0f17 !important;
+  --ink: #f8fafc !important;
+  --mute: #94a3b8 !important;
+  --line: #1e293b !important;
+  --card: #131b28 !important;
+  --dark: #080c14 !important;
+  --dark-ink: #f8fafc !important;
+  --dark-mute: #64748b !important;
+  --dark-line: #1e293b !important;
+  --cyan: #60c1e5 !important;
+  --cyan-dark: #38bdf8 !important;
 }
 
-:root[data-theme="dark"], html.dark {
-  --bg: #0b0f17;
-  --page: #0b0f17;
-  --ink: #f8fafc;
-  --mute: #94a3b8;
-  --line: #1e293b;
-  --card: #131b28;
-  --dark: #080c14;
-  --dark-ink: #f8fafc;
-  --dark-mute: #64748b;
-  --dark-line: #1e293b;
-  --cyan: #60c1e5;
-  --cyan-dark: #38bdf8;
+:root[data-theme="light"], html.light, body.light {
+  --bg: #f5f5f5 !important;
+  --page: #f5f5f5 !important;
+  --ink: #161616 !important;
+  --mute: #64748b !important;
+  --line: #dcdcdc !important;
+  --card: #ffffff !important;
+  --dark: #1b222d !important;
+  --dark-ink: #f8fafc !important;
+  --dark-mute: #94a3b8 !important;
+  --dark-line: #2b3545 !important;
+  --cyan: #60c1e5 !important;
+  --cyan-dark: #0284c7 !important;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
@@ -84,9 +97,8 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   max-width: 100%;
   margin: 0;
   background: var(--page);
-  border-radius: 0;
-  overflow: hidden;
   position: relative;
+  transition: background-color .4s var(--ease);
 }
 
 .sec {
@@ -112,7 +124,7 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   transition: opacity 1.8s var(--ease);
 }
 .ghost.in { opacity: .05; }
-:root[data-theme="dark"] .ghost.in, html.dark .ghost.in { opacity: .035; }
+:root[data-theme="dark"] .ghost.in, html.dark .ghost.in, body.dark .ghost.in { opacity: .035; }
 
 /* Nav */
 nav {
@@ -136,6 +148,7 @@ nav .avail {
   margin-right: auto;
   font-weight: 600;
   border: 1px solid var(--line);
+  color: var(--ink);
 }
 .dot {
   width: 8px;
@@ -147,6 +160,26 @@ nav .avail {
 }
 @keyframes pulse { 70% { box-shadow: 0 0 0 8px rgba(34, 197, 94, 0); } }
 nav sup { color: var(--cyan-dark); font-size: 10px; margin-left: 3px; font-weight: 700; }
+
+.theme-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 99px;
+  background: var(--card);
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 700;
+  border: 1px solid var(--line);
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+  cursor: pointer;
+  transition: transform .3s var(--ease), border-color .3s, background-color .3s;
+}
+.theme-toggle-btn:hover {
+  transform: translateY(-2px);
+  border-color: var(--cyan);
+}
 
 .btn {
   display: inline-flex;
@@ -161,7 +194,7 @@ nav sup { color: var(--cyan-dark); font-size: 10px; margin-left: 3px; font-weigh
   transition: transform .4s var(--ease), box-shadow .4s, background-color .3s;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
 }
-:root[data-theme="dark"] .btn, html.dark .btn {
+:root[data-theme="dark"] .btn, html.dark .btn, body.dark .btn {
   background: var(--cyan);
   color: #0b0f17;
 }
@@ -187,7 +220,23 @@ nav sup { color: var(--cyan-dark); font-size: 10px; margin-left: 3px; font-weigh
   position: relative;
 }
 
-/* Display Typography: CHANNA KAVISHKA - Dymas Alfin Kinetic Slit Animation */
+/* Photographic Exposure Curtain */
+.wash {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  background: var(--page);
+  pointer-events: none;
+  animation: wash 1.8s .15s cubic-bezier(.22, 1, .36, 1) forwards;
+}
+@keyframes wash {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* Display Typography: CHANNA KAVISHKA - Dymas Alfin Kinetic Window Slit Animation */
 .name {
   position: absolute;
   top: clamp(80px, 12vh, 120px);
@@ -216,8 +265,8 @@ nav sup { color: var(--cyan-dark); font-size: 10px; margin-left: 3px; font-weigh
 .name b {
   display: inline-block;
   font-weight: 800;
-  transform: translateY(0);
-  animation: up 1.2s cubic-bezier(.22, 1, .36, 1) both;
+  transform: translateY(105%);
+  animation: up 1.2s cubic-bezier(.22, 1, .36, 1) forwards;
   will-change: transform;
 }
 
@@ -228,7 +277,7 @@ nav sup { color: var(--cyan-dark); font-size: 10px; margin-left: 3px; font-weigh
   animation-delay: .15s;
 }
 
-:root[data-theme="dark"] .name .o b, html.dark .name .o b {
+:root[data-theme="dark"] .name .o b, html.dark .name .o b, body.dark .name .o b {
   -webkit-text-stroke: 2.5px #60c1e5 !important;
   text-stroke: 2.5px #60c1e5 !important;
 }
@@ -238,7 +287,7 @@ nav sup { color: var(--cyan-dark); font-size: 10px; margin-left: 3px; font-weigh
   color: #161616 !important;
 }
 
-:root[data-theme="dark"] .name .s b, html.dark .name .s b {
+:root[data-theme="dark"] .name .s b, html.dark .name .s b, body.dark .name .s b {
   color: #f8fafc !important;
 }
 
@@ -258,12 +307,12 @@ nav sup { color: var(--cyan-dark); font-size: 10px; margin-left: 3px; font-weigh
   bottom: 0;
   width: min(44%, 400px);
   aspect-ratio: 3/4;
-  transform: translate(-50%, 0);
-  opacity: 1;
+  transform: translate(-50%, 40%);
+  opacity: 0;
   z-index: 2;
   cursor: pointer;
   overflow: visible;
-  animation: rise 1.4s .55s cubic-bezier(.22, 1, .36, 1) both;
+  animation: rise 1.4s .5s cubic-bezier(.22, 1, .36, 1) forwards;
   will-change: transform, opacity;
 }
 
@@ -289,7 +338,7 @@ nav sup { color: var(--cyan-dark); font-size: 10px; margin-left: 3px; font-weigh
   border-radius: 14px 14px 0 0;
   mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
   -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
-  animation: unblur 1.8s .5s cubic-bezier(.22, 1, .36, 1) both;
+  animation: unblur 1.8s .45s cubic-bezier(.22, 1, .36, 1) forwards;
   transition: opacity .8s cubic-bezier(.22, 1, .36, 1), transform .6s cubic-bezier(.22, 1, .36, 1);
   will-change: filter, transform, opacity;
 }
@@ -329,26 +378,6 @@ nav sup { color: var(--cyan-dark); font-size: 10px; margin-left: 3px; font-weigh
   transform: scale(1.02);
 }
 
-/* Photographic Wash Curtain */
-.wash {
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-  background: var(--page);
-  pointer-events: none;
-  opacity: 0;
-  animation: wash 1.8s .15s cubic-bezier(.22, 1, .36, 1) both;
-}
-@keyframes wash {
-  from {
-    opacity: 1;
-  }
-  to {
-    opacity: 0;
-    visibility: hidden;
-  }
-}
-
 .hero-l {
   position: relative;
   z-index: 6;
@@ -374,20 +403,19 @@ nav sup { color: var(--cyan-dark); font-size: 10px; margin-left: 3px; font-weigh
   font-size: 11px;
   font-weight: 600;
   border: 1px solid var(--line);
+  color: var(--ink);
   transition: transform .4s var(--ease), border-color .3s;
   text-align: left;
 }
 .socials a:hover, .socials button:hover { transform: translateX(-4px); border-color: var(--cyan); }
 
 .fade {
-  opacity: 1;
-  animation: fade 1s .85s cubic-bezier(.22, 1, .36, 1) both;
+  opacity: 0;
+  animation: fade 1s .85s cubic-bezier(.22, 1, .36, 1) forwards;
 }
 @keyframes fade {
-  from { opacity: 0; }
   to { opacity: 1; }
 }
-@keyframes fade { to { opacity: 1; } }
 
 /* Reveal */
 .rv {
@@ -404,6 +432,7 @@ nav sup { color: var(--cyan-dark); font-size: 10px; margin-left: 3px; font-weigh
   font-weight: 700;
   margin: 0 0 40px;
   letter-spacing: -.02em;
+  color: var(--ink);
 }
 .title.rv {
   filter: blur(14px);
@@ -609,7 +638,7 @@ nav sup { color: var(--cyan-dark); font-size: 10px; margin-left: 3px; font-weigh
   margin: 0 auto 40px;
   position: relative;
 }
-.exp .head h2 { margin: 0; font-size: clamp(26px, 4vw, 40px); font-weight: 700; letter-spacing: -.02em; }
+.exp .head h2 { margin: 0; font-size: clamp(26px, 4vw, 40px); font-weight: 700; letter-spacing: -.02em; color: var(--dark-ink); }
 .exp .head span { font-size: 11px; color: var(--dark-mute); font-weight: 600; }
 .jobs { max-width: 1080px; margin: 0 auto; }
 .job {
@@ -621,7 +650,7 @@ nav sup { color: var(--cyan-dark); font-size: 10px; margin-left: 3px; font-weigh
   position: relative;
   transition: padding .5s var(--ease), opacity .3s;
 }
-.job p { margin: 0; font-weight: 600; }
+.job p { margin: 0; font-weight: 600; color: var(--dark-ink); }
 .job p + p { color: var(--dark-mute); margin-top: 6px; font-weight: 400; }
 .job time { color: var(--dark-mute); align-self: center; font-weight: 600; font-size: 12px; }
 .job:hover { padding-left: 12px; }
@@ -688,9 +717,10 @@ nav sup { color: var(--cyan-dark); font-size: 10px; margin-left: 3px; font-weigh
   font-weight: 600;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
   border: 1px solid var(--line);
+  color: var(--ink);
 }
 .foot a:first-child { background: #1b1b1b; color: #ffffff; border-color: #1b1b1b; }
-:root[data-theme="dark"] .foot a:first-child { background: var(--cyan); color: #0b0f17; border-color: var(--cyan); }
+:root[data-theme="dark"] .foot a:first-child, html.dark .foot a:first-child, body.dark .foot a:first-child { background: var(--cyan); color: #0b0f17; border-color: var(--cyan); }
 
 /* Project Case Study Drawer (#project) */
 #project {
@@ -718,6 +748,7 @@ nav sup { color: var(--cyan-dark); font-size: 10px; margin-left: 3px; font-weigh
   font-weight: 700;
   box-shadow: 0 2px 10px rgba(0,0,0,0.06);
   border: 1px solid var(--line);
+  color: var(--ink);
   display: inline-flex;
   align-items: center;
   cursor: pointer;
@@ -818,9 +849,12 @@ nav sup { color: var(--cyan-dark); font-size: 10px; margin-left: 3px; font-weigh
     aspect-ratio: 3/4;
     margin: 16px auto 0;
     opacity: 1;
-    animation: riseMobile 1.2s .35s var(--ease) both;
+    animation: riseMobile 1.2s .4s cubic-bezier(.22, 1, .36, 1) forwards;
   }
-  @keyframes riseMobile { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes riseMobile {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
   .hero-l {
     position: relative;
     max-width: 100%;
@@ -837,39 +871,6 @@ nav sup { color: var(--cyan-dark); font-size: 10px; margin-left: 3px; font-weigh
   .row .pic { display: none; }
   .foot { gap: 8px; }
 }
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.001s !important;
-    animation-delay: 0s !important;
-  }
-  .name b {
-    animation: none !important;
-    transform: none !important;
-    opacity: 1 !important;
-  }
-  .portrait {
-    animation: none !important;
-    transform: translate(-50%, 0) !important;
-    opacity: 1 !important;
-  }
-  .portrait img {
-    animation: none !important;
-    filter: none !important;
-    transform: none !important;
-  }
-  .wash {
-    display: none !important;
-  }
-  .fade {
-    animation: none !important;
-    opacity: 1 !important;
-  }
-  .rv {
-    opacity: 1 !important;
-    transform: none !important;
-    filter: none !important;
-  }
-}
 </style>
 </head>
 <body>
@@ -884,13 +885,13 @@ nav sup { color: var(--cyan-dark); font-size: 10px; margin-left: 3px; font-weigh
       <a class="fade" href="#service">Capabilities<sup>[4]</sup></a>
       <a class="fade" href="#experience">Education<sup>[2026]</sup></a>
       <button class="fade" id="term-trigger" style="font-weight:600;font-size:12px;color:var(--cyan-dark)">Terminal [/cli]</button>
-      <button class="fade theme-toggle-btn" onclick="toggleTheme()" style="padding:6px 12px;border-radius:99px;border:1px solid var(--line);background:var(--card);font-size:11px;font-weight:600">🌙 Dark</button>
+      <button class="fade theme-toggle-btn" id="theme-nav-btn" onclick="toggleTheme()">🌙 Dark</button>
       <a class="btn fade" href="#contact">Let’s Talk <i>↗</i></a>
     </nav>
 
     <!-- Kinetic Display Title: Outline CHANNA + Solid KAVISHKA -->
     <h1 class="name">
-      <span class="o"><b>CHANNA</b></span> 
+      <span class="o"><b>CHANNA</b></span>
       <span class="s"><b>KAVISHKA</b></span>
     </h1>
 
@@ -1027,7 +1028,7 @@ nav sup { color: var(--cyan-dark); font-size: 10px; margin-left: 3px; font-weigh
 
   <!-- CONTACT & CTA -->
   <section class="sec cta" id="contact">
-    <span class="avail" style="display:flex;gap:8px;align-items:center;padding:7px 14px;border-radius:99px;background:var(--card);font-size:11px;font-weight:600;box-shadow:0 2px 10px rgba(0,0,0,0.06);border:1px solid var(--line)"><i class="dot"></i>Available for 2026 Internship & Trainee Roles</span>
+    <span class="avail" style="display:flex;gap:8px;align-items:center;padding:7px 14px;border-radius:99px;background:var(--card);font-size:11px;font-weight:600;box-shadow:0 2px 10px rgba(0,0,0,0.06);border:1px solid var(--line);color:var(--ink)"><i class="dot"></i>Available for 2026 Internship & Trainee Roles</span>
     <h2 class="rv">HAVE A ROLE OR PROJECT IN MIND?</h2>
     <p class="rv" style="--i:1">Final-year Software Engineering undergraduate ready to bring fresh engineering rigor, modern web development, and proactive problem solving to your engineering team.</p>
     <div class="rv" style="--i:2;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:6px">
@@ -1040,7 +1041,7 @@ nav sup { color: var(--cyan-dark); font-size: 10px; margin-left: 3px; font-weigh
       <a href="https://github.com/C-KAVISHKA" target="_blank" rel="noopener noreferrer">GitHub</a>
       <a href="https://linkedin.com/in/channa-sandaruwan" target="_blank" rel="noopener noreferrer">LinkedIn</a>
       <a href="tel:+94704573602">+94 70 457 3602</a>
-      <button class="theme-toggle-btn" onclick="toggleTheme()">Theme: Dark 🌙</button>
+      <button class="theme-toggle-btn" id="theme-foot-btn" onclick="toggleTheme()">Theme: Dark 🌙</button>
     </div>
   </section>
 
@@ -1120,6 +1121,32 @@ nav sup { color: var(--cyan-dark); font-size: 10px; margin-left: 3px; font-weigh
 </div>
 
 <script>
+/* Theme Toggle Function (Global) */
+function updateThemeUI(isDark) {
+  var navBtn = document.getElementById('theme-nav-btn');
+  var footBtn = document.getElementById('theme-foot-btn');
+  var text = isDark ? '☀️ Light' : '🌙 Dark';
+  if (navBtn) navBtn.textContent = text;
+  if (footBtn) footBtn.textContent = isDark ? 'Theme: Light ☀️' : 'Theme: Dark 🌙';
+}
+
+function toggleTheme() {
+  var current = document.documentElement.getAttribute('data-theme') || (document.documentElement.classList.contains('dark') ? 'dark' : 'light');
+  var next = (current === 'dark') ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  document.documentElement.className = next;
+  if (document.body) document.body.className = next;
+  try { localStorage.setItem('portfolio-theme', next); } catch(e) {}
+  updateThemeUI(next === 'dark');
+}
+window.toggleTheme = toggleTheme;
+
+// Sync theme button text on initial load
+(function() {
+  var cur = document.documentElement.getAttribute('data-theme') || 'light';
+  updateThemeUI(cur === 'dark');
+})();
+
 (function() {
   var projectsData = {
     "cafe-nuwara": {
@@ -1220,14 +1247,6 @@ nav sup { color: var(--cyan-dark); font-size: 10px; margin-left: 3px; font-weigh
 
   var $$ = function(s, c) { return Array.prototype.slice.call((c || document).querySelectorAll(s)); };
 
-  /* Portrait tap/click toggle for mobile & desktop */
-  var ptEl = document.getElementById('hero-portrait');
-  if (ptEl) {
-    ptEl.addEventListener('click', function() {
-      ptEl.classList.toggle('active');
-    });
-  }
-
   /* 1. Scroll Reveal */
   var io = new IntersectionObserver(function(entries) {
     entries.forEach(function(e) {
@@ -1249,22 +1268,30 @@ nav sup { color: var(--cyan-dark); font-size: 10px; margin-left: 3px; font-weigh
   var so = document.querySelector('.socials');
   var ex = document.querySelector('.exp');
 
+  var entranceDone = false;
+  setTimeout(function() { entranceDone = true; }, 1900);
+
   function par() {
-    if (window.innerWidth <= 768) {
-      if (nm) { nm.style.transform = 'none'; nm.style.opacity = '1'; }
-      if (pt) { pt.style.translate = '0 0'; pt.style.scale = '1'; }
-      if (hl) { hl.style.translate = '0 0'; }
-      return;
-    }
+    if (!entranceDone) return;
+    if (window.innerWidth <= 768) return;
     if (hero && nm && pt && hl && so) {
       var hr = hero.getBoundingClientRect();
       var p = Math.max(0, Math.min(1, -hr.top / Math.max(hr.height, 1)));
-      nm.style.transform = 'translateY(' + (p * -90) + 'px)';
-      nm.style.opacity = Math.max(0.2, 1 - p * 1.1);
-      pt.style.translate = '0 ' + (p * 70) + 'px';
-      pt.style.scale = 1 + p * 0.1;
-      hl.style.translate = '0 ' + (p * -50) + 'px';
-      so.style.translate = '0 ' + (p * -50) + 'px';
+      if (p > 0.005) {
+        nm.style.transform = 'translateY(' + (p * -90) + 'px)';
+        nm.style.opacity = Math.max(0.2, 1 - p * 1.2);
+        pt.style.translate = '0 ' + (p * 70) + 'px';
+        pt.style.scale = 1 + p * 0.1;
+        hl.style.translate = '0 ' + (p * -50) + 'px';
+        so.style.translate = '0 ' + (p * -50) + 'px';
+      } else {
+        nm.style.transform = '';
+        nm.style.opacity = '';
+        pt.style.translate = '';
+        pt.style.scale = '';
+        hl.style.translate = '';
+        so.style.translate = '';
+      }
     }
     if (ex) {
       var er = ex.getBoundingClientRect();
@@ -1278,7 +1305,14 @@ nav sup { color: var(--cyan-dark); font-size: 10px; margin-left: 3px; font-weigh
     });
   }
   window.addEventListener('scroll', par, { passive: true });
-  par();
+
+  /* Portrait tap/click toggle for mobile & desktop */
+  var ptEl = document.getElementById('hero-portrait');
+  if (ptEl) {
+    ptEl.addEventListener('click', function() {
+      ptEl.classList.toggle('active');
+    });
+  }
 
   /* 3. Work Filter */
   $$('.tools button[data-f]').forEach(function(b) {
@@ -1291,7 +1325,7 @@ nav sup { color: var(--cyan-dark); font-size: 10px; margin-left: 3px; font-weigh
     });
   });
 
-  /* 4. Capabilities Accordion (Always visible, expands smoothly) */
+  /* 4. Capabilities Accordion */
   $$('.row').forEach(function(row) {
     row.querySelector('button').addEventListener('click', function() {
       var open = !row.classList.contains('open');
@@ -1394,33 +1428,6 @@ nav sup { color: var(--cyan-dark); font-size: 10px; margin-left: 3px; font-weigh
   window.addEventListener('hashchange', show);
   if (location.hash === '#project') history.replaceState(null, '', location.pathname);
 
-  /* 7. Theme Switcher */
-  function updateThemeUI(dark) {
-    $$('.theme-toggle-btn').forEach(function(btn) {
-      btn.textContent = dark ? '☀️ Light' : '🌙 Dark';
-    });
-  }
-  function toggleTheme() {
-    var dark = document.documentElement.classList.toggle('dark');
-    if (dark) {
-      document.documentElement.setAttribute('data-theme', 'dark');
-      localStorage.setItem('portfolio-theme', 'dark');
-    } else {
-      document.documentElement.removeAttribute('data-theme');
-      localStorage.setItem('portfolio-theme', 'light');
-    }
-    updateThemeUI(dark);
-  }
-  $$('.theme-toggle-btn').forEach(function(b) {
-    b.addEventListener('click', toggleTheme);
-  });
-  var savedTheme = localStorage.getItem('portfolio-theme');
-  if (savedTheme === 'dark' || (!savedTheme && matchMedia('(prefers-color-scheme: dark)').matches)) {
-    document.documentElement.classList.add('dark');
-    document.documentElement.setAttribute('data-theme', 'dark');
-    updateThemeUI(true);
-  }
-
   /* 8. Email Copy */
   function copyEmail() {
     navigator.clipboard.writeText('channasadhruvan@gmail.com');
@@ -1433,8 +1440,10 @@ nav sup { color: var(--cyan-dark); font-size: 10px; margin-left: 3px; font-weigh
       if (btn2) btn2.textContent = 'Copy Email Address 📋';
     }, 2000);
   }
-  document.getElementById('copy-email-hero').addEventListener('click', copyEmail);
-  document.getElementById('copy-email-btn').addEventListener('click', copyEmail);
+  var b1 = document.getElementById('copy-email-hero');
+  if (b1) b1.addEventListener('click', copyEmail);
+  var b2 = document.getElementById('copy-email-btn');
+  if (b2) b2.addEventListener('click', copyEmail);
 
   /* 9. Developer Terminal */
   var termModal = document.getElementById('terminal-modal');
