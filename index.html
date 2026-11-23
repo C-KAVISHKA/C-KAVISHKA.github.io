@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Channa Kavishka | Software Engineer & 3D WebXR Developer</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -213,8 +216,8 @@ nav sup { color: var(--cyan-dark); font-size: 10px; margin-left: 3px; font-weigh
 .name b {
   display: inline-block;
   font-weight: 800;
-  transform: translateY(105%);
-  animation: up 1.2s cubic-bezier(.22, 1, .36, 1) forwards;
+  transform: translateY(0);
+  animation: up 1.2s cubic-bezier(.22, 1, .36, 1) both;
   will-change: transform;
 }
 
@@ -240,6 +243,9 @@ nav sup { color: var(--cyan-dark); font-size: 10px; margin-left: 3px; font-weigh
 }
 
 @keyframes up {
+  from {
+    transform: translateY(105%);
+  }
   to {
     transform: translateY(0);
   }
@@ -252,16 +258,20 @@ nav sup { color: var(--cyan-dark); font-size: 10px; margin-left: 3px; font-weigh
   bottom: 0;
   width: min(44%, 400px);
   aspect-ratio: 3/4;
-  transform: translate(-50%, 40%);
-  opacity: 0;
+  transform: translate(-50%, 0);
+  opacity: 1;
   z-index: 2;
   cursor: pointer;
   overflow: visible;
-  animation: rise 1.4s .55s cubic-bezier(.22, 1, .36, 1) forwards;
+  animation: rise 1.4s .55s cubic-bezier(.22, 1, .36, 1) both;
   will-change: transform, opacity;
 }
 
 @keyframes rise {
+  from {
+    transform: translate(-50%, 40%);
+    opacity: 0;
+  }
   to {
     transform: translate(-50%, 0);
     opacity: 1;
@@ -279,7 +289,7 @@ nav sup { color: var(--cyan-dark); font-size: 10px; margin-left: 3px; font-weigh
   border-radius: 14px 14px 0 0;
   mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
   -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
-  animation: unblur 1.8s .5s cubic-bezier(.22, 1, .36, 1) backwards;
+  animation: unblur 1.8s .5s cubic-bezier(.22, 1, .36, 1) both;
   transition: opacity .8s cubic-bezier(.22, 1, .36, 1), transform .6s cubic-bezier(.22, 1, .36, 1);
   will-change: filter, transform, opacity;
 }
@@ -326,9 +336,13 @@ nav sup { color: var(--cyan-dark); font-size: 10px; margin-left: 3px; font-weigh
   z-index: 3;
   background: var(--page);
   pointer-events: none;
-  animation: wash 1.8s .15s cubic-bezier(.22, 1, .36, 1) forwards;
+  opacity: 0;
+  animation: wash 1.8s .15s cubic-bezier(.22, 1, .36, 1) both;
 }
 @keyframes wash {
+  from {
+    opacity: 1;
+  }
   to {
     opacity: 0;
     visibility: hidden;
@@ -365,7 +379,14 @@ nav sup { color: var(--cyan-dark); font-size: 10px; margin-left: 3px; font-weigh
 }
 .socials a:hover, .socials button:hover { transform: translateX(-4px); border-color: var(--cyan); }
 
-.fade { opacity: 0; animation: fade 1s .6s forwards; }
+.fade {
+  opacity: 1;
+  animation: fade 1s .85s cubic-bezier(.22, 1, .36, 1) both;
+}
+@keyframes fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
 @keyframes fade { to { opacity: 1; } }
 
 /* Reveal */
@@ -816,7 +837,39 @@ nav sup { color: var(--cyan-dark); font-size: 10px; margin-left: 3px; font-weigh
   .row .pic { display: none; }
   .foot { gap: 8px; }
 }
-@media (prefers-reduced-motion: reduce) { .dot, .name b, .portrait { animation: none; } }
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001s !important;
+    animation-delay: 0s !important;
+  }
+  .name b {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+  .portrait {
+    animation: none !important;
+    transform: translate(-50%, 0) !important;
+    opacity: 1 !important;
+  }
+  .portrait img {
+    animation: none !important;
+    filter: none !important;
+    transform: none !important;
+  }
+  .wash {
+    display: none !important;
+  }
+  .fade {
+    animation: none !important;
+    opacity: 1 !important;
+  }
+  .rv {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}
 </style>
 </head>
 <body>
@@ -831,7 +884,7 @@ nav sup { color: var(--cyan-dark); font-size: 10px; margin-left: 3px; font-weigh
       <a class="fade" href="#service">Capabilities<sup>[4]</sup></a>
       <a class="fade" href="#experience">Education<sup>[2026]</sup></a>
       <button class="fade" id="term-trigger" style="font-weight:600;font-size:12px;color:var(--cyan-dark)">Terminal [/cli]</button>
-      <button class="fade theme-toggle-btn" style="padding:6px 12px;border-radius:99px;border:1px solid var(--line);background:var(--card);font-size:11px;font-weight:600">🌙 Dark</button>
+      <button class="fade theme-toggle-btn" onclick="toggleTheme()" style="padding:6px 12px;border-radius:99px;border:1px solid var(--line);background:var(--card);font-size:11px;font-weight:600">🌙 Dark</button>
       <a class="btn fade" href="#contact">Let’s Talk <i>↗</i></a>
     </nav>
 
@@ -987,7 +1040,7 @@ nav sup { color: var(--cyan-dark); font-size: 10px; margin-left: 3px; font-weigh
       <a href="https://github.com/C-KAVISHKA" target="_blank" rel="noopener noreferrer">GitHub</a>
       <a href="https://linkedin.com/in/channa-sandaruwan" target="_blank" rel="noopener noreferrer">LinkedIn</a>
       <a href="tel:+94704573602">+94 70 457 3602</a>
-      <button class="theme-toggle-btn">Theme: Dark 🌙</button>
+      <button class="theme-toggle-btn" onclick="toggleTheme()">Theme: Dark 🌙</button>
     </div>
   </section>
 
