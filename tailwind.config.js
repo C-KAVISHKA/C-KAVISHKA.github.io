@@ -8,16 +8,29 @@ export default {
   theme: {
     extend: {
       colors: {
-        background: "#08090d",
-        card: "rgba(18, 20, 29, 0.7)",
-        cardBorder: "rgba(255, 255, 255, 0.08)",
+        background: "#ffffff",
+        card: "rgba(255, 255, 255, 0.9)",
+        cardBorder: "rgba(96, 193, 229, 0.25)",
+        brand: {
+          DEFAULT: "#60C1E5",
+          50: "#F0F9FD",
+          100: "#E1F3FA",
+          200: "#C2E7F6",
+          300: "#92D5F0",
+          400: "#60C1E5",
+          500: "#3BAFD9",
+          600: "#2292BC",
+          700: "#187192",
+          800: "#12526A",
+          900: "#0C3647",
+        },
         cyber: {
-          blue: "#38bdf8",
-          purple: "#a855f7",
-          cyan: "#06b6d4",
-          pink: "#ec4899",
-          emerald: "#10b981",
-          amber: "#f59e0b"
+          blue: "#60C1E5",
+          purple: "#8B5CF6",
+          cyan: "#60C1E5",
+          pink: "#EC4899",
+          emerald: "#10B981",
+          amber: "#F59E0B"
         }
       },
       fontFamily: {

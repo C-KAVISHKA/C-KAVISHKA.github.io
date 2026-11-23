@@ -20,7 +20,7 @@ const Navbar = ({ soundEnabled, setSoundEnabled }) => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 40);
+      setScrolled(window.scrollY > 30);
 
       // Section spy
       const sections = ['projects', 'skills', 'terminal', 'journey', 'contact'];
@@ -28,7 +28,7 @@ const Navbar = ({ soundEnabled, setSoundEnabled }) => {
         const el = document.getElementById(section);
         if (el) {
           const rect = el.getBoundingClientRect();
-          if (rect.top <= 200 && rect.bottom >= 200) {
+          if (rect.top <= 220 && rect.bottom >= 220) {
             setActiveSection(section);
             break;
           }
@@ -49,8 +49,8 @@ const Navbar = ({ soundEnabled, setSoundEnabled }) => {
     <header
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
         scrolled
-          ? 'py-3.5 bg-[#07090e]/85 backdrop-blur-xl border-b border-white/[0.08] shadow-2xl shadow-black/40'
-          : 'py-6 bg-transparent'
+          ? 'py-3 bg-white/90 backdrop-blur-xl border-b border-slate-200/90 shadow-[0_4px_24px_rgba(96,193,229,0.08)]'
+          : 'py-5 sm:py-6 bg-transparent'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
@@ -58,23 +58,23 @@ const Navbar = ({ soundEnabled, setSoundEnabled }) => {
         <a
           href="#"
           onMouseEnter={() => sound.playHover()}
-          className="group flex items-center gap-2.5 text-slate-100 no-underline"
+          className="group flex items-center gap-2.5 text-slate-900 no-underline"
         >
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-cyan-500/20 via-purple-500/20 to-pink-500/20 border border-cyan-400/30 flex items-center justify-center font-mono font-bold text-cyan-400 group-hover:scale-105 group-hover:border-cyan-400 transition-all duration-300 shadow-[0_0_15px_rgba(56,189,248,0.2)]">
+          <div className="w-10 h-10 rounded-xl bg-white border-2 border-[#60C1E5] flex items-center justify-center font-mono font-bold text-[#0284C7] group-hover:scale-105 group-hover:border-[#0284C7] transition-all duration-300 shadow-[0_2px_12px_rgba(96,193,229,0.25)]">
             CK
           </div>
           <div className="flex flex-col">
-            <span className="font-display font-bold text-base tracking-tight text-white group-hover:text-cyan-400 transition-colors">
+            <span className="font-display font-extrabold text-base tracking-tight text-slate-900 group-hover:text-[#0284C7] transition-colors">
               Channa Kavishka
             </span>
-            <span className="text-[11px] font-mono text-slate-400 tracking-wider">
+            <span className="text-[10.5px] font-mono text-[#0369A1] font-semibold tracking-wider">
               FULLSTACK // 3D WEBXR
             </span>
           </div>
         </a>
 
         {/* Desktop Navigation Links */}
-        <nav className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.06] backdrop-blur-md shadow-inner">
+        <nav className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100/90 border border-slate-200/80 backdrop-blur-md shadow-inner">
           {navItems.map((item) => {
             const Icon = item.icon;
             const isActive = activeSection === item.href.replace('#', '');
@@ -86,26 +86,28 @@ const Navbar = ({ soundEnabled, setSoundEnabled }) => {
                 onClick={() => sound.playClick()}
                 className={`relative px-4 py-2 rounded-full text-xs font-medium tracking-wide transition-all duration-200 flex items-center gap-1.5 ${
                   isActive
-                    ? 'text-cyan-400 font-semibold'
-                    : 'text-slate-300 hover:text-white hover:bg-white/[0.05]'
+                    ? 'text-[#0284C7] font-bold'
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-white/80'
                 }`}
               >
                 {isActive && (
                   <motion.div
                     layoutId="activeNavTab"
-                    className="absolute inset-0 rounded-full bg-cyan-400/10 border border-cyan-400/30 shadow-[0_0_15px_rgba(56,189,248,0.15)]"
+                    className="absolute inset-0 rounded-full bg-white border border-[#60C1E5]/60 shadow-[0_2px_10px_rgba(96,193,229,0.2)]"
                     transition={{ type: 'spring', stiffness: 350, damping: 30 }}
                   />
                 )}
-                <Icon className="w-3.5 h-3.5" />
-                <span>{item.label}</span>
+                <span className="relative z-10 flex items-center gap-1.5">
+                  <Icon className="w-3.5 h-3.5" />
+                  <span>{item.label}</span>
+                </span>
               </a>
             );
           })}
         </nav>
 
-        {/* Action Controls (Sound, CV Download, GitHub, LinkedIn, Contact CTA) */}
-        <div className="flex items-center gap-2.5">
+        {/* Action Controls (Sound, CV Download, GitHub, Contact CTA) */}
+        <div className="flex items-center gap-2 sm:gap-2.5">
           {/* Sound FX Toggle */}
           <button
             onClick={toggleSound}
@@ -113,8 +115,8 @@ const Navbar = ({ soundEnabled, setSoundEnabled }) => {
             title={soundEnabled ? 'Mute Sound FX' : 'Enable Futuristic Sound FX'}
             className={`p-2.5 rounded-xl border transition-all duration-200 flex items-center justify-center ${
               soundEnabled
-                ? 'bg-cyan-500/15 border-cyan-400/50 text-cyan-400 shadow-[0_0_15px_rgba(56,189,248,0.25)]'
-                : 'bg-white/[0.03] border-white/[0.08] text-slate-400 hover:text-slate-200 hover:border-white/20'
+                ? 'bg-[#60C1E5]/20 border-[#60C1E5] text-[#0284C7] shadow-[0_0_15px_rgba(96,193,229,0.3)]'
+                : 'bg-white border-slate-200 text-slate-500 hover:text-slate-800 hover:border-[#60C1E5]/40 shadow-sm'
             }`}
           >
             {soundEnabled ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
@@ -126,10 +128,10 @@ const Navbar = ({ soundEnabled, setSoundEnabled }) => {
             download="Channa_Kavishka_Sadaruwan_CV.pdf"
             onMouseEnter={() => sound.playHover()}
             onClick={() => sound.playSuccess()}
-            className="hidden sm:flex items-center gap-1.5 px-3 py-2 rounded-xl bg-purple-500/10 hover:bg-purple-500/20 border border-purple-400/40 text-xs font-mono text-purple-300 hover:text-purple-200 transition-all shadow-[0_0_15px_rgba(168,85,247,0.15)]"
+            className="hidden sm:flex items-center gap-1.5 px-3 py-2 rounded-xl bg-[#60C1E5]/15 hover:bg-[#60C1E5]/25 border border-[#60C1E5]/50 text-xs font-mono font-semibold text-[#0284C7] transition-all shadow-sm hover:shadow-[0_2px_12px_rgba(96,193,229,0.25)]"
             title="Download Professional CV (PDF)"
           >
-            <FileDown className="w-4 h-4 text-purple-400" />
+            <FileDown className="w-4 h-4 text-[#0284C7]" />
             <span>CV / Resume</span>
           </a>
 
@@ -140,18 +142,18 @@ const Navbar = ({ soundEnabled, setSoundEnabled }) => {
             rel="noopener noreferrer"
             onMouseEnter={() => sound.playHover()}
             onClick={() => sound.playClick()}
-            className="hidden md:flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.09] hover:border-cyan-400/40 text-xs font-medium text-slate-200 hover:text-white transition-all shadow-sm"
+            className="hidden md:flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 hover:border-[#60C1E5]/60 text-xs font-medium text-slate-700 hover:text-slate-900 transition-all shadow-sm"
           >
-            <Github className="w-4 h-4 text-cyan-400" />
+            <Github className="w-4 h-4 text-[#0284C7]" />
             <span className="font-mono">GitHub</span>
           </a>
 
-          {/* Hire Me / Let's Talk CTA */}
+          {/* Contact CTA */}
           <a
             href="#contact"
             onMouseEnter={() => sound.playHover()}
             onClick={() => sound.playClick()}
-            className="px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold text-xs tracking-wide transition-all shadow-[0_0_20px_rgba(56,189,248,0.3)] hover:shadow-[0_0_25px_rgba(56,189,248,0.5)] transform hover:-translate-y-0.5"
+            className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#60C1E5] to-[#0284C7] hover:from-[#48B5DD] hover:to-[#0369A1] text-white font-bold text-xs tracking-wide transition-all shadow-[0_2px_14px_rgba(96,193,229,0.35)] hover:shadow-[0_4px_20px_rgba(96,193,229,0.5)] transform hover:-translate-y-0.5"
           >
             Contact
           </a>
@@ -162,9 +164,10 @@ const Navbar = ({ soundEnabled, setSoundEnabled }) => {
               setMobileMenuOpen(!mobileMenuOpen);
               sound.playClick();
             }}
-            className="lg:hidden p-2 rounded-xl bg-white/[0.04] border border-white/[0.08] text-slate-300"
+            className="lg:hidden p-2.5 rounded-xl bg-white border border-slate-200 text-slate-700 hover:border-[#60C1E5] shadow-sm transition-colors"
+            aria-label="Toggle Navigation Menu"
           >
-            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            {mobileMenuOpen ? <X className="w-5 h-5 text-[#0284C7]" /> : <Menu className="w-5 h-5 text-slate-700" />}
           </button>
         </div>
       </div>
@@ -173,13 +176,15 @@ const Navbar = ({ soundEnabled, setSoundEnabled }) => {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            className="lg:hidden glass-panel border-b border-white/[0.1] px-6 py-5 mt-3 space-y-3"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.2 }}
+            className="lg:hidden bg-white border border-slate-200/90 shadow-2xl rounded-2xl mx-3 sm:mx-4 px-5 py-4 mt-2 space-y-2"
           >
             {navItems.map((item) => {
               const Icon = item.icon;
+              const isActive = activeSection === item.href.replace('#', '');
               return (
                 <a
                   key={item.label}
@@ -188,28 +193,32 @@ const Navbar = ({ soundEnabled, setSoundEnabled }) => {
                     setMobileMenuOpen(false);
                     sound.playClick();
                   }}
-                  className="flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm text-slate-200 hover:text-cyan-400 hover:bg-white/[0.05] transition-colors"
+                  className={`flex items-center gap-3 px-3.5 py-3 rounded-xl text-sm font-medium transition-all ${
+                    isActive
+                      ? 'bg-[#60C1E5]/15 text-[#0284C7] font-bold border border-[#60C1E5]/30'
+                      : 'text-slate-700 hover:text-[#0284C7] hover:bg-[#F0F9FD]'
+                  }`}
                 >
-                  <Icon className="w-4 h-4 text-cyan-400" />
+                  <Icon className={`w-4 h-4 ${isActive ? 'text-[#0284C7]' : 'text-slate-500'}`} />
                   <span>{item.label}</span>
                 </a>
               );
             })}
-            <div className="pt-3 border-t border-white/[0.08] flex flex-col gap-2.5">
+            <div className="pt-3 border-t border-slate-100 flex flex-col gap-2.5">
               <a
                 href={personalInfo.cvDownloadUrl}
                 download="Channa_Kavishka_Sadaruwan_CV.pdf"
-                className="flex items-center gap-2 px-3 py-2 rounded-lg bg-purple-500/15 border border-purple-400/40 text-xs font-mono text-purple-300"
+                className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-[#60C1E5]/15 border border-[#60C1E5]/40 text-xs font-mono font-bold text-[#0284C7] shadow-sm"
               >
-                <FileDown className="w-4 h-4 text-purple-400" />
+                <FileDown className="w-4 h-4 text-[#0284C7]" />
                 <span>Download CV / Resume (PDF)</span>
               </a>
-              <div className="flex items-center justify-between px-3 pt-1">
+              <div className="flex items-center justify-between px-2 pt-1">
                 <a
                   href={personalInfo.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-xs font-mono text-cyan-400"
+                  className="flex items-center gap-2 text-xs font-mono text-[#0284C7] hover:underline"
                 >
                   <Github className="w-4 h-4" />
                   <span>github.com/C-KAVISHKA</span>
@@ -218,7 +227,7 @@ const Navbar = ({ soundEnabled, setSoundEnabled }) => {
                   href={personalInfo.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-xs font-mono text-blue-400"
+                  className="flex items-center gap-2 text-xs font-mono text-[#0284C7] hover:underline"
                 >
                   <Linkedin className="w-4 h-4" />
                   <span>LinkedIn</span>

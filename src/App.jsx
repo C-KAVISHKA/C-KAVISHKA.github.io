@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { AnimatePresence } from 'framer-motion';
+import LoadingScreen from './components/LoadingScreen';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import Projects from './components/Projects';
@@ -11,6 +13,7 @@ import CustomCursor from './components/CustomCursor';
 import ParticleCanvas from './components/ParticleCanvas';
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true);
   const [soundEnabled, setSoundEnabled] = useState(false);
 
   const handleOpenTerminal = () => {
@@ -21,8 +24,13 @@ function App() {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#06070a] text-slate-100 selection:bg-cyan-500/30 selection:text-cyan-200">
-      {/* Interactive Custom Cursor */}
+    <div className="relative min-h-screen bg-white text-slate-900 selection:bg-[#60C1E5]/30 selection:text-slate-950 font-sans antialiased overflow-x-hidden">
+      {/* Bespoke Futuristic Loading Screen */}
+      <AnimatePresence mode="wait">
+        {isLoading && <LoadingScreen onFinish={() => setIsLoading(false)} />}
+      </AnimatePresence>
+
+      {/* Interactive Custom Cursor (Desktop Only) */}
       <CustomCursor />
 
       {/* Particle Constellation Background Canvas */}

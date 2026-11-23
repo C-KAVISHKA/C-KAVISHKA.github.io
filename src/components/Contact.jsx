@@ -25,7 +25,7 @@ const Contact = () => {
       particleCount: 50,
       spread: 60,
       origin: { y: 0.8 },
-      colors: ['#38bdf8', '#a855f7', '#10b981']
+      colors: ['#60c1e5', '#0284c7', '#10b981']
     });
     setTimeout(() => setCopied(false), 3000);
   };
@@ -38,7 +38,6 @@ const Contact = () => {
     setError('');
 
     try {
-      // Free Web3Forms / Formspree API endpoint to deliver real emails to inbox
       const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
         headers: {
@@ -46,7 +45,6 @@ const Contact = () => {
           'Accept': 'application/json',
         },
         body: JSON.stringify({
-          // Free Web3Forms public access key for instant email routing
           access_key: '56ea8b1a-8bb7-4b71-b0db-b1b7454f738a',
           from_name: formData.name,
           email: formData.email,
@@ -71,7 +69,6 @@ const Contact = () => {
           setFormData({ name: '', email: '', subject: '', message: '' });
         }, 5000);
       } else {
-        // Fallback to opening user's mail client directly
         triggerMailtoFallback();
       }
     } catch (err) {
@@ -97,17 +94,20 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-24 relative z-10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="py-24 relative z-10 bg-white">
+      {/* Background ambient light */}
+      <div className="absolute top-1/2 right-1/4 w-[600px] h-[600px] bg-[#60C1E5]/12 rounded-full blur-[140px] pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-16">
+        <div className="text-center max-w-3xl mx-auto space-y-4 mb-14 sm:mb-16">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-panel border border-cyan-400/30 text-xs font-mono text-cyan-300"
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#60C1E5]/15 border border-[#60C1E5]/40 text-xs font-mono font-bold text-[#0284C7] shadow-sm"
           >
-            <Mail className="w-3.5 h-3.5 text-cyan-400" />
+            <Mail className="w-3.5 h-3.5 text-[#0284C7]" />
             <span>LET'S CONNECT</span>
           </motion.div>
 
@@ -115,41 +115,41 @@ const Contact = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-display font-extrabold text-3xl sm:text-5xl text-white tracking-tight"
+            className="font-display font-extrabold text-3xl sm:text-5xl text-slate-900 tracking-tight"
           >
             Get In <span className="text-gradient-cyan">Touch</span>
           </motion.h2>
 
-          <p className="text-slate-400 text-base sm:text-lg">
+          <p className="text-slate-600 text-base sm:text-lg">
             Seeking software developer, trainee, and full-stack engineering opportunities. Send me a direct message below.
           </p>
         </div>
 
         {/* Contact Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
           {/* Left Column: Direct Info & Social Cards */}
           <div className="lg:col-span-5 space-y-4">
             {/* Email Card with Copy Button */}
-            <div className="p-6 rounded-2xl glass-panel-glow border border-cyan-400/30 space-y-3 shadow-xl">
+            <div className="p-6 rounded-2xl bg-white border border-[#60C1E5]/50 space-y-3.5 shadow-sm hover:shadow-[0_8px_24px_rgba(96,193,229,0.18)] transition-all">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-cyan-500/20 border border-cyan-400/40 flex items-center justify-center text-cyan-400">
+                <div className="w-10 h-10 rounded-xl bg-[#60C1E5]/15 border border-[#60C1E5]/40 flex items-center justify-center text-[#0284C7]">
                   <Mail className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="text-xs font-mono text-slate-400">DIRECT EMAIL</div>
-                  <div className="text-sm font-bold text-white font-mono">{personalInfo.email}</div>
+                  <div className="text-xs font-mono text-slate-500 font-semibold">DIRECT EMAIL</div>
+                  <div className="text-sm font-bold text-slate-900 font-mono">{personalInfo.email}</div>
                 </div>
               </div>
 
               <button
                 onClick={handleCopyEmail}
                 onMouseEnter={() => sound.playHover()}
-                className="w-full py-2.5 px-4 rounded-xl bg-white/[0.04] hover:bg-cyan-500/15 border border-white/[0.08] hover:border-cyan-400/40 text-xs font-mono text-cyan-300 flex items-center justify-center gap-2 transition-all"
+                className="w-full py-2.5 px-4 rounded-xl bg-slate-50 hover:bg-[#F0F9FD] border border-slate-200 hover:border-[#60C1E5] text-xs font-mono font-bold text-[#0284C7] flex items-center justify-center gap-2 transition-all shadow-sm"
               >
                 {copied ? (
                   <>
-                    <CheckCircle2 className="w-4 h-4 text-emerald-400" />
-                    <span className="text-emerald-400">Email Copied to Clipboard!</span>
+                    <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                    <span className="text-emerald-700">Email Copied to Clipboard!</span>
                   </>
                 ) : (
                   <>
@@ -161,19 +161,19 @@ const Contact = () => {
             </div>
 
             {/* Phone Card */}
-            <div className="p-5 rounded-2xl glass-card border border-white/[0.08] flex items-center justify-between">
+            <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-400/30 flex items-center justify-center text-emerald-400">
+                <div className="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600">
                   <Phone className="w-4 h-4" />
                 </div>
                 <div>
-                  <div className="text-xs font-mono text-slate-400">PHONE / WHATSAPP</div>
-                  <a href={`tel:${personalInfo.phone.replace(/\s+/g, '')}`} className="text-sm font-semibold text-white font-mono hover:text-emerald-400 transition-colors">
+                  <div className="text-xs font-mono text-slate-500 font-semibold">PHONE / WHATSAPP</div>
+                  <a href={`tel:${personalInfo.phone.replace(/\s+/g, '')}`} className="text-sm font-bold text-slate-900 font-mono hover:text-[#0284C7] transition-colors">
                     {personalInfo.phone}
                   </a>
                 </div>
               </div>
-              <span className="text-xs font-mono text-emerald-400">Direct</span>
+              <span className="text-xs font-mono font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">Direct</span>
             </div>
 
             {/* Download Official CV Card */}
@@ -182,20 +182,20 @@ const Contact = () => {
               download="Channa_Kavishka_Sadaruwan_CV.pdf"
               onMouseEnter={() => sound.playHover()}
               onClick={() => sound.playSuccess()}
-              className="p-5 rounded-2xl glass-card border border-purple-500/30 hover:border-purple-400 bg-purple-500/10 flex items-center justify-between group transition-all block"
+              className="p-5 rounded-2xl bg-gradient-to-br from-white to-[#F0F9FD] border border-[#60C1E5]/60 hover:border-[#60C1E5] shadow-sm hover:shadow-[0_8px_24px_rgba(96,193,229,0.22)] flex items-center justify-between group transition-all block"
             >
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-purple-500/20 border border-purple-400/40 flex items-center justify-center text-purple-300">
+                <div className="w-10 h-10 rounded-xl bg-[#60C1E5]/20 border border-[#60C1E5]/40 flex items-center justify-center text-[#0284C7]">
                   <FileDown className="w-5 h-5 group-hover:scale-110 transition-transform" />
                 </div>
                 <div>
-                  <div className="text-xs font-mono text-purple-300">OFFICIAL RESUME</div>
-                  <div className="text-sm font-bold text-white">
+                  <div className="text-xs font-mono text-[#0284C7] font-bold">OFFICIAL RESUME</div>
+                  <div className="text-sm font-bold text-slate-900">
                     Download CV (PDF Document)
                   </div>
                 </div>
               </div>
-              <span className="text-xs font-mono text-purple-300 group-hover:translate-x-1 transition-transform">
+              <span className="text-xs font-mono font-bold text-[#0284C7] group-hover:translate-x-1 transition-transform">
                 Download &rarr;
               </span>
             </a>
@@ -207,20 +207,20 @@ const Contact = () => {
               rel="noopener noreferrer"
               onMouseEnter={() => sound.playHover()}
               onClick={() => sound.playClick()}
-              className="p-5 rounded-2xl glass-card border border-white/[0.08] hover:border-cyan-400/40 flex items-center justify-between group transition-all block"
+              className="p-5 rounded-2xl bg-white border border-slate-200 hover:border-[#60C1E5] shadow-sm flex items-center justify-between group transition-all block"
             >
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-white/[0.05] border border-white/[0.1] flex items-center justify-center text-slate-200 group-hover:text-cyan-400 group-hover:border-cyan-400/40 transition-colors">
+                <div className="w-10 h-10 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-700 group-hover:text-[#0284C7] group-hover:border-[#60C1E5]/50 transition-colors">
                   <Github className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="text-xs font-mono text-slate-400">GITHUB REPOSITORIES</div>
-                  <div className="text-sm font-bold font-mono text-white group-hover:text-cyan-300 transition-colors">
+                  <div className="text-xs font-mono text-slate-500 font-semibold">GITHUB REPOSITORIES</div>
+                  <div className="text-sm font-bold font-mono text-slate-900 group-hover:text-[#0284C7] transition-colors">
                     github.com/C-KAVISHKA
                   </div>
                 </div>
               </div>
-              <ExternalLink className="w-4 h-4 text-cyan-400 group-hover:translate-x-0.5 transition-transform" />
+              <ExternalLink className="w-4 h-4 text-[#0284C7] group-hover:translate-x-0.5 transition-transform" />
             </a>
 
             {/* LinkedIn Profile Card */}
@@ -230,88 +230,88 @@ const Contact = () => {
               rel="noopener noreferrer"
               onMouseEnter={() => sound.playHover()}
               onClick={() => sound.playClick()}
-              className="p-5 rounded-2xl glass-card border border-white/[0.08] hover:border-blue-400/40 flex items-center justify-between group transition-all block"
+              className="p-5 rounded-2xl bg-white border border-slate-200 hover:border-[#60C1E5] shadow-sm flex items-center justify-between group transition-all block"
             >
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-blue-500/10 border border-blue-400/30 flex items-center justify-center text-blue-400">
+                <div className="w-10 h-10 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-center text-slate-700 group-hover:text-[#0284C7] group-hover:border-[#60C1E5]/50 transition-colors">
                   <Linkedin className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="text-xs font-mono text-slate-400">LINKEDIN PROFILE</div>
-                  <div className="text-sm font-bold font-mono text-white group-hover:text-blue-300 transition-colors">
+                  <div className="text-xs font-mono text-slate-500 font-semibold">LINKEDIN PROFILE</div>
+                  <div className="text-sm font-bold font-mono text-slate-900 group-hover:text-[#0284C7] transition-colors">
                     linkedin.com/in/channa-sandaruwan
                   </div>
                 </div>
               </div>
-              <ExternalLink className="w-4 h-4 text-blue-400 group-hover:translate-x-0.5 transition-transform" />
+              <ExternalLink className="w-4 h-4 text-[#0284C7] group-hover:translate-x-0.5 transition-transform" />
             </a>
           </div>
 
           {/* Right Column: Contact Message Form */}
           <div className="lg:col-span-7">
-            <div className="p-7 sm:p-9 rounded-2xl glass-panel-glow border border-white/[0.1] shadow-2xl">
+            <div className="p-7 sm:p-9 rounded-3xl bg-white border-2 border-[#60C1E5]/40 shadow-[0_12px_36px_rgba(96,193,229,0.16)]">
               {submitted ? (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
                   className="py-12 text-center space-y-4"
                 >
-                  <div className="w-16 h-16 rounded-full bg-emerald-500/20 border border-emerald-400 flex items-center justify-center mx-auto text-emerald-400 shadow-[0_0_30px_rgba(16,185,129,0.3)]">
+                  <div className="w-16 h-16 rounded-full bg-emerald-50 border-2 border-emerald-400 flex items-center justify-center mx-auto text-emerald-600 shadow-md">
                     <CheckCircle2 className="w-8 h-8" />
                   </div>
-                  <h3 className="text-2xl font-bold font-display text-white">Message Transmitted!</h3>
-                  <p className="text-sm text-slate-300 max-w-md mx-auto">
-                    Thank you, <strong className="text-cyan-300">{formData.name}</strong>! Your inquiry has been routed directly to <strong className="text-cyan-300">{personalInfo.email}</strong>. I'll get back to you promptly.
+                  <h3 className="text-2xl font-bold font-display text-slate-900">Message Transmitted!</h3>
+                  <p className="text-sm text-slate-600 max-w-md mx-auto">
+                    Thank you, <strong className="text-[#0284C7]">{formData.name}</strong>! Your inquiry has been routed directly to <strong className="text-[#0284C7]">{personalInfo.email}</strong>. I'll get back to you promptly.
                   </p>
                 </motion.div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                    <div className="space-y-2">
-                      <label className="text-xs font-mono text-slate-300">Your Name *</label>
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-mono font-bold text-slate-700">Your Name *</label>
                       <input
                         type="text"
                         required
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         placeholder="e.g. Alex Mercer"
-                        className="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/[0.1] focus:border-cyan-400 outline-none text-sm text-white placeholder-slate-600 transition-colors"
+                        className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:border-[#60C1E5] focus:bg-white focus:ring-2 focus:ring-[#60C1E5]/20 outline-none text-sm text-slate-900 placeholder-slate-400 transition-all"
                       />
                     </div>
 
-                    <div className="space-y-2">
-                      <label className="text-xs font-mono text-slate-300">Email Address *</label>
+                    <div className="space-y-1.5">
+                      <label className="text-xs font-mono font-bold text-slate-700">Email Address *</label>
                       <input
                         type="email"
                         required
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         placeholder="e.g. alex@company.com"
-                        className="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/[0.1] focus:border-cyan-400 outline-none text-sm text-white placeholder-slate-600 transition-colors"
+                        className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:border-[#60C1E5] focus:bg-white focus:ring-2 focus:ring-[#60C1E5]/20 outline-none text-sm text-slate-900 placeholder-slate-400 transition-all"
                       />
                     </div>
                   </div>
 
-                  <div className="space-y-2">
-                    <label className="text-xs font-mono text-slate-300">Subject / Role Opportunity</label>
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-mono font-bold text-slate-700">Subject / Role Opportunity</label>
                     <input
                       type="text"
                       value={formData.subject}
                       onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                       placeholder="e.g. Trainee / Software Developer Opportunity"
-                      className="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/[0.1] focus:border-cyan-400 outline-none text-sm text-white placeholder-slate-600 transition-colors"
+                      className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:border-[#60C1E5] focus:bg-white focus:ring-2 focus:ring-[#60C1E5]/20 outline-none text-sm text-slate-900 placeholder-slate-400 transition-all"
                     />
                   </div>
 
-                  <div className="space-y-2">
-                    <label className="text-xs font-mono text-slate-300">Message *</label>
+                  <div className="space-y-1.5">
+                    <label className="text-xs font-mono font-bold text-slate-700">Message *</label>
                     <textarea
                       rows={5}
                       required
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       placeholder="Describe your inquiry, role requirements, or collaboration scope..."
-                      className="w-full px-4 py-3 rounded-xl bg-black/40 border border-white/[0.1] focus:border-cyan-400 outline-none text-sm text-white placeholder-slate-600 transition-colors resize-none"
+                      className="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 focus:border-[#60C1E5] focus:bg-white focus:ring-2 focus:ring-[#60C1E5]/20 outline-none text-sm text-slate-900 placeholder-slate-400 transition-all resize-none"
                     />
                   </div>
 
@@ -319,17 +319,17 @@ const Contact = () => {
                     type="submit"
                     disabled={isSubmitting}
                     onMouseEnter={() => sound.playHover()}
-                    className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 hover:from-cyan-400 hover:to-indigo-500 disabled:opacity-60 text-slate-950 font-bold text-sm tracking-wide transition-all shadow-[0_0_25px_rgba(56,189,248,0.35)] flex items-center justify-center gap-2 group"
+                    className="w-full py-3.5 px-6 rounded-xl bg-gradient-to-r from-[#60C1E5] to-[#0284C7] hover:from-[#48B5DD] hover:to-[#0369A1] disabled:opacity-60 text-white font-bold text-sm tracking-wide transition-all shadow-[0_4px_20px_rgba(96,193,229,0.35)] hover:shadow-[0_6px_25px_rgba(96,193,229,0.5)] flex items-center justify-center gap-2 group"
                   >
                     {isSubmitting ? (
                       <>
-                        <Loader2 className="w-4 h-4 animate-spin text-slate-950" />
+                        <Loader2 className="w-4 h-4 animate-spin text-white" />
                         <span>Transmitting Message...</span>
                       </>
                     ) : (
                       <>
                         <span>Send Message</span>
-                        <Send className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform text-slate-950" />
+                        <Send className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-0.5 transition-transform text-white" />
                       </>
                     )}
                   </button>

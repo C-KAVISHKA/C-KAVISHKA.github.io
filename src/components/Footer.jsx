@@ -23,24 +23,24 @@ const Footer = () => {
   };
 
   return (
-    <footer className="relative border-t border-white/[0.08] bg-[#040508] pt-12 pb-8 z-10">
+    <footer className="relative border-t border-slate-200 bg-slate-50 pt-12 pb-8 z-10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-white/[0.06]">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-slate-200">
           {/* Brand Info */}
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-cyan-500/20 border border-cyan-400/30 flex items-center justify-center font-mono font-bold text-cyan-400 text-sm">
+            <div className="w-9 h-9 rounded-xl bg-white border-2 border-[#60C1E5] flex items-center justify-center font-mono font-bold text-[#0284C7] text-sm shadow-sm">
               CK
             </div>
             <div>
-              <div className="font-display font-bold text-base text-white">Channa Kavishka</div>
-              <div className="text-xs font-mono text-slate-400">Full-Stack & 3D WebXR Software Engineer</div>
+              <div className="font-display font-extrabold text-base text-slate-900">Channa Kavishka</div>
+              <div className="text-xs font-mono text-slate-500 font-medium">Full-Stack &amp; 3D WebXR Software Engineer</div>
             </div>
           </div>
 
           {/* Live System Time */}
-          <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.06] text-xs font-mono text-slate-300">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span>SYS_TIME: {time || '12:00:00'}</span>
+          <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-slate-200 text-xs font-mono text-slate-700 shadow-sm">
+            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="font-semibold">SYS_TIME: {time || '12:00:00'}</span>
           </div>
 
           {/* Socials & Back to Top */}
@@ -50,7 +50,7 @@ const Footer = () => {
               target="_blank"
               rel="noopener noreferrer"
               onMouseEnter={() => sound.playHover()}
-              className="p-2.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] border border-white/[0.08] text-slate-300 hover:text-cyan-400 transition-colors"
+              className="p-2.5 rounded-xl bg-white hover:bg-slate-100 border border-slate-200 text-slate-700 hover:text-[#0284C7] transition-colors shadow-sm"
               title="GitHub Profile"
             >
               <Github className="w-4 h-4" />
@@ -59,10 +59,10 @@ const Footer = () => {
             <button
               onClick={scrollToTop}
               onMouseEnter={() => sound.playHover()}
-              className="p-2.5 rounded-xl bg-cyan-500/15 hover:bg-cyan-500/25 border border-cyan-400/40 text-cyan-400 transition-all shadow-[0_0_15px_rgba(56,189,248,0.2)]"
+              className="p-2.5 rounded-xl bg-[#60C1E5] hover:bg-[#48B5DD] text-slate-950 font-bold transition-all shadow-[0_2px_12px_rgba(96,193,229,0.35)] hover:shadow-[0_4px_16px_rgba(96,193,229,0.5)] transform hover:-translate-y-0.5"
               title="Scroll to Top"
             >
-              <ArrowUp className="w-4 h-4" />
+              <ArrowUp className="w-4 h-4 text-slate-950" />
             </button>
           </div>
         </div>
@@ -71,7 +71,7 @@ const Footer = () => {
         <div className="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs font-mono text-slate-500 gap-3">
           <div>&copy; {new Date().getFullYear()} Channa Kavishka (C-KAVISHKA). All rights reserved.</div>
           <div className="flex items-center gap-1">
-            <span>Engineered with React 18, Three.js, TailwindCSS & Framer Motion</span>
+            <span>Engineered with React, Three.js, TailwindCSS &amp; Framer Motion</span>
           </div>
         </div>
       </div>

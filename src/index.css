@@ -4,8 +4,9 @@
 
 @layer base {
   :root {
-    --color-primary: 56, 189, 248; /* cyan-400 */
-    --color-accent: 168, 85, 247; /* purple-500 */
+    --color-primary: 96, 193, 229; /* #60C1E5 */
+    --color-primary-dark: 2, 132, 199; /* #0284C7 */
+    --color-accent: 96, 193, 229;
   }
 
   html {
@@ -14,88 +15,96 @@
   }
 
   body {
-    background-color: #06070a;
-    color: #f1f5f9;
+    background-color: #ffffff;
+    color: #0f172a;
     overflow-x: hidden;
   }
 }
 
-/* Custom Scrollbar */
+/* Custom Scrollbar - Clean White & #60C1E5 */
 ::-webkit-scrollbar {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #08090e;
+  background: #f8fafc;
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e2230;
+  background: #cbd5e1;
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #38bdf8;
+  background: #60c1e5;
 }
 
-/* Glassmorphism Styles */
+/* Glassmorphism Styles - Light Mode with #60C1E5 Accents */
 .glass-panel {
-  background: rgba(13, 16, 26, 0.65);
+  background: rgba(255, 255, 255, 0.88);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(226, 232, 240, 0.85);
+  box-shadow: 0 4px 20px -2px rgba(96, 193, 229, 0.08);
 }
 
 .glass-panel-glow {
-  background: rgba(13, 16, 26, 0.75);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(56, 189, 248, 0.2);
-  box-shadow: 0 0 25px rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(96, 193, 229, 0.4);
+  box-shadow: 0 10px 35px -5px rgba(96, 193, 229, 0.22);
 }
 
 .glass-card {
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: #ffffff;
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  box-shadow: 0 2px 14px -2px rgba(15, 23, 42, 0.05);
   transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .glass-card:hover {
-  border-color: rgba(56, 189, 248, 0.35);
-  box-shadow: 0 10px 30px -10px rgba(56, 189, 248, 0.25);
+  border-color: rgba(96, 193, 229, 0.65);
+  box-shadow: 0 14px 34px -8px rgba(96, 193, 229, 0.25);
+  transform: translateY(-3px);
 }
 
 /* Glowing text gradients */
 .text-gradient-cyan {
-  background: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
+  background: linear-gradient(135deg, #0284c7 0%, #60c1e5 50%, #38bdf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-primary {
+  background: linear-gradient(135deg, #0f172a 0%, #0369a1 60%, #60c1e5 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .text-gradient-emerald {
-  background: linear-gradient(135deg, #34d399 0%, #06b6d4 100%);
+  background: linear-gradient(135deg, #059669 0%, #60c1e5 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .text-gradient-gold {
-  background: linear-gradient(135deg, #fbbf24 0%, #f97316 100%);
+  background: linear-gradient(135deg, #d97706 0%, #ea580c 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-/* Cyber Grid Background */
+/* Grid Background */
 .cyber-grid {
-  background-size: 40px 40px;
+  background-size: 36px 36px;
   background-image: 
-    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    linear-gradient(to right, rgba(96, 193, 229, 0.09) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(96, 193, 229, 0.09) 1px, transparent 1px);
 }
 
 .radial-glow {
-  background: radial-gradient(circle at 50% 50%, rgba(56, 189, 248, 0.12) 0%, transparent 65%);
+  background: radial-gradient(circle at 50% 50%, rgba(96, 193, 229, 0.16) 0%, transparent 68%);
 }
 
-.radial-glow-purple {
-  background: radial-gradient(circle at 50% 50%, rgba(168, 85, 247, 0.12) 0%, transparent 65%);
+.radial-glow-cyan {
+  background: radial-gradient(circle at 50% 50%, rgba(96, 193, 229, 0.22) 0%, transparent 65%);
 }
 
 /* 3D tilt effect */

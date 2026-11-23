@@ -8,7 +8,7 @@ const CustomCursor = () => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    // Only enable on pointer-supported devices
+    // Only enable on desktop pointer devices
     if (window.matchMedia('(pointer: coarse)').matches) {
       return;
     }
@@ -56,7 +56,7 @@ const CustomCursor = () => {
     <>
       {/* Small dot */}
       <motion.div
-        className="fixed top-0 left-0 w-2.5 h-2.5 bg-cyan-400 rounded-full pointer-events-none z-50 shadow-[0_0_12px_#38bdf8]"
+        className="fixed top-0 left-0 w-2.5 h-2.5 bg-[#60C1E5] rounded-full pointer-events-none z-50 shadow-[0_0_10px_#60c1e5]"
         animate={{
           x: mousePosition.x - 5,
           y: mousePosition.y - 5,
@@ -66,13 +66,13 @@ const CustomCursor = () => {
       />
       {/* Outer soft ring */}
       <motion.div
-        className="fixed top-0 left-0 w-8 h-8 border border-cyan-400/50 rounded-full pointer-events-none z-50"
+        className="fixed top-0 left-0 w-8 h-8 border border-[#60C1E5]/60 rounded-full pointer-events-none z-50"
         animate={{
           x: mousePosition.x - 16,
           y: mousePosition.y - 16,
-          scale: isClicking ? 1.6 : isHovered ? 2.2 : 1,
-          borderColor: isHovered ? 'rgba(168, 85, 247, 0.8)' : 'rgba(56, 189, 248, 0.4)',
-          backgroundColor: isHovered ? 'rgba(168, 85, 247, 0.08)' : 'transparent',
+          scale: isClicking ? 1.5 : isHovered ? 2.2 : 1,
+          borderColor: isHovered ? '#0284C7' : 'rgba(96, 193, 229, 0.5)',
+          backgroundColor: isHovered ? 'rgba(96, 193, 229, 0.12)' : 'transparent',
         }}
         transition={{ type: 'spring', damping: 20, stiffness: 200, mass: 0.2 }}
       />

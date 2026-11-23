@@ -28,11 +28,14 @@ const InteractiveTerminal = () => {
   const [inputVal, setInputVal] = useState('');
   const [historyIndex, setHistoryIndex] = useState(-1);
   const [cmdList, setCmdList] = useState([]);
-  const bottomRef = useRef(null);
+  const terminalBodyRef = useRef(null);
   const inputRef = useRef(null);
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    // Only scroll the terminal container itself, NEVER the whole webpage window
+    if (terminalBodyRef.current) {
+      terminalBodyRef.current.scrollTop = terminalBodyRef.current.scrollHeight;
+    }
   }, [history]);
 
   const handleCommand = (cmdText) => {
@@ -137,7 +140,7 @@ STATUS: ${personalInfo.availability}`
           particleCount: 80,
           spread: 80,
           origin: { y: 0.6 },
-          colors: ['#38bdf8', '#a855f7', '#10b981']
+          colors: ['#60c1e5', '#38bdf8', '#0284c7']
         });
         sound.playSuccess();
         newHistory.push({
@@ -194,7 +197,7 @@ Thank you for reaching out! Let's build something extraordinary together.`
   };
 
   return (
-    <section id="terminal" className="py-24 relative z-10">
+    <section id="terminal" className="py-24 relative z-10 bg-slate-50/70 border-t border-slate-200/80">
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-12">
@@ -202,9 +205,9 @@ Thank you for reaching out! Let's build something extraordinary together.`
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-panel border border-cyan-400/30 text-xs font-mono text-cyan-300"
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#60C1E5]/15 border border-[#60C1E5]/40 text-xs font-mono font-bold text-[#0284C7] shadow-sm"
           >
-            <TerminalIcon className="w-3.5 h-3.5 text-cyan-400" />
+            <TerminalIcon className="w-3.5 h-3.5 text-[#0284C7]" />
             <span>INTERACTIVE DEVELOPER CONSOLE</span>
           </motion.div>
 
@@ -212,24 +215,24 @@ Thank you for reaching out! Let's build something extraordinary together.`
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-display font-extrabold text-3xl sm:text-5xl text-white tracking-tight"
+            className="font-display font-extrabold text-3xl sm:text-5xl text-slate-900 tracking-tight"
           >
             Terminal <span className="text-gradient-cyan">Shell Interface</span>
           </motion.h2>
 
-          <p className="text-slate-400 text-sm sm:text-base">
-            For engineers & recruiters who love the command line. Run commands or execute quick triggers.
+          <p className="text-slate-600 text-sm sm:text-base">
+            For engineers &amp; recruiters who love the command line. Run commands or tap quick triggers below.
           </p>
         </div>
 
         {/* Terminal Window Box */}
-        <div className="rounded-2xl glass-panel-glow border border-cyan-400/30 overflow-hidden shadow-2xl">
+        <div className="rounded-3xl bg-[#0B1320] border-2 border-[#60C1E5]/40 overflow-hidden shadow-[0_16px_50px_rgba(96,193,229,0.22)]">
           {/* Terminal Window Bar */}
-          <div className="px-4 py-3 bg-[#0a0d18] border-b border-white/[0.08] flex items-center justify-between">
+          <div className="px-4 py-3 bg-[#070D18] border-b border-slate-800 flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <div className="w-3 h-3 rounded-full bg-rose-500/80" />
-              <div className="w-3 h-3 rounded-full bg-amber-500/80" />
-              <div className="w-3 h-3 rounded-full bg-emerald-500/80" />
+              <div className="w-3 h-3 rounded-full bg-rose-500/90" />
+              <div className="w-3 h-3 rounded-full bg-amber-500/90" />
+              <div className="w-3 h-3 rounded-full bg-emerald-500/90" />
               <span className="font-mono text-xs text-slate-400 ml-2">bash — ckavishka@devbox:~</span>
             </div>
 
@@ -237,7 +240,8 @@ Thank you for reaching out! Let's build something extraordinary together.`
               <button
                 onClick={() => setHistory([])}
                 title="Clear Terminal"
-                className="p-1.5 rounded hover:bg-white/[0.08] text-slate-400 hover:text-white transition-colors"
+                className="p-1.5 rounded hover:bg-slate-800 text-slate-400 hover:text-white transition-colors"
+                aria-label="Clear Terminal"
               >
                 <Trash2 className="w-3.5 h-3.5" />
               </button>
@@ -246,13 +250,14 @@ Thank you for reaching out! Let's build something extraordinary together.`
 
           {/* Terminal Screen Body */}
           <div
+            ref={terminalBodyRef}
             onClick={() => inputRef.current?.focus()}
-            className="p-5 sm:p-6 bg-[#060810]/95 min-h-[380px] max-h-[500px] overflow-y-auto font-mono text-xs sm:text-sm text-slate-200 space-y-3 cursor-text"
+            className="p-4 sm:p-6 bg-[#0B1320]/95 min-h-[360px] sm:min-h-[400px] max-h-[500px] overflow-y-auto font-mono text-xs sm:text-sm text-slate-200 space-y-3 cursor-text"
           >
             {history.map((item, idx) => (
               <div key={idx} className="leading-relaxed">
                 {item.type === 'banner' && (
-                  <pre className="text-cyan-400 font-mono text-[10px] sm:text-xs leading-none overflow-x-auto pb-2">
+                  <pre className="text-[#60C1E5] font-mono text-[9px] sm:text-xs leading-none overflow-x-auto pb-2">
                     {item.text}
                   </pre>
                 )}
@@ -260,27 +265,27 @@ Thank you for reaching out! Let's build something extraordinary together.`
                   <div className="text-slate-400 font-light">{item.text}</div>
                 )}
                 {item.type === 'user' && (
-                  <div className="text-purple-300 font-semibold">{item.text}</div>
+                  <div className="text-[#38BDF8] font-bold">{item.text}</div>
                 )}
                 {item.type === 'output' && (
-                  <pre className="text-slate-300 font-mono whitespace-pre-wrap pl-2 border-l border-cyan-400/20 my-1">
+                  <pre className="text-slate-300 font-mono whitespace-pre-wrap pl-2 border-l border-[#60C1E5]/40 my-1">
                     {item.text}
                   </pre>
                 )}
                 {item.type === 'success' && (
-                  <pre className="text-emerald-400 font-mono whitespace-pre-wrap pl-2 border-l border-emerald-400/40 my-1 bg-emerald-950/20 p-2 rounded">
+                  <pre className="text-emerald-400 font-mono whitespace-pre-wrap pl-2 border-l border-emerald-400/40 my-1 bg-emerald-950/30 p-2.5 rounded-lg">
                     {item.text}
                   </pre>
                 )}
                 {item.type === 'error' && (
-                  <div className="text-rose-400 pl-2 border-l border-rose-400/30">{item.text}</div>
+                  <div className="text-rose-400 pl-2 border-l border-rose-400/50">{item.text}</div>
                 )}
               </div>
             ))}
 
             {/* Live Command Prompt */}
             <div className="flex items-center gap-2 pt-2">
-              <span className="text-cyan-400 font-bold">$</span>
+              <span className="text-[#60C1E5] font-bold">$</span>
               <input
                 ref={inputRef}
                 type="text"
@@ -288,23 +293,22 @@ Thank you for reaching out! Let's build something extraordinary together.`
                 onChange={(e) => setInputVal(e.target.value)}
                 onKeyDown={handleKeyDown}
                 placeholder="type 'help', 'cv', 'skills'..."
-                className="flex-1 bg-transparent outline-none text-cyan-200 placeholder-slate-600 font-mono text-xs sm:text-sm"
+                className="flex-1 bg-transparent outline-none text-[#60C1E5] placeholder-slate-600 font-mono text-xs sm:text-sm"
               />
-              <span className="animate-pulse w-2 h-4 bg-cyan-400 inline-block" />
+              <span className="animate-pulse w-2 h-4 bg-[#60C1E5] inline-block" />
             </div>
-            <div ref={bottomRef} />
           </div>
 
           {/* Quick Command Pills */}
-          <div className="px-4 py-3 bg-[#0a0d18] border-t border-white/[0.08] flex flex-wrap items-center gap-2">
-            <span className="text-[11px] font-mono text-slate-500 mr-1">Quick:</span>
+          <div className="px-4 py-3 bg-[#070D18] border-t border-slate-800 flex flex-wrap items-center gap-2">
+            <span className="text-[11px] font-mono text-slate-400 mr-1 font-semibold">Quick:</span>
             {['help', 'cv', 'skills', 'projects', 'contact', 'sudo hire', 'clear'].map((cmd) => (
               <button
                 key={cmd}
                 onClick={() => handleCommand(cmd)}
-                className="px-2.5 py-1 rounded-md bg-white/[0.04] hover:bg-cyan-500/20 border border-white/[0.08] hover:border-cyan-400/40 text-[11px] font-mono text-cyan-300 transition-all flex items-center gap-1"
+                className="px-2.5 py-1 rounded-md bg-slate-800/90 hover:bg-[#60C1E5]/25 border border-slate-700 hover:border-[#60C1E5] text-[11px] font-mono text-[#60C1E5] transition-all flex items-center gap-1 shadow-sm active:scale-95"
               >
-                {cmd === 'cv' ? <FileDown className="w-2.5 h-2.5 text-purple-400" /> : <Play className="w-2.5 h-2.5 text-cyan-400" />}
+                {cmd === 'cv' ? <FileDown className="w-2.5 h-2.5 text-[#60C1E5]" /> : <Play className="w-2.5 h-2.5 text-[#60C1E5]" />}
                 <span>{cmd}</span>
               </button>
             ))}

@@ -19,13 +19,16 @@ const ParticleCanvas = () => {
 
     window.addEventListener('resize', handleResize);
 
+    const isMobile = width < 768;
     const particles = [];
-    const particleCount = Math.min(Math.floor((width * height) / 12000), 100);
+    const particleCount = isMobile
+      ? Math.min(Math.floor((width * height) / 22000), 32)
+      : Math.min(Math.floor((width * height) / 14000), 75);
 
     const mouse = {
       x: null,
       y: null,
-      radius: 140,
+      radius: isMobile ? 80 : 130,
     };
 
     const handleMouseMove = (e) => {
@@ -45,11 +48,12 @@ const ParticleCanvas = () => {
       constructor() {
         this.x = Math.random() * width;
         this.y = Math.random() * height;
-        this.vx = (Math.random() - 0.5) * 0.8;
-        this.vy = (Math.random() - 0.5) * 0.8;
-        this.radius = Math.random() * 2 + 1;
-        this.baseColor = Math.random() > 0.4 ? 'rgba(56, 189, 248, ' : 'rgba(168, 85, 247, ';
-        this.alpha = Math.random() * 0.6 + 0.2;
+        this.vx = (Math.random() - 0.5) * (isMobile ? 0.4 : 0.6);
+        this.vy = (Math.random() - 0.5) * (isMobile ? 0.4 : 0.6);
+        this.radius = Math.random() * 1.8 + 1;
+        // Clean #60C1E5 & Sky Blue shades on White
+        this.baseColor = Math.random() > 0.4 ? 'rgba(96, 193, 229, ' : 'rgba(56, 189, 248, ';
+        this.alpha = Math.random() * 0.4 + 0.25;
       }
 
       update() {
@@ -69,8 +73,8 @@ const ParticleCanvas = () => {
             const force = (mouse.radius - distance) / mouse.radius;
             const directionX = dx / distance;
             const directionY = dy / distance;
-            this.x -= directionX * force * 3;
-            this.y -= directionY * force * 3;
+            this.x -= directionX * force * 2.5;
+            this.y -= directionY * force * 2.5;
           }
         }
       }
@@ -79,8 +83,8 @@ const ParticleCanvas = () => {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
         ctx.fillStyle = `${this.baseColor}${this.alpha})`;
-        ctx.shadowBlur = 8;
-        ctx.shadowColor = this.baseColor.includes('56') ? '#38bdf8' : '#a855f7';
+        ctx.shadowBlur = 4;
+        ctx.shadowColor = '#60c1e5';
         ctx.fill();
         ctx.shadowBlur = 0;
       }
@@ -93,18 +97,19 @@ const ParticleCanvas = () => {
     const animate = () => {
       ctx.clearRect(0, 0, width, height);
 
-      // Connect nearby particles
+      // Connect nearby particles with subtle light cyan lines
+      const maxDistance = isMobile ? 95 : 125;
       for (let i = 0; i < particles.length; i++) {
         for (let j = i + 1; j < particles.length; j++) {
           const dx = particles[i].x - particles[j].x;
           const dy = particles[i].y - particles[j].y;
           const distance = Math.sqrt(dx * dx + dy * dy);
 
-          if (distance < 130) {
-            const opacity = (1 - distance / 130) * 0.25;
+          if (distance < maxDistance) {
+            const opacity = (1 - distance / maxDistance) * 0.22;
             ctx.beginPath();
-            ctx.strokeStyle = `rgba(56, 189, 248, ${opacity})`;
-            ctx.lineWidth = 0.8;
+            ctx.strokeStyle = `rgba(96, 193, 229, ${opacity})`;
+            ctx.lineWidth = 0.75;
             ctx.moveTo(particles[i].x, particles[i].y);
             ctx.lineTo(particles[j].x, particles[j].y);
             ctx.stroke();
@@ -134,7 +139,7 @@ const ParticleCanvas = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-0 opacity-70"
+      className="fixed inset-0 pointer-events-none z-0 opacity-80"
     />
   );
 };

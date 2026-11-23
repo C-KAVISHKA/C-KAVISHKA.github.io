@@ -21,7 +21,7 @@ const Hero = ({ onOpenTerminal }) => {
       particleCount: 50,
       spread: 60,
       origin: { y: 0.75 },
-      colors: ['#38bdf8', '#a855f7', '#ec4899']
+      colors: ['#60c1e5', '#38bdf8', '#0284c7']
     });
     setTimeout(() => setCopied(false), 2500);
   };
@@ -32,26 +32,29 @@ const Hero = ({ onOpenTerminal }) => {
       particleCount: 60,
       spread: 70,
       origin: { y: 0.7 },
-      colors: ['#a855f7', '#38bdf8', '#10b981']
+      colors: ['#60c1e5', '#0284c7', '#10b981']
     });
   };
 
   return (
-    <section id="hero" className="relative min-h-screen pt-32 pb-20 flex items-center justify-center overflow-hidden">
-      {/* Ambient background glows */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-cyan-500/10 rounded-full blur-[140px] pointer-events-none" />
-      <div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] bg-purple-500/10 rounded-full blur-[130px] pointer-events-none" />
+    <section id="hero" className="relative min-h-screen pt-28 sm:pt-36 pb-20 flex items-center justify-center overflow-hidden bg-white">
+      {/* Ambient background glows in #60C1E5 */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[650px] h-[650px] bg-[#60C1E5]/12 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/3 left-1/4 w-[400px] h-[400px] bg-sky-200/25 rounded-full blur-[120px] pointer-events-none" />
+
+      {/* Cyber Grid Pattern */}
+      <div className="absolute inset-0 cyber-grid opacity-20 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-center">
           {/* Left Column: Hero Text & CTAs */}
           <div className="lg:col-span-7 space-y-6 text-left">
             {/* Status Badge */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full glass-panel border border-cyan-400/30 text-xs font-mono text-cyan-300 shadow-[0_0_20px_rgba(56,189,248,0.15)]"
+              className="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-[#60C1E5]/15 border border-[#60C1E5]/40 text-xs font-mono font-bold text-[#0284C7] shadow-sm"
             >
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
@@ -62,21 +65,21 @@ const Hero = ({ onOpenTerminal }) => {
 
             {/* Main Headline */}
             <motion.div
-              initial={{ opacity: 0, y: 25 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
               className="space-y-2"
             >
-              <h1 className="font-display font-extrabold text-4xl sm:text-6xl xl:text-7xl tracking-tight leading-[1.08] text-white">
+              <h1 className="font-display font-extrabold text-4xl sm:text-6xl xl:text-7xl tracking-tight leading-[1.08] text-slate-900">
                 Hi, I'm <br />
-                <span className="text-gradient-cyan drop-shadow-[0_0_35px_rgba(56,189,248,0.4)]">
+                <span className="text-gradient-cyan drop-shadow-[0_2px_15px_rgba(96,193,229,0.3)]">
                   {personalInfo.name}
                 </span>
               </h1>
-              <p className="text-xl sm:text-2xl font-semibold text-slate-300 font-display">
+              <p className="text-xl sm:text-2xl font-bold text-slate-700 font-display">
                 {personalInfo.role}
               </p>
-              <div className="flex items-center gap-2 text-xs font-mono text-cyan-400 pt-1">
+              <div className="flex items-center gap-2 text-xs font-mono text-[#0284C7] font-semibold pt-1">
                 <MapPin className="w-3.5 h-3.5" />
                 <span>{personalInfo.location} &bull; Cardiff Metropolitan University (2026)</span>
               </div>
@@ -84,20 +87,20 @@ const Hero = ({ onOpenTerminal }) => {
 
             {/* Description */}
             <motion.p
-              initial={{ opacity: 0, y: 25 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-base sm:text-lg text-slate-400 max-w-2xl leading-relaxed font-light"
+              className="text-base sm:text-lg text-slate-600 max-w-2xl leading-relaxed font-normal"
             >
-              Building immersive web applications with real-time <span className="text-cyan-300 font-medium">3D WebXR (Three.js)</span>, responsive <span className="text-purple-300 font-medium">MERN Stack (React, Node.js, Express, MongoDB)</span>, and enterprise <span className="text-emerald-300 font-medium">Java Spring Boot & MySQL</span>.
+              Building immersive web applications with real-time <span className="text-[#0284C7] font-semibold">3D WebXR (Three.js)</span>, responsive <span className="text-slate-900 font-semibold">MERN Stack (React, Node.js, Express, MongoDB)</span>, and enterprise <span className="text-emerald-700 font-semibold">Java Spring Boot & MySQL</span>.
             </motion.p>
 
             {/* Quick Action Buttons */}
             <motion.div
-              initial={{ opacity: 0, y: 25 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.3 }}
-              className="flex flex-wrap items-center gap-3 pt-2"
+              className="flex flex-wrap items-center gap-2.5 sm:gap-3 pt-2"
             >
               {/* Download CV CTA */}
               <a
@@ -105,7 +108,7 @@ const Hero = ({ onOpenTerminal }) => {
                 download="Channa_Kavishka_Sadaruwan_CV.pdf"
                 onClick={handleDownloadCV}
                 onMouseEnter={() => sound.playHover()}
-                className="px-5 py-3 rounded-xl bg-gradient-to-r from-purple-600 via-indigo-600 to-cyan-500 hover:from-purple-500 hover:to-cyan-400 text-white font-bold text-xs font-mono tracking-wide transition-all shadow-[0_0_25px_rgba(168,85,247,0.35)] flex items-center gap-2 group"
+                className="px-5 py-3 rounded-xl bg-gradient-to-r from-[#60C1E5] to-[#0284C7] hover:from-[#48B5DD] hover:to-[#0369A1] text-white font-bold text-xs font-mono tracking-wide transition-all shadow-[0_4px_18px_rgba(96,193,229,0.35)] hover:shadow-[0_6px_22px_rgba(96,193,229,0.5)] flex items-center gap-2 group transform hover:-translate-y-0.5"
               >
                 <FileDown className="w-4 h-4 group-hover:-translate-y-0.5 transition-transform" />
                 <span>Download CV (PDF)</span>
@@ -116,10 +119,10 @@ const Hero = ({ onOpenTerminal }) => {
                 href="#projects"
                 onMouseEnter={() => sound.playHover()}
                 onClick={() => sound.playClick()}
-                className="px-5 py-3 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 hover:from-cyan-400 hover:to-blue-500 text-slate-950 font-bold text-xs tracking-wide transition-all shadow-[0_0_20px_rgba(56,189,248,0.3)] flex items-center gap-2 group"
+                className="px-5 py-3 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs tracking-wide transition-all shadow-md hover:shadow-lg flex items-center gap-2 group transform hover:-translate-y-0.5"
               >
                 <span>Projects</span>
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform text-slate-950" />
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform text-[#60C1E5]" />
               </a>
 
               {/* CLI Terminal */}
@@ -129,9 +132,9 @@ const Hero = ({ onOpenTerminal }) => {
                   onOpenTerminal();
                 }}
                 onMouseEnter={() => sound.playHover()}
-                className="px-4 py-3 rounded-xl glass-panel hover:bg-white/[0.08] border border-cyan-400/30 hover:border-cyan-400 text-xs font-mono text-cyan-300 transition-all flex items-center gap-2 group shadow-sm"
+                className="px-4 py-3 rounded-xl bg-white hover:bg-[#F0F9FD] border border-[#60C1E5]/50 hover:border-[#60C1E5] text-xs font-mono font-bold text-[#0284C7] transition-all flex items-center gap-2 group shadow-sm"
               >
-                <Terminal className="w-4 h-4 text-cyan-400 group-hover:rotate-6 transition-transform" />
+                <Terminal className="w-4 h-4 text-[#0284C7] group-hover:rotate-6 transition-transform" />
                 <span>/cli</span>
               </button>
 
@@ -139,16 +142,16 @@ const Hero = ({ onOpenTerminal }) => {
               <button
                 onClick={handleCopyEmail}
                 onMouseEnter={() => sound.playHover()}
-                className="px-4 py-3 rounded-xl glass-panel hover:bg-white/[0.08] border border-white/10 hover:border-purple-400/40 text-xs font-medium text-slate-300 hover:text-white transition-all flex items-center gap-2"
+                className="px-4 py-3 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 hover:border-[#60C1E5]/60 text-xs font-medium text-slate-700 hover:text-slate-900 transition-all flex items-center gap-2 shadow-sm"
               >
                 {copied ? (
                   <>
-                    <CheckCircle className="w-4 h-4 text-emerald-400" />
-                    <span className="text-emerald-400 font-mono">Copied!</span>
+                    <CheckCircle className="w-4 h-4 text-emerald-600" />
+                    <span className="text-emerald-700 font-mono font-bold">Copied!</span>
                   </>
                 ) : (
                   <>
-                    <Mail className="w-4 h-4 text-purple-400" />
+                    <Mail className="w-4 h-4 text-[#0284C7]" />
                     <span>Copy Email</span>
                   </>
                 )}
@@ -160,75 +163,74 @@ const Hero = ({ onOpenTerminal }) => {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 border-t border-white/[0.08]"
+              className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 border-t border-slate-200"
             >
               {personalInfo.stats.map((stat, idx) => (
-                <div key={idx} className="space-y-1">
-                  <div className="text-2xl sm:text-3xl font-display font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-cyan-400">
+                <div key={idx} className="space-y-0.5">
+                  <div className="text-2xl sm:text-3xl font-display font-extrabold text-slate-900">
                     {stat.value}
                   </div>
-                  <div className="text-xs font-mono text-slate-400">{stat.label}</div>
+                  <div className="text-xs font-mono text-slate-500 font-medium">{stat.label}</div>
                 </div>
               ))}
             </motion.div>
           </div>
 
-          {/* Right Column: 3D Holographic Profile Avatar Card */}
+          {/* Right Column: Holographic Profile Avatar Card */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
+            initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="lg:col-span-5 relative"
           >
             <div className="relative mx-auto max-w-md">
-              {/* Outer decorative glowing ring */}
-              <div className="absolute -inset-1.5 bg-gradient-to-r from-cyan-500 via-purple-500 to-pink-500 rounded-3xl blur-xl opacity-30 group-hover:opacity-60 transition duration-1000 animate-pulse-glow" />
+              {/* Outer decorative glowing ring in #60C1E5 */}
+              <div className="absolute -inset-1.5 bg-gradient-to-r from-[#60C1E5] via-sky-300 to-[#0284C7] rounded-3xl blur-xl opacity-40 group-hover:opacity-70 transition duration-1000 animate-pulse-glow" />
 
-              <div className="relative glass-panel-glow rounded-2xl p-5 sm:p-6 border border-white/[0.12] space-y-5 shadow-2xl">
-                {/* Header of hologram card */}
-                <div className="flex items-center justify-between pb-3 border-b border-white/[0.08]">
+              <div className="relative bg-white/95 backdrop-blur-xl rounded-2xl p-5 sm:p-6 border-2 border-[#60C1E5]/40 space-y-4 shadow-2xl">
+                {/* Header of card */}
+                <div className="flex items-center justify-between pb-3 border-b border-slate-100">
                   <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 rounded-full bg-rose-500/80" />
-                    <div className="w-3 h-3 rounded-full bg-amber-500/80" />
-                    <div className="w-3 h-3 rounded-full bg-emerald-500/80" />
+                    <div className="w-3 h-3 rounded-full bg-rose-400" />
+                    <div className="w-3 h-3 rounded-full bg-amber-400" />
+                    <div className="w-3 h-3 rounded-full bg-emerald-400" />
                   </div>
-                  <span className="font-mono text-[11px] text-cyan-400 tracking-wider">
+                  <span className="font-mono text-[11px] text-[#0284C7] font-bold tracking-wider">
                     SOFTWARE_ENGINEER::PROFILE
                   </span>
                 </div>
 
-                {/* Profile Portrait Headshot with Cyber Frame */}
-                <div className="relative h-72 sm:h-80 rounded-xl overflow-hidden border border-cyan-500/30 group/photo shadow-inner bg-slate-950">
+                {/* Profile Portrait Headshot with #60C1E5 Frame */}
+                <div className="relative h-64 sm:h-72 rounded-xl overflow-hidden border border-[#60C1E5]/40 group/photo shadow-md bg-slate-100">
                   <img
                     src="/profile.jpg"
                     alt="Channa Kavishka Sadaruwan"
-                    className="w-full h-full object-cover object-top filter brightness-105 contrast-105 group-hover/photo:scale-105 transition-transform duration-700"
+                    className="w-full h-full object-cover object-top group-hover/photo:scale-105 transition-transform duration-700"
                   />
                   {/* Subtle Gradient Overlays */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#090b12] via-transparent to-black/20" />
-                  <div className="absolute inset-0 cyber-grid opacity-15 pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-transparent to-transparent pointer-events-none" />
 
                   {/* Floating Status Pill over Photo */}
-                  <div className="absolute top-3 right-3 px-3 py-1 rounded-full bg-black/70 backdrop-blur-md border border-cyan-400/40 text-[11px] font-mono text-cyan-300 flex items-center gap-1.5 shadow-lg">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+                  <div className="absolute top-3 right-3 px-3 py-1 rounded-full bg-white/95 backdrop-blur-md border border-[#60C1E5]/50 text-[11px] font-mono text-slate-800 font-semibold flex items-center gap-1.5 shadow-md">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-ping" />
                     <span>Active Developer</span>
                   </div>
 
                   {/* Bottom Credentials Pill */}
-                  <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between px-3.5 py-2 rounded-xl bg-black/75 backdrop-blur-md border border-white/10 text-xs font-mono">
-                    <span className="text-cyan-300 font-semibold">Channa Kavishka</span>
-                    <span className="text-purple-300 text-[11px]">Cardiff Met &bull; 2026</span>
+                  <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between px-3.5 py-2 rounded-xl bg-white/95 backdrop-blur-md border border-slate-200 text-xs font-mono shadow-md">
+                    <span className="text-[#0284C7] font-bold">Channa Kavishka</span>
+                    <span className="text-slate-600 text-[11px] font-medium">Cardiff Met &bull; 2026</span>
                   </div>
                 </div>
 
                 {/* Developer Configuration Snippet */}
-                <div className="p-3.5 rounded-xl bg-black/50 border border-white/[0.06] font-mono text-xs space-y-1">
-                  <div className="text-slate-500">// Core Stack & Qualifications</div>
-                  <div className="text-cyan-300">const dev = &#123;</div>
-                  <div className="pl-4 text-purple-300">degree: <span className="text-amber-300">'BSc (Hons) Software Engineering'</span>,</div>
-                  <div className="pl-4 text-purple-300">stack: [<span className="text-emerald-300">'MERN'</span>, <span className="text-emerald-300">'Spring Boot'</span>, <span className="text-emerald-300">'Three.js'</span>],</div>
-                  <div className="pl-4 text-purple-300">phone: <span className="text-cyan-300">'{personalInfo.phone}'</span></div>
-                  <div className="text-cyan-300">&#125;;</div>
+                <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 font-mono text-xs space-y-1">
+                  <div className="text-slate-400">// Core Stack & Qualifications</div>
+                  <div className="text-slate-800 font-semibold">const dev = &#123;</div>
+                  <div className="pl-4 text-[#0284C7]">degree: <span className="text-slate-700">'BSc (Hons) Software Engineering'</span>,</div>
+                  <div className="pl-4 text-[#0284C7]">stack: [<span className="text-emerald-700">'MERN'</span>, <span className="text-emerald-700">'Spring Boot'</span>, <span className="text-emerald-700">'Three.js'</span>],</div>
+                  <div className="pl-4 text-[#0284C7]">phone: <span className="text-slate-700">'{personalInfo.phone}'</span></div>
+                  <div className="text-slate-800 font-semibold">&#125;;</div>
                 </div>
 
                 {/* Social Actions */}
@@ -238,9 +240,9 @@ const Hero = ({ onOpenTerminal }) => {
                     target="_blank"
                     rel="noopener noreferrer"
                     onMouseEnter={() => sound.playHover()}
-                    className="py-2.5 px-3 rounded-xl bg-white/[0.04] hover:bg-cyan-500/15 border border-white/[0.08] hover:border-cyan-400/40 text-xs font-mono text-slate-200 hover:text-cyan-300 flex items-center justify-center gap-2 transition-all group/btn"
+                    className="py-2.5 px-3 rounded-xl bg-slate-50 hover:bg-[#F0F9FD] border border-slate-200 hover:border-[#60C1E5] text-xs font-mono text-slate-700 hover:text-[#0284C7] flex items-center justify-center gap-2 transition-all shadow-sm group/btn"
                   >
-                    <Github className="w-4 h-4 text-cyan-400 group-hover/btn:scale-110 transition-transform" />
+                    <Github className="w-4 h-4 text-[#0284C7] group-hover/btn:scale-110 transition-transform" />
                     <span>GitHub</span>
                   </a>
                   <a
@@ -248,9 +250,9 @@ const Hero = ({ onOpenTerminal }) => {
                     target="_blank"
                     rel="noopener noreferrer"
                     onMouseEnter={() => sound.playHover()}
-                    className="py-2.5 px-3 rounded-xl bg-white/[0.04] hover:bg-blue-500/15 border border-white/[0.08] hover:border-blue-400/40 text-xs font-mono text-slate-200 hover:text-blue-300 flex items-center justify-center gap-2 transition-all group/btn"
+                    className="py-2.5 px-3 rounded-xl bg-slate-50 hover:bg-[#F0F9FD] border border-slate-200 hover:border-[#60C1E5] text-xs font-mono text-slate-700 hover:text-[#0284C7] flex items-center justify-center gap-2 transition-all shadow-sm group/btn"
                   >
-                    <Linkedin className="w-4 h-4 text-blue-400 group-hover/btn:scale-110 transition-transform" />
+                    <Linkedin className="w-4 h-4 text-[#0284C7] group-hover/btn:scale-110 transition-transform" />
                     <span>LinkedIn</span>
                   </a>
                 </div>
