@@ -42,31 +42,31 @@ const capabilityPreviews = [
   },
 ];
 
-const SkillsMatrix = () => {
+const SkillsMatrix = ({ isDark }) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section id="skills" className="py-24 sm:py-32 relative z-10 bg-white overflow-hidden border-b border-slate-200/80 scroll-mt-20">
+    <section id="skills" className="py-24 sm:py-32 relative z-10 bg-white dark:bg-[#080C14] overflow-hidden border-b border-slate-200/80 dark:border-slate-800 scroll-mt-20">
       {/* Watermark Typography (Dribbble Signature) */}
       <div className="absolute top-10 right-4 sm:right-10 watermark-text pointer-events-none select-none">
         SKILLS
       </div>
 
       {/* Ambient background glow in #60C1E5 */}
-      <div className="absolute top-1/3 right-1/4 w-[600px] h-[600px] bg-[#60C1E5]/10 rounded-full blur-[160px] pointer-events-none" />
+      <div className="absolute top-1/3 right-1/4 w-[600px] h-[600px] bg-[#60C1E5]/10 dark:bg-[#60C1E5]/12 rounded-full blur-[170px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Editorial Top Bar */}
-        <div className="flex items-center justify-between border-b border-slate-200/80 pb-4 mb-8">
+        <div className="flex items-center justify-between border-b border-slate-200/80 dark:border-slate-800 pb-4 mb-8">
           <div className="flex items-center gap-2">
-            <span className="font-mono text-xs font-bold text-[#0284C7] bg-[#60C1E5]/15 border border-[#60C1E5]/30 px-2.5 py-1 rounded-md">
+            <span className="font-mono text-xs font-bold text-[#0284C7] dark:text-[#60C1E5] bg-[#60C1E5]/15 border border-[#60C1E5]/30 px-2.5 py-1 rounded-md">
               /02
             </span>
-            <span className="font-mono text-xs font-bold tracking-wider text-slate-800 uppercase">
+            <span className="font-mono text-xs font-bold tracking-wider text-slate-800 dark:text-slate-200 uppercase">
               / SPECIALIZED SERVICES &amp; CAPABILITIES
             </span>
           </div>
-          <div className="font-mono text-xs text-slate-500 font-semibold tracking-wider">
+          <div className="font-mono text-xs text-slate-500 dark:text-slate-400 font-semibold tracking-wider">
             [ 0{skillsData.length} DOMAINS ]
           </div>
         </div>
@@ -77,9 +77,9 @@ const SkillsMatrix = () => {
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#60C1E5]/15 border border-[#60C1E5]/40 text-xs font-mono font-bold text-[#0284C7] shadow-sm"
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#60C1E5]/15 border border-[#60C1E5]/40 text-xs font-mono font-bold text-[#0284C7] dark:text-[#60C1E5] shadow-sm"
           >
-            <Sparkles className="w-3.5 h-3.5 text-[#0284C7]" />
+            <Sparkles className="w-3.5 h-3.5 text-[#0284C7] dark:text-[#60C1E5]" />
             <span>ENGINEERING ARSENAL</span>
           </motion.div>
 
@@ -87,7 +87,7 @@ const SkillsMatrix = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-display font-extrabold text-3xl sm:text-5xl text-slate-900 tracking-tight"
+            className="font-display font-extrabold text-3xl sm:text-5xl text-slate-900 dark:text-white tracking-tight"
           >
             Capabilities &amp; <span className="text-gradient-cyan">Technical Stack</span>
           </motion.h2>
@@ -96,7 +96,7 @@ const SkillsMatrix = () => {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-slate-600 text-base sm:text-lg"
+            className="text-slate-600 dark:text-slate-300 text-base sm:text-lg"
           >
             From modern responsive interfaces to real-time 3D graphics and enterprise-grade backend systems.
           </motion.p>
@@ -118,10 +118,10 @@ const SkillsMatrix = () => {
                 className={`flex items-center gap-2 px-4 sm:px-5 py-2.5 sm:py-3 rounded-2xl text-xs font-mono whitespace-nowrap transition-all duration-200 shrink-0 ${
                   isSelected
                     ? 'bg-[#60C1E5] text-slate-950 font-bold border border-[#60C1E5] shadow-[0_4px_18px_rgba(96,193,229,0.45)] scale-105'
-                    : 'bg-white hover:bg-[#F0F9FD] border border-slate-200 text-slate-700 shadow-sm'
+                    : 'bg-white dark:bg-slate-900 hover:bg-[#F0F9FD] dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 shadow-sm'
                 }`}
               >
-                <Icon className={`w-4 h-4 ${isSelected ? 'text-slate-950' : 'text-[#0284C7]'}`} />
+                <Icon className={`w-4 h-4 ${isSelected ? 'text-slate-950' : 'text-[#0284C7] dark:text-[#60C1E5]'}`} />
                 <span>[0{idx + 1}] {cat.category}</span>
               </button>
             );
@@ -148,8 +148,8 @@ const SkillsMatrix = () => {
                   }}
                   className={`cursor-pointer rounded-2xl transition-all duration-300 border ${
                     isActive
-                      ? 'bg-slate-50/90 border-[#60C1E5] shadow-[0_8px_28px_rgba(96,193,229,0.2)] p-6'
-                      : 'bg-white border-slate-200/90 hover:border-[#60C1E5]/60 hover:bg-[#F8FCFE] p-5 shadow-sm'
+                      ? 'bg-slate-50/90 dark:bg-slate-900/90 border-[#60C1E5] shadow-[0_8px_28px_rgba(96,193,229,0.2)] p-6'
+                      : 'bg-white dark:bg-slate-900/50 border-slate-200/90 dark:border-slate-800 hover:border-[#60C1E5]/60 hover:bg-[#F8FCFE] dark:hover:bg-slate-800/80 p-5 shadow-sm'
                   }`}
                 >
                   {/* Row Header */}
@@ -159,31 +159,31 @@ const SkillsMatrix = () => {
                         className={`w-9 h-9 rounded-xl flex items-center justify-center font-mono text-xs font-bold transition-all ${
                           isActive
                             ? 'bg-[#60C1E5] text-slate-950 shadow-sm'
-                            : 'bg-slate-100 border border-slate-200 text-[#0284C7]'
+                            : 'bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-[#0284C7] dark:text-[#60C1E5]'
                         }`}
                       >
                         0{idx + 1}
                       </div>
                       <div>
-                        <h3 className="font-display font-bold text-lg sm:text-xl text-slate-900 flex items-center gap-2">
+                        <h3 className="font-display font-bold text-lg sm:text-xl text-slate-900 dark:text-white flex items-center gap-2">
                           <span>{cat.category}</span>
                           {isActive && (
-                            <span className="w-2 h-2 rounded-full bg-[#0284C7] animate-pulse" />
+                            <span className="w-2 h-2 rounded-full bg-[#0284C7] dark:bg-[#60C1E5] animate-pulse" />
                           )}
                         </h3>
-                        <p className="text-xs font-mono text-slate-500 mt-0.5">{cat.description}</p>
+                        <p className="text-xs font-mono text-slate-500 dark:text-slate-400 mt-0.5">{cat.description}</p>
                       </div>
                     </div>
 
                     <div className="flex items-center gap-2">
-                      <span className="hidden sm:inline-block text-xs font-mono font-semibold text-slate-400">
+                      <span className="hidden sm:inline-block text-xs font-mono font-semibold text-slate-400 dark:text-slate-500">
                         {cat.skills.length} Skills
                       </span>
                       <div
                         className={`w-8 h-8 rounded-full flex items-center justify-center transition-transform ${
                           isActive
-                            ? 'bg-[#60C1E5]/20 text-[#0284C7] rotate-90'
-                            : 'bg-slate-100 text-slate-400'
+                            ? 'bg-[#60C1E5]/20 text-[#0284C7] dark:text-[#60C1E5] rotate-90'
+                            : 'bg-slate-100 dark:bg-slate-800 text-slate-400'
                         }`}
                       >
                         <ChevronRight className="w-4 h-4" />
@@ -199,21 +199,21 @@ const SkillsMatrix = () => {
                         animate={{ opacity: 1, height: 'auto' }}
                         exit={{ opacity: 0, height: 0 }}
                         transition={{ duration: 0.3 }}
-                        className="pt-6 border-t border-slate-200/80 mt-5 space-y-4"
+                        className="pt-6 border-t border-slate-200/80 dark:border-slate-800 mt-5 space-y-4"
                       >
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                           {cat.skills.map((skill, sIdx) => (
                             <div
                               key={sIdx}
-                              className="p-4 rounded-xl bg-white border border-slate-200/90 shadow-sm space-y-2 hover:border-[#60C1E5] transition-colors"
+                              className="p-4 rounded-xl bg-white dark:bg-slate-800/80 border border-slate-200/90 dark:border-slate-700 shadow-sm space-y-2 hover:border-[#60C1E5] transition-colors"
                             >
                               <div className="flex items-center justify-between text-xs font-mono">
-                                <span className="font-bold text-slate-900">{skill.name}</span>
-                                <span className="font-bold text-[#0284C7]">{skill.level}%</span>
+                                <span className="font-bold text-slate-900 dark:text-white">{skill.name}</span>
+                                <span className="font-bold text-[#0284C7] dark:text-[#60C1E5]">{skill.level}%</span>
                               </div>
 
                               {/* Progress bar in #60C1E5 */}
-                              <div className="w-full h-1.5 rounded-full bg-slate-100 overflow-hidden">
+                              <div className="w-full h-1.5 rounded-full bg-slate-100 dark:bg-slate-700 overflow-hidden">
                                 <motion.div
                                   initial={{ width: 0 }}
                                   animate={{ width: `${skill.level}%` }}
@@ -222,7 +222,7 @@ const SkillsMatrix = () => {
                                 />
                               </div>
 
-                              <p className="text-[11px] font-mono text-slate-500 line-clamp-2">
+                              <p className="text-[11px] font-mono text-slate-500 dark:text-slate-400 line-clamp-2">
                                 {skill.desc}
                               </p>
                             </div>
@@ -244,19 +244,19 @@ const SkillsMatrix = () => {
               animate={{ opacity: 1, y: 0, rotate: -2 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.4 }}
-              className="p-8 rounded-3xl bg-white border-2 border-[#60C1E5] shadow-[0_20px_50px_rgba(96,193,229,0.28)] space-y-6 relative overflow-hidden group hover:rotate-0 transition-transform duration-500"
+              className="p-8 rounded-3xl bg-white dark:bg-slate-900 border-2 border-[#60C1E5] shadow-[0_20px_50px_rgba(96,193,229,0.28)] space-y-6 relative overflow-hidden group hover:rotate-0 transition-transform duration-500"
             >
               {/* Corner Watermark */}
-              <div className="absolute top-2 right-4 text-7xl font-display font-black text-slate-100 pointer-events-none select-none">
+              <div className="absolute top-2 right-4 text-7xl font-display font-black text-slate-100 dark:text-slate-800 pointer-events-none select-none">
                 0{activeIndex + 1}
               </div>
 
               {/* Header Badge */}
               <div className="flex items-center justify-between relative z-10">
-                <span className="px-3.5 py-1.5 rounded-xl bg-[#60C1E5]/20 border border-[#60C1E5]/50 font-mono text-xs font-bold text-[#0284C7]">
+                <span className="px-3.5 py-1.5 rounded-xl bg-[#60C1E5]/20 border border-[#60C1E5]/50 font-mono text-xs font-bold text-[#0284C7] dark:text-[#60C1E5]">
                   {capabilityPreviews[activeIndex]?.badge}
                 </span>
-                <span className="flex items-center gap-1.5 text-xs font-mono text-emerald-600 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-lg font-bold">
+                <span className="flex items-center gap-1.5 text-xs font-mono text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/80 border border-emerald-200 dark:border-emerald-800 px-2.5 py-1 rounded-lg font-bold">
                   <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
                   Verified Tech
                 </span>
@@ -264,19 +264,19 @@ const SkillsMatrix = () => {
 
               {/* Title & Metric */}
               <div className="space-y-2 relative z-10">
-                <h4 className="text-2xl font-display font-extrabold text-slate-900 leading-snug">
+                <h4 className="text-2xl font-display font-extrabold text-slate-900 dark:text-white leading-snug">
                   {skillsData[activeIndex].category}
                 </h4>
-                <div className="text-sm font-mono text-[#0284C7] font-bold">
+                <div className="text-sm font-mono text-[#0284C7] dark:text-[#60C1E5] font-bold">
                   {capabilityPreviews[activeIndex]?.metric}
                 </div>
-                <p className="text-xs text-slate-600 leading-relaxed">
+                <p className="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
                   {capabilityPreviews[activeIndex]?.highlight}
                 </p>
               </div>
 
               {/* Code Snippet Box */}
-              <div className="p-3.5 rounded-xl bg-slate-900 text-slate-200 font-mono text-xs border border-slate-800 shadow-inner overflow-x-auto relative z-10">
+              <div className="p-3.5 rounded-xl bg-slate-900 dark:bg-black/90 text-slate-200 font-mono text-xs border border-slate-800 shadow-inner overflow-x-auto relative z-10">
                 <div className="flex items-center gap-1.5 pb-2 mb-2 border-b border-slate-800 text-[10px] text-slate-400">
                   <span className="w-2 h-2 rounded-full bg-rose-500" />
                   <span className="w-2 h-2 rounded-full bg-amber-500" />
@@ -290,14 +290,14 @@ const SkillsMatrix = () => {
 
               {/* Technology Tags */}
               <div className="space-y-2 relative z-10">
-                <span className="text-[11px] font-mono font-bold text-slate-400 uppercase tracking-wider">
+                <span className="text-[11px] font-mono font-bold text-slate-400 dark:text-slate-500 uppercase tracking-wider">
                   Core Toolset
                 </span>
                 <div className="flex flex-wrap gap-1.5">
                   {capabilityPreviews[activeIndex]?.tags.map((tag, i) => (
                     <span
                       key={i}
-                      className="px-2.5 py-1 rounded-lg bg-slate-50 border border-slate-200 text-xs font-mono text-slate-700 font-medium"
+                      className="px-2.5 py-1 rounded-lg bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-xs font-mono text-slate-700 dark:text-slate-300 font-medium"
                     >
                       {tag}
                     </span>
@@ -306,9 +306,9 @@ const SkillsMatrix = () => {
               </div>
 
               {/* Bottom Micro Indicator */}
-              <div className="pt-4 border-t border-slate-100 flex items-center justify-between text-xs font-mono text-slate-400 relative z-10">
+              <div className="pt-4 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between text-xs font-mono text-slate-400 dark:text-slate-500 relative z-10">
                 <span>Architecture Verified</span>
-                <span className="text-[#0284C7] font-bold">Cardiff Met Standard</span>
+                <span className="text-[#0284C7] dark:text-[#60C1E5] font-bold">Cardiff Met Standard</span>
               </div>
             </motion.div>
           </div>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 
-const CustomCursor = () => {
+const CustomCursor = ({ isDark }) => {
   const [mousePosition, setMousePosition] = useState({ x: -100, y: -100 });
   const [isHovered, setIsHovered] = useState(false);
   const [isClicking, setIsClicking] = useState(false);
@@ -56,7 +56,7 @@ const CustomCursor = () => {
     <>
       {/* Small dot */}
       <motion.div
-        className="fixed top-0 left-0 w-2.5 h-2.5 bg-[#60C1E5] rounded-full pointer-events-none z-50 shadow-[0_0_10px_#60c1e5]"
+        className="fixed top-0 left-0 w-2.5 h-2.5 bg-[#60C1E5] rounded-full pointer-events-none z-50 shadow-[0_0_12px_#60C1E5]"
         animate={{
           x: mousePosition.x - 5,
           y: mousePosition.y - 5,
@@ -71,8 +71,9 @@ const CustomCursor = () => {
           x: mousePosition.x - 16,
           y: mousePosition.y - 16,
           scale: isClicking ? 1.5 : isHovered ? 2.2 : 1,
-          borderColor: isHovered ? '#0284C7' : 'rgba(96, 193, 229, 0.5)',
-          backgroundColor: isHovered ? 'rgba(96, 193, 229, 0.12)' : 'transparent',
+          borderColor: isHovered ? '#60C1E5' : 'rgba(96, 193, 229, 0.5)',
+          backgroundColor: isHovered ? 'rgba(96, 193, 229, 0.15)' : 'transparent',
+          boxShadow: isDark && isHovered ? '0 0 20px rgba(96, 193, 229, 0.4)' : 'none',
         }}
         transition={{ type: 'spring', damping: 20, stiffness: 200, mass: 0.2 }}
       />

@@ -70,6 +70,31 @@ class SoundManager {
     }
   }
 
+  playThemeSwitch(isDark) {
+    this.init();
+    if (!this.enabled || !this.ctx) return;
+    try {
+      const osc = this.ctx.createOscillator();
+      const gain = this.ctx.createGain();
+      osc.type = 'sine';
+      const startFreq = isDark ? 440 : 660;
+      const endFreq = isDark ? 784 : 440;
+      osc.frequency.setValueAtTime(startFreq, this.ctx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(endFreq, this.ctx.currentTime + 0.12);
+
+      gain.gain.setValueAtTime(0.04, this.ctx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.12);
+
+      osc.connect(gain);
+      gain.connect(this.ctx.destination);
+
+      osc.start();
+      osc.stop(this.ctx.currentTime + 0.12);
+    } catch (e) {
+      // safe
+    }
+  }
+
   playKeypress() {
     if (!this.enabled || !this.ctx) return;
     try {
@@ -92,6 +117,7 @@ class SoundManager {
   }
 
   playSuccess() {
+    this.init();
     if (!this.ctx) return;
     try {
       const notes = [523.25, 659.25, 783.99, 1046.5]; // C5, E5, G5, C6

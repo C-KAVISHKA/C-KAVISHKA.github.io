@@ -1,233 +1,227 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Volume2, VolumeX, Menu, X, Terminal, Sparkles, Layers, Send, User, FileDown, ArrowUpRight } from 'lucide-react';
-import { Github, Linkedin } from './Icons';
+import { Menu, X, Volume2, VolumeX, Sun, Moon, ArrowUpRight, Terminal as TerminalIcon, Sparkles, FileDown } from 'lucide-react';
 import { sound } from '../utils/audio';
 import { personalInfo } from '../data/portfolioData';
 
-const navItems = [
-  { label: 'Work [5]', href: '#projects', icon: Layers },
-  { label: 'Skills [15+]', href: '#skills', icon: Sparkles },
-  { label: 'Terminal [/cli]', href: '#terminal', icon: Terminal },
-  { label: 'Experience [2026]', href: '#journey', icon: User },
-  { label: 'Contact', href: '#contact', icon: Send },
+const navLinks = [
+  { name: 'Work', href: '#projects', badge: '8' },
+  { name: 'Skills', href: '#skills', badge: '15+' },
+  { name: 'Journey', href: '#journey', badge: '2026' },
+  { name: 'Terminal', href: '#terminal', badge: '/cli' },
+  { name: 'Contact', href: '#contact' },
 ];
 
-const Navbar = ({ soundEnabled, setSoundEnabled }) => {
+const Navbar = ({ isDark, onToggleTheme, soundEnabled, setSoundEnabled }) => {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('hero');
+  const [activeSection, setActiveSection] = useState('projects');
 
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 30);
-
-      const sections = ['projects', 'skills', 'terminal', 'journey', 'contact'];
-      for (const section of sections) {
-        const el = document.getElementById(section);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          if (rect.top <= 240 && rect.bottom >= 240) {
-            setActiveSection(section);
-            break;
-          }
-        }
-      }
+      setScrolled(window.scrollY > 25);
     };
-
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const toggleSound = () => {
-    const isNowOn = sound.toggleSound();
-    setSoundEnabled(isNowOn);
+  const handleAudioToggle = () => {
+    const newState = sound.toggleSound();
+    setSoundEnabled(newState);
+  };
+
+  const handleNavClick = (href) => {
+    sound.playClick();
+    setMobileMenuOpen(false);
   };
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-        scrolled
-          ? 'py-2.5 sm:py-3 bg-white/90 backdrop-blur-xl border-b border-slate-200/90 shadow-[0_4px_24px_rgba(96,193,229,0.08)]'
-          : 'py-4 sm:py-6 bg-transparent'
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-        {/* Left: Brand Logo & Availability Pill */}
+    <header className="fixed top-0 left-0 right-0 z-40 transition-all duration-300 px-3 sm:px-6 pt-3 sm:pt-4">
+      <div
+        className={`max-w-7xl mx-auto rounded-2xl sm:rounded-3xl transition-all duration-300 px-4 sm:px-6 py-2.5 sm:py-3.5 flex items-center justify-between border ${
+          scrolled
+            ? 'bg-white/90 dark:bg-[#0B1320]/90 backdrop-blur-xl border-slate-200/90 dark:border-slate-800 shadow-[0_8px_30px_rgba(0,0,0,0.06)] dark:shadow-[0_12px_40px_rgba(0,0,0,0.4)]'
+            : 'bg-white/70 dark:bg-[#0B1320]/70 backdrop-blur-md border-slate-200/60 dark:border-slate-800/60 shadow-sm'
+        }`}
+      >
+        {/* Left: Brand Monogram & Live Status */}
         <div className="flex items-center gap-3">
           <a
             href="#"
-            onMouseEnter={() => sound.playHover()}
-            className="group flex items-center gap-2.5 text-slate-900 no-underline"
+            onClick={() => sound.playClick()}
+            className="group flex items-center gap-2.5"
           >
-            <div className="w-10 h-10 rounded-xl bg-white border-2 border-[#60C1E5] flex items-center justify-center font-mono font-bold text-[#0284C7] group-hover:scale-105 group-hover:border-[#0284C7] transition-all duration-300 shadow-[0_2px_12px_rgba(96,193,229,0.25)]">
-              CK
+            <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-white dark:bg-slate-900 border-2 border-[#60C1E5] flex items-center justify-center font-display font-black text-sm text-slate-900 dark:text-white shadow-sm group-hover:scale-105 transition-transform">
+              C<span className="text-[#60C1E5]">K</span>
             </div>
-            <div className="hidden min-[420px]:flex flex-col">
-              <span className="font-display font-extrabold text-sm sm:text-base tracking-tight text-slate-900 group-hover:text-[#0284C7] transition-colors leading-tight">
-                Channa Kavishka
-              </span>
-              <span className="text-[10px] sm:text-[10.5px] font-mono text-[#0284C7] font-semibold tracking-wider">
+            <div className="hidden sm:block text-left">
+              <div className="font-display font-extrabold text-sm text-slate-900 dark:text-white leading-tight flex items-center gap-1.5">
+                <span>Channa Kavishka</span>
+              </div>
+              <div className="text-[10px] font-mono text-[#0284C7] dark:text-[#60C1E5] font-semibold">
                 SWE // 3D WEBXR
-              </span>
+              </div>
             </div>
           </a>
 
-          {/* Dribbble Style Availability Pill Badge */}
-          <div className="hidden xl:flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-xs font-mono font-semibold text-emerald-700 shadow-sm">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-            </span>
-            <span>Available for New Projects</span>
+          {/* Availability Pill */}
+          <div className="hidden lg:flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200/80 dark:border-emerald-800/60 text-[11px] font-mono font-medium text-emerald-700 dark:text-emerald-400">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+            <span>Available for 2026 Roles</span>
           </div>
         </div>
 
-        {/* Center: Desktop Navigation Links with Bracketed Counters */}
-        <nav className="hidden lg:flex items-center gap-1 px-3 py-1.5 rounded-full bg-slate-100/90 border border-slate-200/90 backdrop-blur-md shadow-inner">
-          {navItems.map((item) => {
-            const sectionId = item.href.replace('#', '');
-            const isActive = activeSection === sectionId;
-            return (
-              <a
-                key={item.label}
-                href={item.href}
-                onMouseEnter={() => sound.playHover()}
-                onClick={() => sound.playClick()}
-                className={`relative px-3.5 py-1.5 rounded-full text-xs font-mono transition-all duration-200 flex items-center gap-1.5 ${
-                  isActive
-                    ? 'text-[#0284C7] font-bold'
-                    : 'text-slate-600 hover:text-slate-900 hover:bg-white/80'
-                }`}
-              >
-                {isActive && (
-                  <motion.div
-                    layoutId="activeNavTab"
-                    className="absolute inset-0 rounded-full bg-white border border-[#60C1E5]/60 shadow-[0_2px_10px_rgba(96,193,229,0.2)]"
-                    transition={{ type: 'spring', stiffness: 350, damping: 30 }}
-                  />
-                )}
-                <span className="relative z-10">{item.label}</span>
-              </a>
-            );
-          })}
+        {/* Center: Desktop Navigation Segment */}
+        <nav className="hidden md:flex items-center gap-1 bg-slate-100/80 dark:bg-slate-900/80 p-1 rounded-2xl border border-slate-200/80 dark:border-slate-800">
+          {navLinks.map((link) => (
+            <a
+              key={link.name}
+              href={link.href}
+              onClick={() => handleNavClick(link.href)}
+              onMouseEnter={() => sound.playHover()}
+              className="px-3.5 py-1.5 rounded-xl text-xs font-mono font-semibold text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white hover:bg-white dark:hover:bg-slate-800 transition-all flex items-center gap-1.5"
+            >
+              <span>{link.name}</span>
+              {link.badge && (
+                <span className="text-[10px] text-[#0284C7] dark:text-[#60C1E5] opacity-80">
+                  [{link.badge}]
+                </span>
+              )}
+            </a>
+          ))}
         </nav>
 
-        {/* Right: Actions (Sound, CV Download, Contact Pill) */}
+        {/* Right: Actions, Theme Switcher, Sound & CTAs */}
         <div className="flex items-center gap-2 sm:gap-2.5">
-          {/* Sound FX Toggle */}
+          {/* Theme Toggle Button (Light ↔ Dark) */}
           <button
-            onClick={toggleSound}
+            onClick={onToggleTheme}
             onMouseEnter={() => sound.playHover()}
-            title={soundEnabled ? 'Mute Sound FX' : 'Enable Sound FX'}
-            className={`p-2.5 rounded-xl border transition-all duration-200 flex items-center justify-center ${
-              soundEnabled
-                ? 'bg-[#60C1E5]/20 border-[#60C1E5] text-[#0284C7] shadow-[0_0_15px_rgba(96,193,229,0.3)]'
-                : 'bg-white border-slate-200 text-slate-500 hover:text-slate-800 hover:border-[#60C1E5]/40 shadow-sm'
-            }`}
+            title={isDark ? "Switch to Light Theme" : "Switch to Dark Theme"}
+            aria-label="Toggle Theme"
+            className="p-2 sm:p-2.5 rounded-xl bg-slate-100 dark:bg-slate-900 hover:bg-[#F0F9FD] dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 hover:text-[#0284C7] dark:hover:text-[#60C1E5] transition-all shadow-sm active:scale-95"
           >
-            {soundEnabled ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
+            {isDark ? (
+              <Sun className="w-4 h-4 text-amber-400 rotate-0 transition-transform duration-300" />
+            ) : (
+              <Moon className="w-4 h-4 text-slate-700 rotate-0 transition-transform duration-300" />
+            )}
           </button>
 
-          {/* Download CV Pill Button */}
+          {/* Sound FX Toggle Button */}
+          <button
+            onClick={handleAudioToggle}
+            onMouseEnter={() => sound.playHover()}
+            title={soundEnabled ? "Disable UI Sound FX" : "Enable UI Sound FX"}
+            aria-label="Toggle UI Audio"
+            className="p-2 sm:p-2.5 rounded-xl bg-slate-100 dark:bg-slate-900 hover:bg-[#F0F9FD] dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200 hover:text-[#0284C7] dark:hover:text-[#60C1E5] transition-all shadow-sm active:scale-95"
+          >
+            {soundEnabled ? (
+              <Volume2 className="w-4 h-4 text-[#0284C7] dark:text-[#60C1E5]" />
+            ) : (
+              <VolumeX className="w-4 h-4 text-slate-400" />
+            )}
+          </button>
+
+          {/* Download CV (Desktop) */}
           <a
             href={personalInfo.cvDownloadUrl}
             download="Channa_Kavishka_Sadaruwan_CV.pdf"
             onMouseEnter={() => sound.playHover()}
             onClick={() => sound.playSuccess()}
-            className="hidden sm:flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-white hover:bg-slate-50 border border-slate-200 hover:border-[#60C1E5] text-xs font-mono font-bold text-slate-800 transition-all shadow-sm group"
-            title="Download Professional CV (PDF)"
+            className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-slate-100 dark:bg-slate-900 hover:bg-slate-200 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800 text-xs font-mono font-bold text-slate-800 dark:text-slate-200 shadow-sm transition-all"
           >
-            <FileDown className="w-3.5 h-3.5 text-[#0284C7] group-hover:-translate-y-0.5 transition-transform" />
-            <span>CV / Resume</span>
+            <FileDown className="w-3.5 h-3.5 text-[#0284C7] dark:text-[#60C1E5]" />
+            <span>CV</span>
           </a>
 
-          {/* Dribbble Style Pill "Let's Talk ↗" */}
+          {/* Primary Let's Talk CTA */}
           <a
             href="#contact"
             onMouseEnter={() => sound.playHover()}
             onClick={() => sound.playClick()}
-            className="px-4 py-2 rounded-full bg-slate-900 hover:bg-slate-800 text-white font-mono font-bold text-xs tracking-wide transition-all shadow-md hover:shadow-lg flex items-center gap-1 group transform hover:-translate-y-0.5"
+            className="px-4 sm:px-5 py-2 sm:py-2.5 rounded-xl bg-gradient-to-r from-[#60C1E5] to-[#0284C7] hover:from-[#48B5DD] hover:to-[#0369A1] text-white font-mono font-bold text-xs flex items-center gap-1.5 shadow-[0_4px_16px_rgba(96,193,229,0.35)] hover:shadow-[0_6px_22px_rgba(96,193,229,0.5)] transition-all transform hover:-translate-y-0.5"
           >
             <span>Let's Talk</span>
-            <ArrowUpRight className="w-3.5 h-3.5 text-[#60C1E5] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            <ArrowUpRight className="w-3.5 h-3.5 text-white" />
           </a>
 
-          {/* Mobile menu trigger */}
+          {/* Mobile Hamburger Toggle Button */}
           <button
             onClick={() => {
-              setMobileMenuOpen(!mobileMenuOpen);
               sound.playClick();
+              setMobileMenuOpen(!mobileMenuOpen);
             }}
-            className="lg:hidden p-2 rounded-xl bg-white border border-slate-200 text-slate-700 hover:border-[#60C1E5] shadow-sm transition-colors"
-            aria-label="Toggle Navigation Menu"
+            className="md:hidden p-2 rounded-xl bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-200"
+            aria-label="Toggle Navigation Drawer"
           >
-            {mobileMenuOpen ? <X className="w-5 h-5 text-[#0284C7]" /> : <Menu className="w-5 h-5 text-slate-700" />}
+            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile dropdown menu */}
+      {/* Mobile Menu Drawer */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.2 }}
-            className="lg:hidden bg-white border border-slate-200/90 shadow-2xl rounded-2xl mx-3 sm:mx-4 px-5 py-4 mt-2 space-y-2"
+            initial={{ opacity: 0, y: -15, scale: 0.98 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: -15, scale: 0.98 }}
+            transition={{ duration: 0.25 }}
+            className="md:hidden mt-2 mx-auto max-w-7xl rounded-2xl bg-white/95 dark:bg-[#0B1320]/95 backdrop-blur-2xl border border-slate-200 dark:border-slate-800 p-5 shadow-2xl space-y-4"
           >
-            {navItems.map((item) => {
-              const sectionId = item.href.replace('#', '');
-              const isActive = activeSection === sectionId;
-              return (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    sound.playClick();
-                  }}
-                  className={`flex items-center justify-between px-3.5 py-3 rounded-xl text-sm font-mono transition-all ${
-                    isActive
-                      ? 'bg-[#60C1E5]/15 text-[#0284C7] font-bold border border-[#60C1E5]/30'
-                      : 'text-slate-700 hover:text-[#0284C7] hover:bg-[#F0F9FD]'
-                  }`}
+            <div className="flex items-center justify-between pb-3 border-b border-slate-100 dark:border-slate-800">
+              <span className="text-xs font-mono font-bold text-[#0284C7] dark:text-[#60C1E5]">
+                NAVIGATION // MENU
+              </span>
+              <div className="flex items-center gap-2">
+                <button
+                  onClick={onToggleTheme}
+                  className="px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-xs font-mono font-bold flex items-center gap-1 text-slate-700 dark:text-slate-200"
                 >
-                  <span>{item.label}</span>
-                  <ArrowUpRight className="w-4 h-4 text-slate-400" />
+                  {isDark ? <Sun className="w-3.5 h-3.5 text-amber-400" /> : <Moon className="w-3.5 h-3.5" />}
+                  <span>{isDark ? 'Light Mode' : 'Dark Mode'}</span>
+                </button>
+              </div>
+            </div>
+
+            <nav className="flex flex-col space-y-2">
+              {navLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  onClick={() => handleNavClick(link.href)}
+                  className="px-4 py-2.5 rounded-xl text-sm font-mono font-semibold text-slate-800 dark:text-slate-200 hover:bg-[#F0F9FD] dark:hover:bg-slate-800/80 hover:text-[#0284C7] dark:hover:text-[#60C1E5] flex items-center justify-between transition-colors"
+                >
+                  <span>{link.name}</span>
+                  {link.badge && (
+                    <span className="text-xs text-[#0284C7] dark:text-[#60C1E5] font-bold">
+                      [{link.badge}]
+                    </span>
+                  )}
                 </a>
-              );
-            })}
-            <div className="pt-3 border-t border-slate-100 flex flex-col gap-2.5">
+              ))}
+            </nav>
+
+            <div className="pt-3 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between gap-3">
               <a
                 href={personalInfo.cvDownloadUrl}
                 download="Channa_Kavishka_Sadaruwan_CV.pdf"
-                className="flex items-center justify-center gap-2 px-4 py-3 rounded-full bg-[#60C1E5]/15 border border-[#60C1E5]/40 text-xs font-mono font-bold text-[#0284C7] shadow-sm"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex-1 py-2.5 px-3 rounded-xl bg-slate-100 dark:bg-slate-800 text-xs font-mono font-bold text-center text-slate-800 dark:text-slate-200 flex items-center justify-center gap-1.5"
               >
-                <FileDown className="w-4 h-4 text-[#0284C7]" />
-                <span>Download CV / Resume (PDF)</span>
+                <FileDown className="w-3.5 h-3.5 text-[#0284C7] dark:text-[#60C1E5]" />
+                <span>Download CV</span>
               </a>
-              <div className="flex items-center justify-between px-2 pt-1">
-                <a
-                  href={personalInfo.github}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-xs font-mono text-[#0284C7] hover:underline"
-                >
-                  <Github className="w-4 h-4" />
-                  <span>github.com/C-KAVISHKA</span>
-                </a>
-                <a
-                  href={personalInfo.linkedin}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-xs font-mono text-[#0284C7] hover:underline"
-                >
-                  <Linkedin className="w-4 h-4" />
-                  <span>LinkedIn</span>
-                </a>
-              </div>
+
+              <a
+                href="#contact"
+                onClick={() => setMobileMenuOpen(false)}
+                className="flex-1 py-2.5 px-3 rounded-xl bg-[#60C1E5] text-slate-950 text-xs font-mono font-bold text-center shadow-md flex items-center justify-center gap-1"
+              >
+                <span>Let's Talk</span>
+                <ArrowUpRight className="w-3.5 h-3.5" />
+              </a>
             </div>
           </motion.div>
         )}

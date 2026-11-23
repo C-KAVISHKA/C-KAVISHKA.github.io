@@ -4,14 +4,14 @@ import { GraduationCap, Briefcase, Award, Sparkles, CheckCircle2, ArrowUpRight, 
 import { educationAndExperience, personalInfo } from '../data/portfolioData';
 import { sound } from '../utils/audio';
 
-const Journey = () => {
+const Journey = ({ isDark }) => {
   return (
-    <section id="journey" className="py-20 sm:py-28 relative z-10 bg-slate-100/60 overflow-hidden scroll-mt-20">
+    <section id="journey" className="py-20 sm:py-28 relative z-10 bg-slate-100/70 dark:bg-[#060A12] overflow-hidden scroll-mt-20">
       {/* Physical Dark Modal Sheet (Dribbble Signature Transition) */}
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="relative rounded-[2.5rem] bg-[#0B1320] text-slate-100 border border-cyan-500/30 shadow-[0_30px_90px_rgba(11,19,32,0.45)] p-7 sm:p-12 lg:p-16 overflow-hidden">
+        <div className="relative rounded-[2.5rem] bg-white dark:bg-[#0B1320] text-slate-900 dark:text-slate-100 border border-slate-200/80 dark:border-cyan-500/30 shadow-[0_20px_70px_rgba(0,0,0,0.06)] dark:shadow-[0_30px_90px_rgba(11,19,32,0.45)] p-7 sm:p-12 lg:p-16 overflow-hidden">
           {/* Watermark Dark Typography */}
-          <div className="absolute top-8 right-6 sm:right-12 watermark-text-dark pointer-events-none select-none">
+          <div className="absolute top-8 right-6 sm:right-12 watermark-text dark:watermark-text-dark pointer-events-none select-none">
             EXPERIENCE
           </div>
 
@@ -21,16 +21,16 @@ const Journey = () => {
 
           <div className="relative z-10">
             {/* Editorial Top Bar */}
-            <div className="flex items-center justify-between border-b border-slate-800 pb-4 mb-8">
+            <div className="flex items-center justify-between border-b border-slate-200 dark:border-slate-800 pb-4 mb-8">
               <div className="flex items-center gap-2">
-                <span className="font-mono text-xs font-bold text-[#60C1E5] bg-[#60C1E5]/15 border border-[#60C1E5]/30 px-2.5 py-1 rounded-md">
+                <span className="font-mono text-xs font-bold text-[#0284C7] dark:text-[#60C1E5] bg-[#60C1E5]/15 border border-[#60C1E5]/30 px-2.5 py-1 rounded-md">
                   /03
                 </span>
-                <span className="font-mono text-xs font-bold tracking-wider text-slate-300 uppercase">
+                <span className="font-mono text-xs font-bold tracking-wider text-slate-800 dark:text-slate-300 uppercase">
                   / CAREER &amp; ACADEMIC TIMELINE
                 </span>
               </div>
-              <div className="font-mono text-xs text-slate-400 font-semibold tracking-wider">
+              <div className="font-mono text-xs text-slate-500 dark:text-slate-400 font-semibold tracking-wider">
                 [ 2022 — 2026+ ]
               </div>
             </div>
@@ -38,16 +38,16 @@ const Journey = () => {
             {/* Section Header */}
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12 sm:mb-16">
               <div className="space-y-3 max-w-2xl">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#60C1E5]/15 border border-[#60C1E5]/40 text-xs font-mono font-bold text-[#60C1E5]">
-                  <GraduationCap className="w-3.5 h-3.5 text-[#60C1E5]" />
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#60C1E5]/15 border border-[#60C1E5]/40 text-xs font-mono font-bold text-[#0284C7] dark:text-[#60C1E5]">
+                  <GraduationCap className="w-3.5 h-3.5 text-[#0284C7] dark:text-[#60C1E5]" />
                   <span>ACADEMIC FOUNDATION &amp; ROLES</span>
                 </div>
 
-                <h2 className="font-display font-extrabold text-3xl sm:text-5xl text-white tracking-tight">
+                <h2 className="font-display font-extrabold text-3xl sm:text-5xl text-slate-900 dark:text-white tracking-tight">
                   Education &amp; <span className="text-gradient-cyan">Milestones</span>
                 </h2>
 
-                <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
+                <p className="text-slate-600 dark:text-slate-400 text-sm sm:text-base leading-relaxed">
                   Final-year BSc (Hons) Software Engineering student at Cardiff Metropolitan University, coupling theoretical computer science rigor with hands-on production builds.
                 </p>
               </div>
@@ -79,31 +79,31 @@ const Journey = () => {
                   className="relative group"
                 >
                   {/* Glowing Milestone Node Icon */}
-                  <div className="absolute -left-[35px] sm:-left-[51px] top-1.5 w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-[#0B1320] border-2 border-[#60C1E5] flex items-center justify-center shadow-[0_0_16px_rgba(96,193,229,0.8)] group-hover:scale-110 transition-transform">
+                  <div className="absolute -left-[35px] sm:-left-[51px] top-1.5 w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-white dark:bg-[#0B1320] border-2 border-[#60C1E5] flex items-center justify-center shadow-[0_0_16px_rgba(96,193,229,0.8)] group-hover:scale-110 transition-transform">
                     {item.badge.includes('Degree') ? (
-                      <GraduationCap className="w-3.5 h-3.5 text-[#60C1E5]" />
+                      <GraduationCap className="w-3.5 h-3.5 text-[#0284C7] dark:text-[#60C1E5]" />
                     ) : (
-                      <Briefcase className="w-3.5 h-3.5 text-[#60C1E5]" />
+                      <Briefcase className="w-3.5 h-3.5 text-[#0284C7] dark:text-[#60C1E5]" />
                     )}
                   </div>
 
-                  {/* Dark Timeline Card Content */}
-                  <div className="p-6 sm:p-7 rounded-2xl bg-slate-900/90 border border-slate-800 hover:border-[#60C1E5]/70 shadow-lg hover:shadow-[0_12px_36px_rgba(96,193,229,0.18)] transition-all duration-300 space-y-3">
+                  {/* Dark/Light Timeline Card Content */}
+                  <div className="p-6 sm:p-7 rounded-2xl bg-slate-50 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 hover:border-[#60C1E5]/70 shadow-sm dark:shadow-lg hover:shadow-[0_12px_36px_rgba(96,193,229,0.18)] transition-all duration-300 space-y-3">
                     <div className="flex flex-wrap items-center justify-between gap-2">
-                      <span className="px-3 py-1 rounded-lg bg-[#60C1E5]/15 border border-[#60C1E5]/40 text-xs font-mono font-bold text-[#60C1E5]">
+                      <span className="px-3 py-1 rounded-lg bg-[#60C1E5]/15 border border-[#60C1E5]/40 text-xs font-mono font-bold text-[#0284C7] dark:text-[#60C1E5]">
                         {item.period}
                       </span>
-                      <span className="text-xs font-mono text-slate-400 bg-slate-800/80 px-2.5 py-0.5 rounded border border-slate-700 font-semibold">
+                      <span className="text-xs font-mono text-slate-600 dark:text-slate-400 bg-white dark:bg-slate-800/80 px-2.5 py-0.5 rounded border border-slate-200 dark:border-slate-700 font-semibold">
                         {item.badge}
                       </span>
                     </div>
 
-                    <h3 className="text-xl sm:text-2xl font-bold font-display text-white group-hover:text-[#60C1E5] transition-colors">
+                    <h3 className="text-xl sm:text-2xl font-bold font-display text-slate-900 dark:text-white group-hover:text-[#0284C7] dark:group-hover:text-[#60C1E5] transition-colors">
                       {item.title}
                     </h3>
-                    <div className="text-sm font-mono text-[#60C1E5] font-semibold">{item.organization}</div>
+                    <div className="text-sm font-mono text-[#0284C7] dark:text-[#60C1E5] font-semibold">{item.organization}</div>
 
-                    <p className="text-sm text-slate-300 font-normal leading-relaxed pt-1">
+                    <p className="text-sm text-slate-600 dark:text-slate-300 font-normal leading-relaxed pt-1">
                       {item.description}
                     </p>
                   </div>
@@ -112,12 +112,12 @@ const Journey = () => {
             </div>
 
             {/* Bottom Status Banner inside Sheet */}
-            <div className="mt-12 pt-8 border-t border-slate-800/90 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-400">
+            <div className="mt-12 pt-8 border-t border-slate-200 dark:border-slate-800/90 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-slate-500 dark:text-slate-400">
               <div className="flex items-center gap-2">
                 <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
                 <span>Available for Full-time Internship / Trainee Developer Roles (2026)</span>
               </div>
-              <div className="text-slate-500">
+              <div className="text-slate-400 dark:text-slate-500">
                 Cardiff Met ID: ST20295190
               </div>
             </div>

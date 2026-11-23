@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Terminal as TerminalIcon, Sparkles, CornerDownLeft, Play, X, Trash2, FileDown } from 'lucide-react';
+import { Terminal as TerminalIcon, Sparkles, CornerDownLeft, Play, X, Trash2, FileDown, Sun, Moon } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { sound } from '../utils/audio';
 import { personalInfo, projectsData, skillsData } from '../data/portfolioData';
@@ -16,14 +16,14 @@ const banner = `
  $$    $$/ $$ | $$  |     $$    $$/ $$       |   $$$/    
   $$$$$$/  $$/   $$/       $$$$$$/  $$$$$$$$/     $/     
                                                          
-  Type 'help' to see available commands or 'cv' to download resume.
+  Type 'help' to see commands, 'cv' to download resume, or 'theme' to switch mode.
 `;
 
-const InteractiveTerminal = () => {
+const InteractiveTerminal = ({ isDark, onToggleTheme }) => {
   const [history, setHistory] = useState([
     { type: 'banner', text: banner },
-    { type: 'system', text: `Connected to ${personalInfo.name} Dev Terminal [v2.5.0-release]` },
-    { type: 'system', text: `Type 'help' or click quick actions below to inspect profile.` }
+    { type: 'system', text: `Connected to ${personalInfo.name} Dev Terminal [v3.0.0-release]` },
+    { type: 'system', text: `Type 'help' or tap quick actions below to inspect profile.` }
   ]);
   const [inputVal, setInputVal] = useState('');
   const [historyIndex, setHistoryIndex] = useState(-1);
@@ -59,6 +59,7 @@ const InteractiveTerminal = () => {
   skills      - Inspect core technical stack
   projects    - Show flagship software repositories
   cv / resume - Download official resume PDF
+  theme       - Toggle Light / Dark mode
   github      - Open GitHub profile in new tab
   linkedin    - Open LinkedIn profile
   contact     - Display direct phone, email & socials
@@ -81,22 +82,37 @@ BIO: ${personalInfo.bio}`
         });
         break;
 
+      case 'theme':
+        if (onToggleTheme) {
+          onToggleTheme();
+        }
+        newHistory.push({
+          type: 'success',
+          text: `[SYS_OK]: Theme toggled successfully to ${!isDark ? 'DARK' : 'LIGHT'} mode.`
+        });
+        break;
+
       case 'skills':
-        const skillsOutput = skillsData
-          .map((cat) => `\n[${cat.category}]\n` + cat.skills.map((s) => `  • ${s.name} (${s.level}%) - ${s.desc}`).join('\n'))
-          .join('\n');
-        newHistory.push({ type: 'output', text: skillsOutput });
+        newHistory.push({
+          type: 'output',
+          text: `TECHNICAL STACK & CAPABILITIES:
+${skillsData
+  .map(
+    (c) =>
+      `• [${c.category.toUpperCase()}]\n  ${c.skills.map((s) => `${s.name} (${s.level}%)`).join(' | ')}`
+  )
+  .join('\n\n')}`
+        });
         break;
 
       case 'projects':
-        const projectsOutput = projectsData
-          .map((p, idx) => {
-            const hasLive = p.demoUrl && !p.demoUrl.includes('github.com');
-            const demoLine = hasLive ? `\n    • Live Hosted App: ${p.demoUrl}` : '';
-            return `[${idx + 1}] ${p.title}\n    • Category: ${p.category}\n    • Stack: ${p.tags.join(', ')}\n    • Repo: ${p.repoUrl}${demoLine}`;
-          })
-          .join('\n\n');
-        newHistory.push({ type: 'output', text: projectsOutput });
+        newHistory.push({
+          type: 'output',
+          text: `FEATURED PRODUCTION REPOSITORIES:
+${projectsData
+  .map((p, i) => `[0${i + 1}] ${p.title}\n    Stack: ${p.tags.slice(0, 4).join(', ')}\n    Repo:  ${p.repoUrl}`)
+  .join('\n\n')}`
+        });
         break;
 
       case 'cv':
@@ -105,52 +121,58 @@ BIO: ${personalInfo.bio}`
         const link = document.createElement('a');
         link.href = personalInfo.cvDownloadUrl;
         link.download = 'Channa_Kavishka_Sadaruwan_CV.pdf';
+        document.body.appendChild(link);
         link.click();
+        document.body.removeChild(link);
         newHistory.push({
           type: 'success',
-          text: `>>> INITIATING CV DOWNLOAD: Channa_Kavishka_Sadaruwan_CV.pdf ... <<<
-PDF Document downloaded successfully! Also available at: ${personalInfo.cvDownloadUrl}`
+          text: `[DOWNLOAD_INITIATED]: Channa_Kavishka_Sadaruwan_CV.pdf has been dispatched to your browser.`
         });
         break;
 
       case 'github':
-        newHistory.push({ type: 'output', text: `Opening GitHub profile: ${personalInfo.github}...` });
         window.open(personalInfo.github, '_blank');
+        newHistory.push({
+          type: 'output',
+          text: `Opening GitHub: ${personalInfo.github}`
+        });
         break;
 
       case 'linkedin':
-        newHistory.push({ type: 'output', text: `Opening LinkedIn profile: ${personalInfo.linkedin}...` });
         window.open(personalInfo.linkedin, '_blank');
-        break;
-
-      case 'contact':
         newHistory.push({
           type: 'output',
-          text: `PHONE: ${personalInfo.phone}
-EMAIL: ${personalInfo.email}
-GITHUB: ${personalInfo.github}
-LINKEDIN: ${personalInfo.linkedin}
-STATUS: ${personalInfo.availability}`
+          text: `Opening LinkedIn: ${personalInfo.linkedin}`
         });
         break;
 
       case 'sudo hire':
       case 'hire':
-        confetti({
-          particleCount: 80,
-          spread: 80,
-          origin: { y: 0.6 },
-          colors: ['#60c1e5', '#38bdf8', '#0284c7']
-        });
         sound.playSuccess();
+        confetti({
+          particleCount: 100,
+          spread: 80,
+          origin: { y: 0.6 }
+        });
         newHistory.push({
           type: 'success',
-          text: `>>> INITIATING PRIORITY COLLABORATION PROTOCOL <<<
-Direct Phone: ${personalInfo.phone}
+          text: `[COLLABORATION_MODE_ENGAGED] 🚀
+Channa Kavishka is ready to contribute to your engineering team!
 Direct Email: ${personalInfo.email}
 LinkedIn: ${personalInfo.linkedin}
-GitHub: ${personalInfo.github}
-Thank you for reaching out! Let's build something extraordinary together.`
+GitHub: ${personalInfo.github}`
+        });
+        break;
+
+      case 'contact':
+        newHistory.push({
+          type: 'output',
+          text: `DIRECT CONTACT DETAILS:
+Email:    ${personalInfo.email}
+Phone:    ${personalInfo.phone}
+Location: ${personalInfo.location}
+GitHub:   ${personalInfo.github}
+LinkedIn: ${personalInfo.linkedin}`
         });
         break;
 
@@ -197,7 +219,7 @@ Thank you for reaching out! Let's build something extraordinary together.`
   };
 
   return (
-    <section id="terminal" className="py-24 sm:py-32 relative z-10 bg-slate-50/70 border-t border-slate-200/80 overflow-hidden scroll-mt-20">
+    <section id="terminal" className="py-24 sm:py-32 relative z-10 bg-slate-50/70 dark:bg-[#070C16]/80 border-t border-slate-200/80 dark:border-slate-800 overflow-hidden scroll-mt-20">
       {/* Watermark Typography (Dribbble Signature) */}
       <div className="absolute top-10 right-4 sm:right-10 watermark-text pointer-events-none select-none">
         TERMINAL
@@ -205,17 +227,17 @@ Thank you for reaching out! Let's build something extraordinary together.`
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Editorial Top Bar */}
-        <div className="flex items-center justify-between border-b border-slate-200/80 pb-4 mb-8">
+        <div className="flex items-center justify-between border-b border-slate-200/80 dark:border-slate-800 pb-4 mb-8">
           <div className="flex items-center gap-2">
-            <span className="font-mono text-xs font-bold text-[#0284C7] bg-[#60C1E5]/15 border border-[#60C1E5]/30 px-2.5 py-1 rounded-md">
+            <span className="font-mono text-xs font-bold text-[#0284C7] dark:text-[#60C1E5] bg-[#60C1E5]/15 border border-[#60C1E5]/30 px-2.5 py-1 rounded-md">
               /05
             </span>
-            <span className="font-mono text-xs font-bold tracking-wider text-slate-800 uppercase">
+            <span className="font-mono text-xs font-bold tracking-wider text-slate-800 dark:text-slate-200 uppercase">
               / INTERACTIVE TERMINAL EMULATOR
             </span>
           </div>
-          <div className="font-mono text-xs text-slate-500 font-semibold tracking-wider">
-            [ bash v2.5.0 ]
+          <div className="font-mono text-xs text-slate-500 dark:text-slate-400 font-semibold tracking-wider">
+            [ bash v3.0.0 ]
           </div>
         </div>
 
@@ -225,9 +247,9 @@ Thank you for reaching out! Let's build something extraordinary together.`
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#60C1E5]/15 border border-[#60C1E5]/40 text-xs font-mono font-bold text-[#0284C7] shadow-sm"
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#60C1E5]/15 border border-[#60C1E5]/40 text-xs font-mono font-bold text-[#0284C7] dark:text-[#60C1E5] shadow-sm"
           >
-            <TerminalIcon className="w-3.5 h-3.5 text-[#0284C7]" />
+            <TerminalIcon className="w-3.5 h-3.5 text-[#0284C7] dark:text-[#60C1E5]" />
             <span>INTERACTIVE DEVELOPER CONSOLE</span>
           </motion.div>
 
@@ -235,12 +257,12 @@ Thank you for reaching out! Let's build something extraordinary together.`
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-display font-extrabold text-3xl sm:text-5xl text-slate-900 tracking-tight"
+            className="font-display font-extrabold text-3xl sm:text-5xl text-slate-900 dark:text-white tracking-tight"
           >
             Terminal <span className="text-gradient-cyan">Shell Interface</span>
           </motion.h2>
 
-          <p className="text-slate-600 text-sm sm:text-base">
+          <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base">
             For engineers &amp; recruiters who love the command line. Run commands or tap quick triggers below.
           </p>
         </div>
@@ -312,7 +334,7 @@ Thank you for reaching out! Let's build something extraordinary together.`
                 value={inputVal}
                 onChange={(e) => setInputVal(e.target.value)}
                 onKeyDown={handleKeyDown}
-                placeholder="type 'help', 'cv', 'skills'..."
+                placeholder="type 'help', 'cv', 'skills', 'theme'..."
                 className="flex-1 bg-transparent outline-none text-[#60C1E5] placeholder-slate-600 font-mono text-xs sm:text-sm"
               />
               <span className="animate-pulse w-2 h-4 bg-[#60C1E5] inline-block" />
@@ -322,13 +344,19 @@ Thank you for reaching out! Let's build something extraordinary together.`
           {/* Quick Command Pills */}
           <div className="px-4 py-3 bg-[#070D18] border-t border-slate-800 flex flex-wrap items-center gap-2">
             <span className="text-[11px] font-mono text-slate-400 mr-1 font-semibold">Quick:</span>
-            {['help', 'cv', 'skills', 'projects', 'contact', 'sudo hire', 'clear'].map((cmd) => (
+            {['help', 'cv', 'skills', 'projects', 'theme', 'contact', 'sudo hire', 'clear'].map((cmd) => (
               <button
                 key={cmd}
                 onClick={() => handleCommand(cmd)}
                 className="px-2.5 py-1 rounded-md bg-slate-800/90 hover:bg-[#60C1E5]/25 border border-slate-700 hover:border-[#60C1E5] text-[11px] font-mono text-[#60C1E5] transition-all flex items-center gap-1 shadow-sm active:scale-95"
               >
-                {cmd === 'cv' ? <FileDown className="w-2.5 h-2.5 text-[#60C1E5]" /> : <Play className="w-2.5 h-2.5 text-[#60C1E5]" />}
+                {cmd === 'cv' ? (
+                  <FileDown className="w-2.5 h-2.5 text-[#60C1E5]" />
+                ) : cmd === 'theme' ? (
+                  <Sun className="w-2.5 h-2.5 text-[#60C1E5]" />
+                ) : (
+                  <Play className="w-2.5 h-2.5 text-[#60C1E5]" />
+                )}
                 <span>{cmd}</span>
               </button>
             ))}
