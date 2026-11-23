@@ -1134,7 +1134,7 @@ nav sup { color: var(--cyan-dark); font-size: 10px; margin-left: 3px; font-weigh
   <!-- EXPERIENCE & EDUCATION -->
   <section class="sec exp" id="experience">
     <div class="ghost" data-p>EXPERIENCE</div>
-    <div class="head rv"><h2>/EDUCATION & JOURNEY</h2><span>Cardiff Metropolitan University & Core Milestones</span></div>
+    <div class="head rv"><h2>/EDUCATION & JOURNEY</h2><span>Cardiff Metropolitan University & Academic Milestones</span></div>
     <div class="jobs">
       <div class="job" data-title="BSc (Hons) Software Engineering (Final Year)" data-org="Cardiff Metropolitan University">
         <div><p>Cardiff Metropolitan University</p><p>BSc (Hons) Software Engineering — Final-Year Undergraduate</p></div>
@@ -1147,6 +1147,14 @@ nav sup { color: var(--cyan-dark); font-size: 10px; margin-left: 3px; font-weigh
       <div class="job" data-title="Professional Diploma in English" data-org="British Way English Academy">
         <div><p>British Way English Academy</p><p>Diploma in Professional & Technical English Communication</p></div>
         <time>Completed</time>
+      </div>
+      <div class="job" data-title="G.C.E. Advanced Level (A/L) — Examination Passed" data-org="Secondary Education">
+        <div><p>G.C.E. Advanced Level (A/L)</p><p>Secondary Education — Completed &amp; Passed</p></div>
+        <time>Passed</time>
+      </div>
+      <div class="job" data-title="G.C.E. Ordinary Level (O/L) — Examination Passed" data-org="Secondary Education">
+        <div><p>G.C.E. Ordinary Level (O/L)</p><p>Secondary Education — Completed &amp; Passed</p></div>
+        <time>Passed</time>
       </div>
       <div class="job" data-title="Full-Stack Developer (Live Web Apps)" data-org="Independent Software Engineering">
         <div><p>Independent Software Engineering</p><p>Full-Stack Developer — Delivered Café Nuwara, iFurnish Shop, ApparelFlow ERP</p></div>
@@ -1241,6 +1249,7 @@ nav sup { color: var(--cyan-dark); font-size: 10px; margin-left: 3px; font-weigh
     <div style="padding:8px 16px;background:#070d18;border-top:1px solid #1e293b;display:flex;gap:6px;overflow-x:auto">
       <button class="t-pill" data-c="help">help</button>
       <button class="t-pill" data-c="about">about</button>
+      <button class="t-pill" data-c="education">education</button>
       <button class="t-pill" data-c="skills">skills</button>
       <button class="t-pill" data-c="projects">projects</button>
       <button class="t-pill" data-c="cv">cv</button>
@@ -1616,9 +1625,11 @@ window.toggleTheme = toggleTheme;
     if (!cmd) return;
     appendTerminal('<div style="color:#f8fafc;font-weight:600">$&gt; ' + raw + '</div>');
     if (cmd === 'help') {
-      appendTerminal('<pre style="color:#cbd5e1;margin:0;font-size:11px">Commands: help, about, skills, projects, cv, contact, theme, clear, exit</pre>');
+      appendTerminal('<pre style="color:#cbd5e1;margin:0;font-size:11px">Commands: help, about, education, skills, projects, cv, contact, theme, clear, exit</pre>');
     } else if (cmd === 'about') {
       appendTerminal('<div style="color:#cbd5e1">Channa Kavishka Sadaruwan - Final-year BSc (Hons) Software Engineering student at Cardiff Metropolitan University.</div>');
+    } else if (cmd === 'education' || cmd === 'edu') {
+      appendTerminal('<div style="color:#cbd5e1;line-height:1.6"><span style="color:#60c1e5;font-weight:700">• BSc (Hons) Software Engineering</span> — Cardiff Metropolitan University (2023–2026 Expected)<br><span style="color:#60c1e5;font-weight:700">• Higher National Diploma (HND)</span> — ICBT Campus (Completed)<br><span style="color:#60c1e5;font-weight:700">• Diploma in English</span> — British Way English Academy (Completed)<br><span style="color:#60c1e5;font-weight:700">• G.C.E. Advanced Level (A/L)</span> — Secondary Education (Passed)<br><span style="color:#60c1e5;font-weight:700">• G.C.E. Ordinary Level (O/L)</span> — Secondary Education (Passed)</div>');
     } else if (cmd === 'skills') {
       appendTerminal('<div style="color:#cbd5e1">Frontend: React, Next.js, Three.js\nBackend: Java Spring Boot, Node.js, Express, MySQL, MongoDB</div>');
     } else if (cmd === 'projects') {
