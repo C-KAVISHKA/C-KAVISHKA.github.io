@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Send, CheckCircle2, Copy, MessageSquare, Clock, MapPin, Sparkles, Phone, FileDown, ExternalLink, Loader2, AlertCircle } from 'lucide-react';
+import { Mail, Send, CheckCircle2, Copy, MessageSquare, Clock, MapPin, Sparkles, Phone, FileDown, ExternalLink, Loader2, ArrowUpRight } from 'lucide-react';
 import { Github, Linkedin } from './Icons';
 import confetti from 'canvas-confetti';
 import { sound } from '../utils/audio';
@@ -94,35 +94,85 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-24 relative z-10 bg-white">
+    <section id="contact" className="py-24 sm:py-32 relative z-10 bg-white overflow-hidden border-t border-slate-200/80 scroll-mt-20">
+      {/* Watermark Typography (Dribbble Signature) */}
+      <div className="absolute top-10 right-4 sm:right-10 watermark-text pointer-events-none select-none">
+        CONTACT
+      </div>
+
       {/* Background ambient light */}
-      <div className="absolute top-1/2 right-1/4 w-[600px] h-[600px] bg-[#60C1E5]/12 rounded-full blur-[140px] pointer-events-none" />
+      <div className="absolute top-1/2 right-1/4 w-[600px] h-[600px] bg-[#60C1E5]/12 rounded-full blur-[160px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-14 sm:mb-16">
+        {/* Editorial Top Bar */}
+        <div className="flex items-center justify-between border-b border-slate-200/80 pb-4 mb-10">
+          <div className="flex items-center gap-2">
+            <span className="font-mono text-xs font-bold text-[#0284C7] bg-[#60C1E5]/15 border border-[#60C1E5]/30 px-2.5 py-1 rounded-md">
+              /04
+            </span>
+            <span className="font-mono text-xs font-bold tracking-wider text-slate-800 uppercase">
+              / INITIATE CONVERSATION
+            </span>
+          </div>
+          <div className="font-mono text-xs text-slate-500 font-semibold tracking-wider">
+            [ AVAILABLE FOR 2026 ROLES ]
+          </div>
+        </div>
+
+        {/* Dribbble Kinetic Callout Headline */}
+        <div className="text-center max-w-4xl mx-auto space-y-6 mb-16 sm:mb-20">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#60C1E5]/15 border border-[#60C1E5]/40 text-xs font-mono font-bold text-[#0284C7] shadow-sm"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#60C1E5]/15 border border-[#60C1E5]/40 text-xs font-mono font-bold text-[#0284C7] shadow-sm"
           >
             <Mail className="w-3.5 h-3.5 text-[#0284C7]" />
-            <span>LET'S CONNECT</span>
+            <span>LET'S BUILD SOMETHING EXTRAORDINARY</span>
           </motion.div>
 
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="font-display font-extrabold text-3xl sm:text-5xl text-slate-900 tracking-tight"
+            className="font-display font-black text-4xl sm:text-6xl md:text-7xl text-slate-900 tracking-tight leading-[1.08]"
           >
-            Get In <span className="text-gradient-cyan">Touch</span>
+            HAVE A PROJECT <br className="hidden sm:inline" />
+            <span className="text-gradient-cyan">IN MIND?</span>
           </motion.h2>
 
-          <p className="text-slate-600 text-base sm:text-lg">
-            Seeking software developer, trainee, and full-stack engineering opportunities. Send me a direct message below.
-          </p>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="text-slate-600 text-base sm:text-xl max-w-2xl mx-auto"
+          >
+            Looking for a driven Software Engineering Intern, Trainee Developer, or full-stack 3D collaborator? I'm ready to contribute immediately.
+          </motion.p>
+
+          {/* Quick Action Pill Bar */}
+          <div className="pt-2 flex flex-wrap items-center justify-center gap-3">
+            <a
+              href={`mailto:${personalInfo.email}`}
+              onMouseEnter={() => sound.playHover()}
+              onClick={() => sound.playSuccess()}
+              className="px-6 py-3.5 rounded-2xl bg-[#60C1E5] hover:bg-[#48B5DD] text-slate-950 font-bold font-mono text-xs sm:text-sm flex items-center gap-2 shadow-[0_6px_24px_rgba(96,193,229,0.4)] transition-all transform hover:-translate-y-0.5"
+            >
+              <span>Send Direct Email ↗</span>
+              <ArrowUpRight className="w-4 h-4" />
+            </a>
+
+            <a
+              href={personalInfo.cvDownloadUrl}
+              download="Channa_Kavishka_Sadaruwan_CV.pdf"
+              onMouseEnter={() => sound.playHover()}
+              onClick={() => sound.playSuccess()}
+              className="px-6 py-3.5 rounded-2xl bg-white hover:bg-slate-50 border border-slate-200 text-slate-800 font-bold font-mono text-xs sm:text-sm flex items-center gap-2 shadow-sm transition-all"
+            >
+              <FileDown className="w-4 h-4 text-[#0284C7]" />
+              <span>Download CV (PDF)</span>
+            </a>
+          </div>
         </div>
 
         {/* Contact Grid */}
@@ -130,13 +180,13 @@ const Contact = () => {
           {/* Left Column: Direct Info & Social Cards */}
           <div className="lg:col-span-5 space-y-4">
             {/* Email Card with Copy Button */}
-            <div className="p-6 rounded-2xl bg-white border border-[#60C1E5]/50 space-y-3.5 shadow-sm hover:shadow-[0_8px_24px_rgba(96,193,229,0.18)] transition-all">
+            <div className="p-6 rounded-3xl bg-white border border-[#60C1E5]/50 space-y-3.5 shadow-sm hover:shadow-[0_10px_28px_rgba(96,193,229,0.18)] transition-all">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-[#60C1E5]/15 border border-[#60C1E5]/40 flex items-center justify-center text-[#0284C7]">
+                <div className="w-11 h-11 rounded-2xl bg-[#60C1E5]/15 border border-[#60C1E5]/40 flex items-center justify-center text-[#0284C7]">
                   <Mail className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="text-xs font-mono text-slate-500 font-semibold">DIRECT EMAIL</div>
+                  <div className="text-xs font-mono text-slate-500 font-semibold">DIRECT INBOX</div>
                   <div className="text-sm font-bold text-slate-900 font-mono">{personalInfo.email}</div>
                 </div>
               </div>
@@ -160,7 +210,7 @@ const Contact = () => {
               </button>
             </div>
 
-            {/* Phone Card */}
+            {/* Phone / WhatsApp Card */}
             <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm flex items-center justify-between">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-xl bg-emerald-50 border border-emerald-200 flex items-center justify-center text-emerald-600">
@@ -176,29 +226,19 @@ const Contact = () => {
               <span className="text-xs font-mono font-bold text-emerald-700 bg-emerald-50 px-2.5 py-1 rounded-full border border-emerald-200">Direct</span>
             </div>
 
-            {/* Download Official CV Card */}
-            <a
-              href={personalInfo.cvDownloadUrl}
-              download="Channa_Kavishka_Sadaruwan_CV.pdf"
-              onMouseEnter={() => sound.playHover()}
-              onClick={() => sound.playSuccess()}
-              className="p-5 rounded-2xl bg-gradient-to-br from-white to-[#F0F9FD] border border-[#60C1E5]/60 hover:border-[#60C1E5] shadow-sm hover:shadow-[0_8px_24px_rgba(96,193,229,0.22)] flex items-center justify-between group transition-all block"
-            >
+            {/* Location & Status Card */}
+            <div className="p-5 rounded-2xl bg-white border border-slate-200 shadow-sm flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-[#60C1E5]/20 border border-[#60C1E5]/40 flex items-center justify-center text-[#0284C7]">
-                  <FileDown className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                <div className="w-10 h-10 rounded-xl bg-[#60C1E5]/15 border border-[#60C1E5]/40 flex items-center justify-center text-[#0284C7]">
+                  <MapPin className="w-4 h-4" />
                 </div>
                 <div>
-                  <div className="text-xs font-mono text-[#0284C7] font-bold">OFFICIAL RESUME</div>
-                  <div className="text-sm font-bold text-slate-900">
-                    Download CV (PDF Document)
-                  </div>
+                  <div className="text-xs font-mono text-slate-500 font-semibold">LOCATION</div>
+                  <div className="text-sm font-bold text-slate-900 font-mono">Sri Lanka (UTC +5:30)</div>
                 </div>
               </div>
-              <span className="text-xs font-mono font-bold text-[#0284C7] group-hover:translate-x-1 transition-transform">
-                Download &rarr;
-              </span>
-            </a>
+              <span className="text-xs font-mono font-bold text-[#0284C7] bg-[#60C1E5]/15 px-2.5 py-1 rounded-full border border-[#60C1E5]/30">Hybrid / Remote</span>
+            </div>
 
             {/* GitHub Profile Card */}
             <a
@@ -237,7 +277,7 @@ const Contact = () => {
                   <Linkedin className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="text-xs font-mono text-slate-500 font-semibold">LINKEDIN PROFILE</div>
+                  <div className="text-xs font-mono text-slate-500 font-semibold">LINKEDIN NETWORK</div>
                   <div className="text-sm font-bold font-mono text-slate-900 group-hover:text-[#0284C7] transition-colors">
                     linkedin.com/in/channa-sandaruwan
                   </div>
@@ -249,7 +289,7 @@ const Contact = () => {
 
           {/* Right Column: Contact Message Form */}
           <div className="lg:col-span-7">
-            <div className="p-7 sm:p-9 rounded-3xl bg-white border-2 border-[#60C1E5]/40 shadow-[0_12px_36px_rgba(96,193,229,0.16)]">
+            <div className="p-7 sm:p-9 rounded-3xl bg-white border-2 border-[#60C1E5]/40 shadow-[0_16px_40px_rgba(96,193,229,0.16)]">
               {submitted ? (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}

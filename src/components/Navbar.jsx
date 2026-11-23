@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Volume2, VolumeX, Menu, X, Terminal, Sparkles, Layers, Send, User, FileDown } from 'lucide-react';
+import { Volume2, VolumeX, Menu, X, Terminal, Sparkles, Layers, Send, User, FileDown, ArrowUpRight } from 'lucide-react';
 import { Github, Linkedin } from './Icons';
 import { sound } from '../utils/audio';
 import { personalInfo } from '../data/portfolioData';
 
 const navItems = [
-  { label: 'Projects', href: '#projects', icon: Layers },
-  { label: 'Skills', href: '#skills', icon: Sparkles },
-  { label: 'Terminal', href: '#terminal', icon: Terminal },
-  { label: 'Journey', href: '#journey', icon: User },
+  { label: 'Work [5]', href: '#projects', icon: Layers },
+  { label: 'Skills [15+]', href: '#skills', icon: Sparkles },
+  { label: 'Terminal [/cli]', href: '#terminal', icon: Terminal },
+  { label: 'Experience [2026]', href: '#journey', icon: User },
   { label: 'Contact', href: '#contact', icon: Send },
 ];
 
@@ -22,13 +22,12 @@ const Navbar = ({ soundEnabled, setSoundEnabled }) => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 30);
 
-      // Section spy
       const sections = ['projects', 'skills', 'terminal', 'journey', 'contact'];
       for (const section of sections) {
         const el = document.getElementById(section);
         if (el) {
           const rect = el.getBoundingClientRect();
-          if (rect.top <= 220 && rect.bottom >= 220) {
+          if (rect.top <= 240 && rect.bottom >= 240) {
             setActiveSection(section);
             break;
           }
@@ -49,42 +48,53 @@ const Navbar = ({ soundEnabled, setSoundEnabled }) => {
     <header
       className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
         scrolled
-          ? 'py-3 bg-white/90 backdrop-blur-xl border-b border-slate-200/90 shadow-[0_4px_24px_rgba(96,193,229,0.08)]'
-          : 'py-5 sm:py-6 bg-transparent'
+          ? 'py-2.5 sm:py-3 bg-white/90 backdrop-blur-xl border-b border-slate-200/90 shadow-[0_4px_24px_rgba(96,193,229,0.08)]'
+          : 'py-4 sm:py-6 bg-transparent'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-        {/* Brand Logo */}
-        <a
-          href="#"
-          onMouseEnter={() => sound.playHover()}
-          className="group flex items-center gap-2.5 text-slate-900 no-underline"
-        >
-          <div className="w-10 h-10 rounded-xl bg-white border-2 border-[#60C1E5] flex items-center justify-center font-mono font-bold text-[#0284C7] group-hover:scale-105 group-hover:border-[#0284C7] transition-all duration-300 shadow-[0_2px_12px_rgba(96,193,229,0.25)]">
-            CK
-          </div>
-          <div className="flex flex-col">
-            <span className="font-display font-extrabold text-base tracking-tight text-slate-900 group-hover:text-[#0284C7] transition-colors">
-              Channa Kavishka
-            </span>
-            <span className="text-[10.5px] font-mono text-[#0369A1] font-semibold tracking-wider">
-              FULLSTACK // 3D WEBXR
-            </span>
-          </div>
-        </a>
+        {/* Left: Brand Logo & Availability Pill */}
+        <div className="flex items-center gap-3">
+          <a
+            href="#"
+            onMouseEnter={() => sound.playHover()}
+            className="group flex items-center gap-2.5 text-slate-900 no-underline"
+          >
+            <div className="w-10 h-10 rounded-xl bg-white border-2 border-[#60C1E5] flex items-center justify-center font-mono font-bold text-[#0284C7] group-hover:scale-105 group-hover:border-[#0284C7] transition-all duration-300 shadow-[0_2px_12px_rgba(96,193,229,0.25)]">
+              CK
+            </div>
+            <div className="hidden min-[420px]:flex flex-col">
+              <span className="font-display font-extrabold text-sm sm:text-base tracking-tight text-slate-900 group-hover:text-[#0284C7] transition-colors leading-tight">
+                Channa Kavishka
+              </span>
+              <span className="text-[10px] sm:text-[10.5px] font-mono text-[#0284C7] font-semibold tracking-wider">
+                SWE // 3D WEBXR
+              </span>
+            </div>
+          </a>
 
-        {/* Desktop Navigation Links */}
-        <nav className="hidden lg:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-slate-100/90 border border-slate-200/80 backdrop-blur-md shadow-inner">
+          {/* Dribbble Style Availability Pill Badge */}
+          <div className="hidden xl:flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-xs font-mono font-semibold text-emerald-700 shadow-sm">
+            <span className="relative flex h-2 w-2">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            <span>Available for New Projects</span>
+          </div>
+        </div>
+
+        {/* Center: Desktop Navigation Links with Bracketed Counters */}
+        <nav className="hidden lg:flex items-center gap-1 px-3 py-1.5 rounded-full bg-slate-100/90 border border-slate-200/90 backdrop-blur-md shadow-inner">
           {navItems.map((item) => {
-            const Icon = item.icon;
-            const isActive = activeSection === item.href.replace('#', '');
+            const sectionId = item.href.replace('#', '');
+            const isActive = activeSection === sectionId;
             return (
               <a
                 key={item.label}
                 href={item.href}
                 onMouseEnter={() => sound.playHover()}
                 onClick={() => sound.playClick()}
-                className={`relative px-4 py-2 rounded-full text-xs font-medium tracking-wide transition-all duration-200 flex items-center gap-1.5 ${
+                className={`relative px-3.5 py-1.5 rounded-full text-xs font-mono transition-all duration-200 flex items-center gap-1.5 ${
                   isActive
                     ? 'text-[#0284C7] font-bold'
                     : 'text-slate-600 hover:text-slate-900 hover:bg-white/80'
@@ -97,22 +107,19 @@ const Navbar = ({ soundEnabled, setSoundEnabled }) => {
                     transition={{ type: 'spring', stiffness: 350, damping: 30 }}
                   />
                 )}
-                <span className="relative z-10 flex items-center gap-1.5">
-                  <Icon className="w-3.5 h-3.5" />
-                  <span>{item.label}</span>
-                </span>
+                <span className="relative z-10">{item.label}</span>
               </a>
             );
           })}
         </nav>
 
-        {/* Action Controls (Sound, CV Download, GitHub, Contact CTA) */}
+        {/* Right: Actions (Sound, CV Download, Contact Pill) */}
         <div className="flex items-center gap-2 sm:gap-2.5">
           {/* Sound FX Toggle */}
           <button
             onClick={toggleSound}
             onMouseEnter={() => sound.playHover()}
-            title={soundEnabled ? 'Mute Sound FX' : 'Enable Futuristic Sound FX'}
+            title={soundEnabled ? 'Mute Sound FX' : 'Enable Sound FX'}
             className={`p-2.5 rounded-xl border transition-all duration-200 flex items-center justify-center ${
               soundEnabled
                 ? 'bg-[#60C1E5]/20 border-[#60C1E5] text-[#0284C7] shadow-[0_0_15px_rgba(96,193,229,0.3)]'
@@ -122,40 +129,28 @@ const Navbar = ({ soundEnabled, setSoundEnabled }) => {
             {soundEnabled ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
           </button>
 
-          {/* Download CV Button */}
+          {/* Download CV Pill Button */}
           <a
             href={personalInfo.cvDownloadUrl}
             download="Channa_Kavishka_Sadaruwan_CV.pdf"
             onMouseEnter={() => sound.playHover()}
             onClick={() => sound.playSuccess()}
-            className="hidden sm:flex items-center gap-1.5 px-3 py-2 rounded-xl bg-[#60C1E5]/15 hover:bg-[#60C1E5]/25 border border-[#60C1E5]/50 text-xs font-mono font-semibold text-[#0284C7] transition-all shadow-sm hover:shadow-[0_2px_12px_rgba(96,193,229,0.25)]"
+            className="hidden sm:flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-white hover:bg-slate-50 border border-slate-200 hover:border-[#60C1E5] text-xs font-mono font-bold text-slate-800 transition-all shadow-sm group"
             title="Download Professional CV (PDF)"
           >
-            <FileDown className="w-4 h-4 text-[#0284C7]" />
+            <FileDown className="w-3.5 h-3.5 text-[#0284C7] group-hover:-translate-y-0.5 transition-transform" />
             <span>CV / Resume</span>
           </a>
 
-          {/* GitHub Button */}
-          <a
-            href={personalInfo.github}
-            target="_blank"
-            rel="noopener noreferrer"
-            onMouseEnter={() => sound.playHover()}
-            onClick={() => sound.playClick()}
-            className="hidden md:flex items-center gap-1.5 px-3 py-2 rounded-xl bg-white hover:bg-slate-50 border border-slate-200 hover:border-[#60C1E5]/60 text-xs font-medium text-slate-700 hover:text-slate-900 transition-all shadow-sm"
-          >
-            <Github className="w-4 h-4 text-[#0284C7]" />
-            <span className="font-mono">GitHub</span>
-          </a>
-
-          {/* Contact CTA */}
+          {/* Dribbble Style Pill "Let's Talk ↗" */}
           <a
             href="#contact"
             onMouseEnter={() => sound.playHover()}
             onClick={() => sound.playClick()}
-            className="px-4 py-2 rounded-xl bg-gradient-to-r from-[#60C1E5] to-[#0284C7] hover:from-[#48B5DD] hover:to-[#0369A1] text-white font-bold text-xs tracking-wide transition-all shadow-[0_2px_14px_rgba(96,193,229,0.35)] hover:shadow-[0_4px_20px_rgba(96,193,229,0.5)] transform hover:-translate-y-0.5"
+            className="px-4 py-2 rounded-full bg-slate-900 hover:bg-slate-800 text-white font-mono font-bold text-xs tracking-wide transition-all shadow-md hover:shadow-lg flex items-center gap-1 group transform hover:-translate-y-0.5"
           >
-            Contact
+            <span>Let's Talk</span>
+            <ArrowUpRight className="w-3.5 h-3.5 text-[#60C1E5] group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </a>
 
           {/* Mobile menu trigger */}
@@ -164,7 +159,7 @@ const Navbar = ({ soundEnabled, setSoundEnabled }) => {
               setMobileMenuOpen(!mobileMenuOpen);
               sound.playClick();
             }}
-            className="lg:hidden p-2.5 rounded-xl bg-white border border-slate-200 text-slate-700 hover:border-[#60C1E5] shadow-sm transition-colors"
+            className="lg:hidden p-2 rounded-xl bg-white border border-slate-200 text-slate-700 hover:border-[#60C1E5] shadow-sm transition-colors"
             aria-label="Toggle Navigation Menu"
           >
             {mobileMenuOpen ? <X className="w-5 h-5 text-[#0284C7]" /> : <Menu className="w-5 h-5 text-slate-700" />}
@@ -183,8 +178,8 @@ const Navbar = ({ soundEnabled, setSoundEnabled }) => {
             className="lg:hidden bg-white border border-slate-200/90 shadow-2xl rounded-2xl mx-3 sm:mx-4 px-5 py-4 mt-2 space-y-2"
           >
             {navItems.map((item) => {
-              const Icon = item.icon;
-              const isActive = activeSection === item.href.replace('#', '');
+              const sectionId = item.href.replace('#', '');
+              const isActive = activeSection === sectionId;
               return (
                 <a
                   key={item.label}
@@ -193,14 +188,14 @@ const Navbar = ({ soundEnabled, setSoundEnabled }) => {
                     setMobileMenuOpen(false);
                     sound.playClick();
                   }}
-                  className={`flex items-center gap-3 px-3.5 py-3 rounded-xl text-sm font-medium transition-all ${
+                  className={`flex items-center justify-between px-3.5 py-3 rounded-xl text-sm font-mono transition-all ${
                     isActive
                       ? 'bg-[#60C1E5]/15 text-[#0284C7] font-bold border border-[#60C1E5]/30'
                       : 'text-slate-700 hover:text-[#0284C7] hover:bg-[#F0F9FD]'
                   }`}
                 >
-                  <Icon className={`w-4 h-4 ${isActive ? 'text-[#0284C7]' : 'text-slate-500'}`} />
                   <span>{item.label}</span>
+                  <ArrowUpRight className="w-4 h-4 text-slate-400" />
                 </a>
               );
             })}
@@ -208,7 +203,7 @@ const Navbar = ({ soundEnabled, setSoundEnabled }) => {
               <a
                 href={personalInfo.cvDownloadUrl}
                 download="Channa_Kavishka_Sadaruwan_CV.pdf"
-                className="flex items-center justify-center gap-2 px-4 py-3 rounded-xl bg-[#60C1E5]/15 border border-[#60C1E5]/40 text-xs font-mono font-bold text-[#0284C7] shadow-sm"
+                className="flex items-center justify-center gap-2 px-4 py-3 rounded-full bg-[#60C1E5]/15 border border-[#60C1E5]/40 text-xs font-mono font-bold text-[#0284C7] shadow-sm"
               >
                 <FileDown className="w-4 h-4 text-[#0284C7]" />
                 <span>Download CV / Resume (PDF)</span>

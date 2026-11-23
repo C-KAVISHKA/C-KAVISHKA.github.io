@@ -15,7 +15,7 @@
   }
 
   body {
-    background-color: #ffffff;
+    background-color: #f8fafc;
     color: #0f172a;
     overflow-x: hidden;
   }
@@ -57,13 +57,54 @@
   background: #ffffff;
   border: 1px solid rgba(226, 232, 240, 0.9);
   box-shadow: 0 2px 14px -2px rgba(15, 23, 42, 0.05);
-  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-card:hover {
   border-color: rgba(96, 193, 229, 0.65);
   box-shadow: 0 14px 34px -8px rgba(96, 193, 229, 0.25);
   transform: translateY(-3px);
+}
+
+/* Outline Stroke Typography (Dribbble Signature) */
+.text-stroke-cyan {
+  -webkit-text-stroke: 2px #60c1e5;
+  color: transparent;
+}
+
+.text-stroke-dark {
+  -webkit-text-stroke: 1.5px #0f172a;
+  color: transparent;
+}
+
+@media (max-width: 640px) {
+  .text-stroke-cyan {
+    -webkit-text-stroke: 1.2px #60c1e5;
+  }
+  .text-stroke-dark {
+    -webkit-text-stroke: 1px #0f172a;
+  }
+}
+
+/* Giant Watermark Architecture Typography */
+.watermark-text {
+  font-size: clamp(3.5rem, 14vw, 11rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  color: rgba(15, 23, 42, 0.035);
+  user-select: none;
+  pointer-events: none;
+  line-height: 0.9;
+}
+
+.watermark-text-dark {
+  font-size: clamp(3.5rem, 14vw, 11rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  color: rgba(255, 255, 255, 0.04);
+  user-select: none;
+  pointer-events: none;
+  line-height: 0.9;
 }
 
 /* Glowing text gradients */
@@ -85,18 +126,12 @@
   -webkit-text-fill-color: transparent;
 }
 
-.text-gradient-gold {
-  background: linear-gradient(135deg, #d97706 0%, #ea580c 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-/* Grid Background */
+/* Subtle Grid Background */
 .cyber-grid {
   background-size: 36px 36px;
   background-image: 
-    linear-gradient(to right, rgba(96, 193, 229, 0.09) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(96, 193, 229, 0.09) 1px, transparent 1px);
+    linear-gradient(to right, rgba(96, 193, 229, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(96, 193, 229, 0.08) 1px, transparent 1px);
 }
 
 .radial-glow {

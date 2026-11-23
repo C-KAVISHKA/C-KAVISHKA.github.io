@@ -23,13 +23,33 @@ const Projects = () => {
       : projectsData.filter((p) => p.category.toLowerCase().includes(activeCategory.toLowerCase()));
 
   return (
-    <section id="projects" className="py-24 relative z-10 bg-slate-50/70 border-y border-slate-200/80">
+    <section id="projects" className="py-24 sm:py-32 relative z-10 bg-slate-50/70 border-y border-slate-200/80 overflow-hidden scroll-mt-20">
+      {/* Watermark Typography (Dribbble Signature) */}
+      <div className="absolute top-10 right-4 sm:right-10 watermark-text pointer-events-none select-none">
+        PORTFOLIO
+      </div>
+
       {/* Background radial accent in #60C1E5 */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#60C1E5]/10 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-[#60C1E5]/10 rounded-full blur-[160px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Editorial Top Bar */}
+        <div className="flex items-center justify-between border-b border-slate-200/80 pb-4 mb-8">
+          <div className="flex items-center gap-2">
+            <span className="font-mono text-xs font-bold text-[#0284C7] bg-[#60C1E5]/15 border border-[#60C1E5]/30 px-2.5 py-1 rounded-md">
+              /01
+            </span>
+            <span className="font-mono text-xs font-bold tracking-wider text-slate-800 uppercase">
+              / SELECTED WORK &amp; LIVE DEMOS
+            </span>
+          </div>
+          <div className="font-mono text-xs text-slate-500 font-semibold tracking-wider">
+            [ 0{filteredProjects.length} / 0{projectsData.length} ]
+          </div>
+        </div>
+
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto space-y-4 mb-14 sm:mb-16">
+        <div className="text-center max-w-3xl mx-auto space-y-4 mb-12 sm:mb-16">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -37,7 +57,7 @@ const Projects = () => {
             className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#60C1E5]/15 border border-[#60C1E5]/40 text-xs font-mono font-bold text-[#0284C7] shadow-sm"
           >
             <Layers className="w-3.5 h-3.5 text-[#0284C7]" />
-            <span>PORTFOLIO & LIVE APPLICATIONS</span>
+            <span>PRODUCTION SOFTWARE &amp; 3D EXPERIENCES</span>
           </motion.div>
 
           <motion.h2
@@ -89,7 +109,7 @@ const Projects = () => {
         </div>
 
         {/* Project Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-7 sm:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-9">
           <AnimatePresence mode="popLayout">
             {filteredProjects.map((project, index) => {
               const hasLiveDemo = Boolean(project.demoUrl && !project.demoUrl.includes('github.com'));
@@ -101,17 +121,17 @@ const Projects = () => {
                   initial={{ opacity: 0, y: 25 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.95 }}
-                  transition={{ duration: 0.35, delay: index * 0.06 }}
-                  className="group relative rounded-2xl bg-white border border-slate-200 hover:border-[#60C1E5] shadow-sm hover:shadow-[0_12px_32px_rgba(96,193,229,0.22)] transition-all duration-300 flex flex-col justify-between overflow-hidden"
+                  transition={{ duration: 0.35, delay: index * 0.05 }}
+                  className="group relative rounded-3xl bg-white border border-slate-200 hover:border-[#60C1E5] shadow-sm hover:shadow-[0_16px_36px_rgba(96,193,229,0.22)] transition-all duration-300 flex flex-col justify-between overflow-hidden"
                 >
-                  {/* Project Image & Overlay */}
-                  <div className="relative h-56 sm:h-64 w-full overflow-hidden bg-slate-100">
+                  {/* Project Image & Dribbble Hover Action */}
+                  <div className="relative h-60 sm:h-72 w-full overflow-hidden bg-slate-100">
                     <img
                       src={project.image}
                       alt={project.title}
                       className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-slate-900/20 to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-slate-900/25 to-transparent transition-opacity group-hover:opacity-90" />
 
                     {/* Top Badges */}
                     <div className="absolute top-4 left-4 right-4 flex items-center justify-between pointer-events-none z-10">
@@ -122,7 +142,7 @@ const Projects = () => {
                         {hasLiveDemo && (
                           <span className="px-2.5 py-1 rounded-lg bg-emerald-50 backdrop-blur-md border border-emerald-300 text-[11px] font-mono font-bold text-emerald-700 flex items-center gap-1.5 shadow-sm">
                             <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                            <span>Hosted Live</span>
+                            <span>Live App</span>
                           </span>
                         )}
                         {project.featured && (
@@ -133,8 +153,15 @@ const Projects = () => {
                       </div>
                     </div>
 
-                    {/* Hover Quick Action Overlay (Desktop) */}
-                    <div className="hidden lg:flex absolute inset-0 bg-slate-950/60 backdrop-blur-[2px] opacity-0 group-hover:opacity-100 transition-all duration-300 items-center justify-center gap-3 z-20">
+                    {/* Dribbble Signature Center Hover Button (Circular ↗) */}
+                    <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-20">
+                      <div className="w-16 h-16 rounded-full bg-white text-slate-900 shadow-2xl flex items-center justify-center border border-slate-100 group-hover:scale-100 scale-75 opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:shadow-[0_8px_30px_rgba(96,193,229,0.5)]">
+                        <ArrowUpRight className="w-7 h-7 text-[#0284C7] group-hover:scale-110 transition-transform" />
+                      </div>
+                    </div>
+
+                    {/* Hover Quick Action Buttons on Desktop */}
+                    <div className="hidden lg:flex absolute bottom-4 left-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300 items-center justify-center gap-2.5 z-20">
                       {hasLiveDemo && (
                         <a
                           href={project.demoUrl}
@@ -145,10 +172,10 @@ const Projects = () => {
                             e.stopPropagation();
                             sound.playSuccess();
                           }}
-                          className="px-4 py-2.5 rounded-xl bg-gradient-to-r from-[#60C1E5] to-[#0284C7] hover:from-[#48B5DD] hover:to-[#0369A1] text-white font-bold text-xs font-mono flex items-center gap-2 shadow-lg transform -translate-y-2 group-hover:translate-y-0 transition-all"
+                          className="px-4 py-2 rounded-xl bg-[#60C1E5] hover:bg-[#48B5DD] text-slate-950 font-bold text-xs font-mono flex items-center gap-1.5 shadow-lg transform translate-y-2 group-hover:translate-y-0 transition-all"
                         >
                           <ExternalLink className="w-3.5 h-3.5" />
-                          <span>Open Live Demo</span>
+                          <span>Launch Live</span>
                         </a>
                       )}
                       <a
@@ -160,17 +187,26 @@ const Projects = () => {
                           e.stopPropagation();
                           sound.playClick();
                         }}
-                        className="px-4 py-2.5 rounded-xl bg-white/90 hover:bg-white text-slate-900 font-mono font-bold text-xs flex items-center gap-2 transform -translate-y-2 group-hover:translate-y-0 transition-all shadow-md"
+                        className="px-4 py-2 rounded-xl bg-white hover:bg-slate-50 text-slate-900 font-mono font-bold text-xs flex items-center gap-1.5 transform translate-y-2 group-hover:translate-y-0 transition-all shadow-md"
                       >
-                        <Github className="w-4 h-4 text-[#0284C7]" />
-                        <span>Source Code</span>
+                        <Github className="w-3.5 h-3.5 text-[#0284C7]" />
+                        <span>Source</span>
                       </a>
                     </div>
                   </div>
 
-                  {/* Content Section */}
+                  {/* Card Content Section */}
                   <div className="p-6 sm:p-7 space-y-4 flex-1 flex flex-col justify-between">
-                    <div className="space-y-2">
+                    <div className="space-y-2.5">
+                      <div className="flex items-center justify-between">
+                        <span className="font-mono text-xs font-bold text-[#0284C7]">
+                          [ 0{index + 1} ]
+                        </span>
+                        <span className="text-xs font-mono text-slate-400">
+                          {project.featured ? 'Featured Engineering' : 'Production Build'}
+                        </span>
+                      </div>
+
                       <h3 className="text-xl sm:text-2xl font-bold font-display text-slate-900 group-hover:text-[#0284C7] transition-colors">
                         {hasLiveDemo ? (
                           <a
@@ -189,6 +225,7 @@ const Projects = () => {
                           project.title
                         )}
                       </h3>
+
                       <p className="text-xs font-mono text-[#0284C7] font-semibold">{project.tagline}</p>
                       <p className="text-sm text-slate-600 leading-relaxed font-normal">
                         {project.summary}
@@ -222,7 +259,7 @@ const Projects = () => {
                         onMouseEnter={() => sound.playHover()}
                         className="text-xs font-mono font-bold text-[#0284C7] hover:text-[#0369A1] flex items-center gap-1 group/btn"
                       >
-                        <span>Architecture</span>
+                        <span>Deep Dive Architecture</span>
                         <ArrowUpRight className="w-3.5 h-3.5 group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5 transition-transform" />
                       </button>
 
@@ -299,9 +336,9 @@ const Projects = () => {
                     {selectedProject.category}
                   </span>
                   {selectedProject.demoUrl && !selectedProject.demoUrl.includes('github.com') && (
-                    <span className="px-2.5 py-1 rounded-lg bg-emerald-50 border border-emerald-300 text-xs font-mono font-bold text-emerald-700 flex items-center gap-1.5">
-                      <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                      Hosted Live
+                    <span className="px-3 py-1 rounded-lg bg-emerald-50 border border-emerald-300 text-xs font-mono font-bold text-emerald-700 flex items-center gap-1.5">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                      Live Hosted Demo
                     </span>
                   )}
                 </div>
@@ -311,83 +348,78 @@ const Projects = () => {
                 <p className="text-sm font-mono text-[#0284C7] font-semibold">{selectedProject.tagline}</p>
               </div>
 
-              {/* Architecture Blueprint Card */}
-              <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 font-mono text-xs space-y-2">
-                <div className="text-slate-600 flex items-center gap-2 font-bold">
-                  <Server className="w-4 h-4 text-[#0284C7]" />
-                  <span className="text-[#0284C7]">SYSTEM ARCHITECTURE:</span>
+              {/* Modal Body: Architecture Details */}
+              <div className="space-y-5 text-sm text-slate-600 leading-relaxed border-t border-slate-100 pt-5">
+                <div>
+                  <h4 className="font-mono text-xs font-bold text-slate-900 uppercase tracking-wider mb-2 flex items-center gap-2">
+                    <Code className="w-4 h-4 text-[#0284C7]" />
+                    Overview &amp; Purpose
+                  </h4>
+                  <p>{selectedProject.summary}</p>
                 </div>
-                <div className="text-slate-800 pl-6 leading-relaxed">{selectedProject.architecture}</div>
-              </div>
 
-              {/* Key Technical Highlights */}
-              <div className="space-y-3">
-                <h4 className="text-sm font-mono font-bold text-slate-800 flex items-center gap-2">
-                  <Code className="w-4 h-4 text-[#0284C7]" />
-                  KEY INNOVATIONS &amp; ENGINEERING HIGHLIGHTS:
-                </h4>
-                <div className="grid grid-cols-1 gap-2.5">
-                  {selectedProject.highlights.map((highlight, i) => (
-                    <div
-                      key={i}
-                      className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 flex items-start gap-3"
-                    >
-                      <CheckCircle2 className="w-4 h-4 text-[#0284C7] shrink-0 mt-0.5" />
-                      <span className="text-sm text-slate-700 leading-relaxed font-normal">
-                        {highlight}
-                      </span>
+                {selectedProject.features && selectedProject.features.length > 0 && (
+                  <div>
+                    <h4 className="font-mono text-xs font-bold text-slate-900 uppercase tracking-wider mb-2.5 flex items-center gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                      Key Architectural Features
+                    </h4>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                      {selectedProject.features.map((feat, i) => (
+                        <div
+                          key={i}
+                          className="p-3 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-700 flex items-start gap-2"
+                        >
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#60C1E5] mt-1.5 shrink-0" />
+                          <span>{feat}</span>
+                        </div>
+                      ))}
                     </div>
-                  ))}
+                  </div>
+                )}
+
+                <div>
+                  <h4 className="font-mono text-xs font-bold text-slate-900 uppercase tracking-wider mb-2.5 flex items-center gap-2">
+                    <Box className="w-4 h-4 text-[#0284C7]" />
+                    Full Technology Stack
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {selectedProject.tags.map((tag, i) => (
+                      <span
+                        key={i}
+                        className="px-3 py-1 rounded-lg bg-slate-100 border border-slate-200 font-mono text-xs text-slate-800 font-medium"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
 
-              {/* Complete Tech Tags */}
-              <div className="space-y-2">
-                <h4 className="text-xs font-mono text-slate-500 font-bold">TECHNOLOGY STACK:</h4>
-                <div className="flex flex-wrap gap-2">
-                  {selectedProject.tags.map((tag, i) => (
-                    <span
-                      key={i}
-                      className="px-3 py-1 rounded-lg bg-slate-100 border border-slate-200 text-xs font-mono text-slate-700 font-semibold"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              {/* Modal Footer Actions */}
-              <div className="pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-4">
-                <div className="flex flex-wrap items-center gap-3">
-                  {selectedProject.demoUrl && !selectedProject.demoUrl.includes('github.com') && (
-                    <a
-                      href={selectedProject.demoUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#60C1E5] to-[#0284C7] hover:from-[#48B5DD] hover:to-[#0369A1] text-white font-bold text-xs flex items-center gap-2 shadow-md transition-all"
-                    >
-                      <span>Launch Live Hosted App</span>
-                      <ExternalLink className="w-4 h-4 text-white" />
-                    </a>
-                  )}
-
+              {/* Modal Footer CTAs */}
+              <div className="pt-4 border-t border-slate-100 flex flex-wrap items-center justify-end gap-3">
+                {selectedProject.demoUrl && !selectedProject.demoUrl.includes('github.com') && (
                   <a
-                    href={selectedProject.repoUrl}
+                    href={selectedProject.demoUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-xs font-mono font-bold text-slate-800 flex items-center gap-2 transition-all"
+                    onClick={() => sound.playSuccess()}
+                    className="px-5 py-2.5 rounded-xl bg-gradient-to-r from-[#60C1E5] to-[#0284C7] hover:from-[#48B5DD] hover:to-[#0369A1] text-white font-mono font-bold text-xs flex items-center gap-2 shadow-md hover:shadow-lg transition-all"
                   >
-                    <Github className="w-4 h-4 text-[#0284C7]" />
-                    <span>Explore Source Code on GitHub</span>
+                    <span>Launch Live Demo</span>
+                    <ExternalLink className="w-4 h-4" />
                   </a>
-                </div>
-
-                <button
-                  onClick={() => setSelectedProject(null)}
-                  className="px-5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-mono text-xs font-bold transition-all"
+                )}
+                <a
+                  href={selectedProject.repoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => sound.playClick()}
+                  className="px-5 py-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-900 font-mono font-bold text-xs flex items-center gap-2 transition-colors"
                 >
-                  Close Blueprint
-                </button>
+                  <Github className="w-4 h-4 text-[#0284C7]" />
+                  <span>View Repository</span>
+                </a>
               </div>
             </motion.div>
           </div>

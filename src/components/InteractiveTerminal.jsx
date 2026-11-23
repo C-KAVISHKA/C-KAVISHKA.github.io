@@ -197,8 +197,28 @@ Thank you for reaching out! Let's build something extraordinary together.`
   };
 
   return (
-    <section id="terminal" className="py-24 relative z-10 bg-slate-50/70 border-t border-slate-200/80">
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="terminal" className="py-24 sm:py-32 relative z-10 bg-slate-50/70 border-t border-slate-200/80 overflow-hidden scroll-mt-20">
+      {/* Watermark Typography (Dribbble Signature) */}
+      <div className="absolute top-10 right-4 sm:right-10 watermark-text pointer-events-none select-none">
+        TERMINAL
+      </div>
+
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Editorial Top Bar */}
+        <div className="flex items-center justify-between border-b border-slate-200/80 pb-4 mb-8">
+          <div className="flex items-center gap-2">
+            <span className="font-mono text-xs font-bold text-[#0284C7] bg-[#60C1E5]/15 border border-[#60C1E5]/30 px-2.5 py-1 rounded-md">
+              /05
+            </span>
+            <span className="font-mono text-xs font-bold tracking-wider text-slate-800 uppercase">
+              / INTERACTIVE TERMINAL EMULATOR
+            </span>
+          </div>
+          <div className="font-mono text-xs text-slate-500 font-semibold tracking-wider">
+            [ bash v2.5.0 ]
+          </div>
+        </div>
+
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4 mb-12">
           <motion.div
