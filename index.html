@@ -153,6 +153,7 @@ nav .avail {
 .dot {
   width: 8px;
   height: 8px;
+  flex-shrink: 0;
   border-radius: 50%;
   background: #22c55e;
   box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.6);
@@ -859,14 +860,16 @@ nav sup { color: var(--cyan-dark); font-size: 10px; margin-left: 3px; font-weigh
   nav {
     position: relative;
     inset: auto;
-    padding: 16px 16px 6px;
-    gap: 8px;
+    padding: 12px 14px 4px;
+    gap: 6px;
     justify-content: space-between;
     width: 100%;
   }
   nav a:not(.avail):not(.btn) { display: none; }
-  nav .avail { font-size: 11px; padding: 6px 12px; }
-  .theme-toggle-btn { padding: 6px 12px; font-size: 11px; }
+  nav .avail { font-size: 10px; padding: 6px 10px; line-height: 1.25; }
+  nav .btn { padding: 7px 12px; font-size: 11px; white-space: nowrap; }
+  #term-trigger { font-size: 11px !important; white-space: nowrap; }
+  .theme-toggle-btn { padding: 6px 10px; font-size: 11px; white-space: nowrap; }
   .hero {
     min-height: auto;
     padding-top: 10px;
@@ -895,7 +898,7 @@ nav sup { color: var(--cyan-dark); font-size: 10px; margin-left: 3px; font-weigh
     left: auto;
     bottom: auto;
     transform: none;
-    width: min(66%, 230px);
+    width: min(62%, 215px);
     aspect-ratio: 3/4;
     margin: 8px auto 0;
     opacity: 1;
@@ -982,7 +985,7 @@ nav sup { color: var(--cyan-dark); font-size: 10px; margin-left: 3px; font-weigh
   <section class="sec hero" id="top">
     <div class="wash"></div>
     <nav>
-      <span class="avail fade"><i class="dot"></i>Available for 2026 Roles</span>
+      <span class="avail fade"><i class="dot"></i>Available for Work &amp; Internships</span>
       <a class="fade" href="#work">Work<sup>[7]</sup></a>
       <a class="fade" href="#service">Capabilities<sup>[4]</sup></a>
       <a class="fade" href="#experience">Education<sup>[2026]</sup></a>
@@ -1165,7 +1168,7 @@ nav sup { color: var(--cyan-dark); font-size: 10px; margin-left: 3px; font-weigh
 
   <!-- CONTACT & CTA -->
   <section class="sec cta" id="contact">
-    <span class="avail" style="display:flex;gap:8px;align-items:center;padding:7px 14px;border-radius:99px;background:var(--card);font-size:11px;font-weight:600;box-shadow:0 2px 10px rgba(0,0,0,0.06);border:1px solid var(--line);color:var(--ink)"><i class="dot"></i>Available for 2026 Internship & Trainee Roles</span>
+    <span class="avail" style="display:flex;gap:8px;align-items:center;padding:7px 14px;border-radius:99px;background:var(--card);font-size:11px;font-weight:600;box-shadow:0 2px 10px rgba(0,0,0,0.06);border:1px solid var(--line);color:var(--ink)"><i class="dot"></i>Available for Work &amp; Internships</span>
     <h2 class="rv">HAVE A ROLE OR PROJECT IN MIND?</h2>
     <p class="rv" style="--i:1">Final-year Software Engineering undergraduate ready to bring fresh engineering rigor, modern web development, and proactive problem solving to your engineering team.</p>
     <div class="rv" style="--i:2;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-top:6px">
@@ -1194,7 +1197,7 @@ nav sup { color: var(--cyan-dark); font-size: 10px; margin-left: 3px; font-weigh
 
 <!-- Project Wipe-up Drawer -->
 <div id="project" role="dialog" aria-label="Project Case Study">
-  <div class="top"><button class="back" id="back">← Back to Portfolio</button><span class="back"><i class="dot" style="display:inline-block;margin-right:8px"></i>Available for 2026 Roles</span></div>
+  <div class="top"><button class="back" id="back">← Back to Portfolio</button><span class="back"><i class="dot" style="display:inline-block;margin-right:8px"></i>Available for Work &amp; Internships</span></div>
   <div class="pg">
     <div>
       <div class="tags in-r" style="margin:0"><span id="p-cat" style="background:var(--card)">3D Web & GSAP</span><span style="background:var(--card);color:var(--cyan-dark);font-weight:700">★ Flagship Project</span></div>
